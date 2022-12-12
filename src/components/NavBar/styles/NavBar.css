@@ -1,0 +1,13 @@
+.navbar{
+    
+    /* flex-wrap: wrap !important; */
+    background-color: black;
+}
+.navbar > p{
+   
+    /* background-color: blue; */
+    color: white;
+    margin: 0px 25px;
+    margin-bottom: 0px;
+    
+}
