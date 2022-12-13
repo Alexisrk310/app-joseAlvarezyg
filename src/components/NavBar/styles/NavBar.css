@@ -3,7 +3,7 @@
     /* flex-wrap: wrap !important; */
     background-color: black;
 }
-.navbar > p{
+.navbar > a{
    
     /* background-color: blue; */
     color: white;
@@ -11,3 +11,11 @@
     margin-bottom: 0px;
     
 }
+.navbar > a:hover{
+   color: aquamarine;
+    
+}
+.navbar > a:nth-child(8){
+    color: aquamarine;
+     
+ }

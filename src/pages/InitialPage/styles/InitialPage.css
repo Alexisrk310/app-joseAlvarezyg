@@ -1,0 +1,34 @@
+.initialpage{
+
+}
+.initial-img{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../img/DSCF1657.jpg');
+    background-position: 50% 47%;
+    background-size: cover;
+    opacity: .8;
+}
+
+.initial-img > * {
+    color: white;
+}
+
+.initial-img > div{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.initial-img > div > .come{
+    font-size: 30px;
+}
+.initial-img > div > .artist{
+    font-size: 60px;
+}
+.initial-img > div > .seemore{
+    border-radius: 10px;
+    padding: 5px 20px;
+}

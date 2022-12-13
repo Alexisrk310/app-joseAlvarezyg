@@ -1,0 +1,44 @@
+
+.loginpage{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../img/DSCF1632.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-form{
+    background-color: white;
+    border-radius: 60px;
+    width: 550px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+   
+    justify-content: center;
+}
+.container-form > div > input{
+    width: 200px;
+   
+}
+.log-in{
+    font-size: 30px;
+}
+.container-input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container-input > p{
+    /* align-self: flex-start; */
+    /* margin-right: 155px; */
+}
+.container-p-input{
+
+    width: 400px;
+}
+.text-email{
+    margin-bottom: 0px;
+}
