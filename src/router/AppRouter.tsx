@@ -1,6 +1,8 @@
+import React, { Children } from 'react';
 import { LayoutPage } from '@/layout/LayoutPage';
 import {
 	AboutPage,
+	ContactUsPage,
 	FoodTourPage,
 	HomePage,
 	LoginPage,
@@ -8,12 +10,10 @@ import {
 	PostedVideosPage,
 	RegisterPage,
 	RestaurantPage,
-	ServicesPage,
 	TeamPage,
 } from '@/pages';
 import { InitialPage } from '@/pages/InitialPage';
 
-import React from 'react';
 import { createBrowserRouter, Route, Link } from 'react-router-dom';
 export const AppRouter = createBrowserRouter([
 	{
@@ -22,44 +22,49 @@ export const AppRouter = createBrowserRouter([
 		errorElement: <NoFoundPage />,
 		children: [
 			{
-				path: '/',
-				element: <InitialPage />,
-			},
-			{
-				path: 'home',
-				element: <HomePage />,
-			},
-			{
-				path: 'restaurante',
-				element: <RestaurantPage />,
-			},
-			{
-				path: 'ven',
-				element: <AboutPage />,
-			},
-			{
-				path: 'servicios',
-				element: <ServicesPage />,
-			},
-			{
-				path: 'tour',
-				element: <FoodTourPage />,
-			},
-			{
-				path: 'videos',
-				element: <PostedVideosPage />,
-			},
-			{
-				path: 'team',
-				element: <TeamPage />,
-			},
-			{
-				path: 'login',
-				element: <LoginPage />,
-			},
-			{
-				path: 'register',
-				element: <RegisterPage />,
+				errorElement: <NoFoundPage />,
+				children: [
+					{
+						path: '/',
+						element: <InitialPage />,
+					},
+					{
+						path: 'home',
+						element: <HomePage />,
+					},
+					{
+						path: 'restaurante',
+						element: <RestaurantPage />,
+					},
+					{
+						path: 'ven',
+						element: <AboutPage />,
+					},
+					{
+						path: 'contactanos',
+						element: <ContactUsPage />,
+					},
+					{
+						path: 'tour',
+						element: <FoodTourPage />,
+					},
+					{
+						path: 'videos',
+						element: <PostedVideosPage />,
+					},
+					{
+						path: 'team',
+						element: <TeamPage />,
+					},
+					{
+						path: 'login',
+						element: <LoginPage />,
+					},
+					{
+						path: 'register',
+						element: <RegisterPage />,
+					},
+				],
 			},
 		],
 	},

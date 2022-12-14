@@ -15,8 +15,8 @@ const NavBar: React.FC<NavBarInterface> = () => {
 			<Link to={'ven'} className="pointer">
 				VEN TE ENSEÑO
 			</Link>
-			<Link to={'servicios'} className="pointer">
-				SERVICIOS
+			<Link to={'contactanos'} className="pointer">
+				CONTACTANOS
 			</Link>
 			<Link to={'tour'} className="pointer">
 				TOUR GASTRONOMICO
