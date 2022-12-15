@@ -191,16 +191,15 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						zone={'Cartagena'}
 					/>
 				</div>
-				<h3 className="text-center mt-3">SOÑADORES QUE INSPIRAN</h3>
-				<div className="dreamers mt-3">
-					<div className="container-top">
-						<div className="little-bottom">4</div>
-						<div className="little-bottom">5</div>
-						<div className="little">1</div>
-						<div className="little">2</div>
-						<div className="little">3</div>
-						<div className="small">4</div>
-					</div>
+				<h3 className="text-center m-5">SOÑADORES QUE INSPIRAN</h3>
+
+				<div className="grid">
+					<div className="sidebar">1</div>
+					<div className="video1">2</div>
+					<div className="video2">3</div>
+					<div className="video3">4</div>
+					<div className="video4">5</div>
+					<div className="video5">6</div>
 				</div>
 			</div>
 		</div>
