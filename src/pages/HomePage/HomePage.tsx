@@ -7,12 +7,12 @@ export interface HomePageInterface {}
 const HomePage: React.FC<HomePageInterface> = () => {
 	return (
 		<div className="homepage">
-			<div className="m-5 mt-5">
+			<div className="m-4 mt-5">
 				<div className="d-flex justify-content-between">
 					<p>RECOMENDADOS DE LA SEMANA</p>
-					<p>MOSTRAR MAS</p>
+					<p className="pointer">MOSTRAR MAS</p>
 				</div>
-				<div className="d-flex">
+				<div className="d-flex contain-card">
 					<Card
 						img={
 							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
@@ -71,9 +71,9 @@ const HomePage: React.FC<HomePageInterface> = () => {
 				</div>
 				<div className="mt-3 d-flex justify-content-between">
 					<p>TOP 10 DE COLOMBIA</p>
-					<p>MOSTRAR MAS</p>
+					<p className="pointer">MOSTRAR MAS</p>
 				</div>
-				<div className="d-flex">
+				<div className="d-flex contain-card">
 					<Card
 						img={
 							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
@@ -132,9 +132,9 @@ const HomePage: React.FC<HomePageInterface> = () => {
 				</div>
 				<div className="mt-3 d-flex justify-content-between">
 					<p>TOP 10 DE CARTAGENA</p>
-					<p>MOSTRAR MAS</p>
+					<p className="pointer">MOSTRAR MAS</p>
 				</div>
-				<div className="d-flex">
+				<div className="d-flex contain-card">
 					<Card
 						img={
 							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
@@ -193,12 +193,14 @@ const HomePage: React.FC<HomePageInterface> = () => {
 				</div>
 				<h3 className="text-center mt-3">SOÑADORES QUE INSPIRAN</h3>
 				<div className="dreamers mt-3">
-					<div className="video1">1</div>
-					<div className="video2">2</div>
-					<div className="video3">3</div>
-					<div className="video4">4</div>
-					<div className="video5">5</div>
-					<div className="video6">6</div>
+					<div className="container-top">
+						<div className="little-bottom">4</div>
+						<div className="little-bottom">5</div>
+						<div className="little">1</div>
+						<div className="little">2</div>
+						<div className="little">3</div>
+						<div className="small">4</div>
+					</div>
 				</div>
 			</div>
 		</div>

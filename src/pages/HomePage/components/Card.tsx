@@ -12,7 +12,7 @@ export const Card = ({ img, title, description, specialized, zone }: Props) => {
 		<div
 			className="card m-3"
 			style={{
-				width: 300,
+				width: 250,
 			}}>
 			<img src={img} className="card-img-top" alt={img} />
 			<div className="card-body">
