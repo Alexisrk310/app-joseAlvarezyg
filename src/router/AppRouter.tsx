@@ -15,14 +15,17 @@ import {
 import { InitialPage } from '@/pages/InitialPage';
 
 import { createBrowserRouter, Route, Link } from 'react-router-dom';
+
 export const AppRouter = createBrowserRouter([
 	{
 		path: '/',
 		element: <LayoutPage />,
 		errorElement: <NoFoundPage />,
+
 		children: [
 			{
 				errorElement: <NoFoundPage />,
+
 				children: [
 					{
 						index: true,
