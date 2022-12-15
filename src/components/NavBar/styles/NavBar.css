@@ -1,8 +1,10 @@
 .navbar{
-    
     /* flex-wrap: wrap !important; */
     background-color: black;
+    
+    
 }
+
 .navbar > a{
    
     /* background-color: blue; */
@@ -18,4 +20,4 @@
 .navbar > a:nth-child(8){
     color: aquamarine;
      
- }
+}

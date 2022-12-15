@@ -5,7 +5,7 @@ export interface NavBarInterface {}
 
 const NavBar: React.FC<NavBarInterface> = () => {
 	return (
-		<div className="navbar">
+		<div className="navbar sticky-top">
 			<Link to={'home'} className="pointer">
 				HOME
 			</Link>

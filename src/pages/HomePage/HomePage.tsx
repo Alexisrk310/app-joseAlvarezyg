@@ -7,10 +7,10 @@ export interface HomePageInterface {}
 const HomePage: React.FC<HomePageInterface> = () => {
 	return (
 		<div className="homepage">
-			<div className="m-4 mt-5">
+			<div className="mr-5 ml-5">
 				<div className="d-flex justify-content-between">
-					<p>RECOMENDADOS DE LA SEMANA</p>
-					<p className="pointer">MOSTRAR MAS</p>
+					<p className="mt-3">RECOMENDADOS DE LA SEMANA</p>
+					<p className="pointer mt-3">MOSTRAR MAS</p>
 				</div>
 				<div className="d-flex contain-card">
 					<Card
