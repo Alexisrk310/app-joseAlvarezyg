@@ -21,11 +21,11 @@ color: white;
 .grid {  
     height: 500px;
     width: 100%;
-    background-color: aqua;
+    /* background-color: aqua; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 0px 0px;
+    gap: 10px 10px;
     grid-auto-flow: row;
     grid-template-areas:
       "video1 video2 video3 sidebar sidebar"

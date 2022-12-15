@@ -1,4 +1,4 @@
-import { Header, NavBar } from '@/components';
+import { Footer, Header, NavBar } from '@/components';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -10,9 +10,7 @@ export const LayoutPage = () => {
 			<Header />
 			<NavBar />
 			<Outlet />
-			{/* <h3>Footer</h3> */}
+			<Footer />
 		</>
 	);
 };
-
-
