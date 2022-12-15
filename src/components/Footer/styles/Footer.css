@@ -9,8 +9,8 @@ height: 700px;
     align-items: center;
 }
 .priv{
-   margin-left: 120px;
-   margin-top: 20px;
+   display: flex;
+   justify-content: center;
 }
 .footer-bottom{
     display: flex;

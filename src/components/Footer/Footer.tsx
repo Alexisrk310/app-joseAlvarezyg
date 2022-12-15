@@ -6,13 +6,13 @@ const Footer: React.FC<FooterInterface> = () => {
 	return (
 		<div className="footer">
 			<div>
-				<div className="footer-container">
-					<div className="mt-5">
+				<div className="footer-container flex-wrap">
+					<div className="mt-5 ">
 						<p>Compañia</p>
 						<p>Acerca de Empleo</p>
 						<p>Estadisticas</p>
 					</div>
-					<div className="mt-5">
+					<div className="mt-5 mb-3 ">
 						<p>Comunidades</p>
 						<p>Usuarios</p>
 						<p>Restaurante</p>
@@ -20,12 +20,12 @@ const Footer: React.FC<FooterInterface> = () => {
 						<p>Inversionistas</p>
 						<p>Proveedores</p>
 					</div>
-					<div className="mt-5">
+					<div className="mt-5 mb-3 ">
 						<p>Enlaces Utiles</p>
 						<p>Soporte</p>
 						<p>App</p>
 					</div>
-					<div className="d-flex">
+					<div className="d-flex ">
 						<img
 							src="https://previews.123rf.com/images/cherezoff/cherezoff1310/cherezoff131000612/23286722-vidrio-c%C3%ADrculo-3d-en-el-fondo-blanco.jpg"
 							width={80}
@@ -46,8 +46,8 @@ const Footer: React.FC<FooterInterface> = () => {
 						/>
 					</div>
 				</div>
-				<div className="priv">
-					<p>
+				<div className="priv mt-3">
+					<p className="">
 						Legal Centro de Privacidad Politicas de Privacidad Cookis Sobre
 						Publicidad
 					</p>
@@ -55,7 +55,7 @@ const Footer: React.FC<FooterInterface> = () => {
 			</div>
 			<div className="footer-bottom fixed-bottom">
 				<div>
-					<p>Jose Alvarez</p>
+					<p className="mb-0">Jose Alvarez</p>
 				</div>
 				<div>
 					<img
