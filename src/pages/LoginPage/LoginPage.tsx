@@ -6,19 +6,33 @@ import './styles/LoginPage.css';
 
 export interface LoginPageInterface {}
 
+interface State {
+	title?: 'Inicia sesion o crea una cuenta' | 'Inicia sesión';
+	stateLogin?: boolean;
+	buttonSubmit?: 'Continuar con e-mail' | 'Iniciar sesión';
+}
+
 const LoginPage: React.FC<LoginPageInterface> = () => {
-	const [stateLogin, setStateLogin] = useState(false);
+	const [state, setState] = useState<State>({
+		stateLogin: false,
+		buttonSubmit: 'Continuar con e-mail',
+		title: 'Inicia sesion o crea una cuenta',
+	});
+
 	const handleSubmit = (value: Values) => {
-		console.log(value);
+		// console.log(value);
+		setState({
+			title: 'Inicia sesión',
+			stateLogin: true,
+			buttonSubmit: 'Iniciar sesión',
+		});
+
+		console.log('dentro');
 	};
 
 	const validations = (values: Values) => {
 		let errors: FormikErrors<Values> = {};
-		const xd = () => {
-			if (!values.password) {
-				errors.password = 'Escribe tu contraseña';
-			}
-		};
+
 		if (!values.email) {
 			errors.email = 'Escribe tu correo';
 		} else if (
@@ -27,9 +41,9 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 			errors.email = '@example.com*';
 		}
 		console.log(errors);
-		if (!errors) {
+		if (state.stateLogin) {
 			if (!values.password) {
-				xd();
+				errors.password = 'Escribe tu contraseña';
 			}
 		}
 
@@ -44,13 +58,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 			{({ handleBlur, handleChange, handleSubmit, values, errors }) => (
 				<div className="loginpage">
 					<form className="container-form" onSubmit={handleSubmit}>
-						{stateLogin ? (
-							<p className="text-center log-in">Inicia sesión</p>
-						) : (
-							<p className="text-center log-in">
-								Inicia sesion o crea una cuenta
-							</p>
-						)}
+						<p className="text-center log-in">{state.title}</p>
 
 						<div className="container-input">
 							<div className="container-p-input">
@@ -67,7 +75,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 									name="email"
 									component={() => <MessageErrorType msg={errors.email} />}
 								/>
-								{stateLogin ? (
+								{state.stateLogin ? (
 									<>
 										<p className="text-email">Contraseña</p>
 										<input
@@ -86,11 +94,8 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 										/>
 									</>
 								) : undefined}
-								<button
-									className="btn btn-info w-100 mt-3"
-									type="submit"
-									onClick={() => setStateLogin(!true)}>
-									Continuar con e-mail
+								<button className="btn btn-info w-100 mt-3" type="submit">
+									{state && state.buttonSubmit}
 								</button>
 								<p className="text-center mt-5">O</p>
 							</div>

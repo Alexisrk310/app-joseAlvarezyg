@@ -25,43 +25,43 @@ export const AppRouter = createBrowserRouter([
 				errorElement: <NoFoundPage />,
 				children: [
 					{
-						path: '/',
+						index: true,
 						element: <InitialPage />,
 					},
 					{
-						path: 'home',
+						path: '/home',
 						element: <HomePage />,
 					},
 					{
-						path: 'restaurante',
+						path: '/restaurante',
 						element: <RestaurantPage />,
 					},
 					{
-						path: 'ven',
+						path: '/ven',
 						element: <AboutPage />,
 					},
 					{
-						path: 'contactanos',
+						path: '/contactanos',
 						element: <ContactUsPage />,
 					},
 					{
-						path: 'tour',
+						path: '/tour',
 						element: <FoodTourPage />,
 					},
 					{
-						path: 'videos',
+						path: '/videos',
 						element: <PostedVideosPage />,
 					},
 					{
-						path: 'team',
+						path: '/team',
 						element: <TeamPage />,
 					},
 					{
-						path: 'login',
+						path: '/login',
 						element: <LoginPage />,
 					},
 					{
-						path: 'register',
+						path: '/register',
 						element: <RegisterPage />,
 					},
 				],
