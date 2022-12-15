@@ -8,9 +8,9 @@ const HomePage: React.FC<HomePageInterface> = () => {
 	return (
 		<div className="homepage">
 			<div className="mr-5 ml-5">
-				<div className="d-flex justify-content-between">
-					<p className="mt-3">RECOMENDADOS DE LA SEMANA</p>
-					<p className="pointer mt-3">MOSTRAR MAS</p>
+				<div className="row">
+					<p className="mt-3 col-12 col-md-6">RECOMENDADOS DE LA SEMANA</p>
+					<p className="pointer mt-3 col-12 col-md-6 text-right">MOSTRAR MAS</p>
 				</div>
 				<div className="d-flex contain-card">
 					<Card
@@ -69,9 +69,9 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						zone={'Cartagena'}
 					/>
 				</div>
-				<div className="mt-3 d-flex justify-content-between">
-					<p>TOP 10 DE COLOMBIA</p>
-					<p className="pointer">MOSTRAR MAS</p>
+				<div className="mt-3 row">
+					<p className="col-12 col-md-6 ">TOP 10 DE COLOMBIA</p>
+					<p className="pointer col-12 col-md-6 text-right">MOSTRAR MAS</p>
 				</div>
 				<div className="d-flex contain-card">
 					<Card
@@ -130,9 +130,9 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						zone={'Cartagena'}
 					/>
 				</div>
-				<div className="mt-3 d-flex justify-content-between">
-					<p>TOP 10 DE CARTAGENA</p>
-					<p className="pointer">MOSTRAR MAS</p>
+				<div className="mt-3 row">
+					<p className="col-12 col-md-6">TOP 10 DE CARTAGENA</p>
+					<p className="pointer col-12 col-md-6 text-right">MOSTRAR MAS</p>
 				</div>
 				<div className="d-flex contain-card">
 					<Card

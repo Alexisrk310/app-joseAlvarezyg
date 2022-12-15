@@ -15,9 +15,7 @@ const NavBar: React.FC<NavBarInterface> = () => {
 			<Link to={'ven'} className="pointer">
 				VEN TE ENSEÑO
 			</Link>
-			<Link to={'contactanos'} className="pointer">
-				CONTACTANOS
-			</Link>
+
 			<Link to={'tour'} className="pointer">
 				TOUR GASTRONOMICO
 			</Link>
@@ -26,6 +24,9 @@ const NavBar: React.FC<NavBarInterface> = () => {
 			</Link>
 			<Link to={'team'} className="pointer">
 				TEAM JOSE ALVAREZ
+			</Link>
+			<Link to={'contactanos'} className="pointer">
+				CONTACTANOS
 			</Link>
 			<Link to={'login'} className="pointer">
 				INICIA SESION/REGISTRATE
