@@ -2,7 +2,6 @@ export * from './AboutPage';
 export * from './ContactUsPage';
 export * from './FoodTourPage';
 export * from './HomePage';
-export * from './InitialPage';
 export * from './LoginPage';
 export * from './NoFoundPage';
 export * from './PostedVideosPage';

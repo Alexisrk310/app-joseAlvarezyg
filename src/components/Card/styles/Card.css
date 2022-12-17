@@ -1,0 +1,7 @@
+.card{
+
+}
+.backgroud-img{
+    background-image:  url('../img/fondo-card.jpg');
+    background-size: cover;
+}

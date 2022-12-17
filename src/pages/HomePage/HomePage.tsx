@@ -1,5 +1,5 @@
+import { Card } from '@/components';
 import React from 'react';
-import { Card } from './components/Card';
 
 import './styles/HomePage.css';
 export interface HomePageInterface {}
@@ -196,12 +196,66 @@ const HomePage: React.FC<HomePageInterface> = () => {
 				<h3 className="text-center m-5">SOÑADORES QUE INSPIRAN</h3>
 
 				<div className="grid">
-					<div className="sidebar">1</div>
-					<div className="video1">2</div>
-					<div className="video2">3</div>
-					<div className="video3">4</div>
-					<div className="video4">5</div>
-					<div className="video5">6</div>
+					<div className="sidebar">
+						<iframe
+							className="sidebar"
+							height="100%"
+							width="100%"
+							src="https://www.youtube.com/embed/D2FyHvooV2M"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							title="YouTube video player"
+							frameBorder={0}></iframe>
+					</div>
+					<div className="video1">
+						<iframe
+							height="100%"
+							width="100%"
+							src="https://www.youtube.com/embed/W89RNHYE_VM"
+							title="YouTube video player"
+							frameBorder={0}
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowFullScreen></iframe>
+					</div>
+					<div className="video2">
+						<iframe
+							height="100%"
+							width="100%"
+							src="https://www.youtube.com/embed/BKC4R8xDrmA"
+							title="YouTube video player"
+							frameBorder={0}
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowFullScreen></iframe>
+					</div>
+					<div className="video3">
+						<iframe
+							height="100%"
+							width="100%"
+							src="https://www.youtube.com/embed/OvU3rVuLoBo"
+							title="YouTube video player"
+							frameBorder={0}
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowFullScreen></iframe>
+					</div>
+					<div className="video4">
+						<iframe
+							height="100%"
+							width="100%"
+							src="https://www.youtube.com/embed/4gNshItEoQE"
+							title="YouTube video player"
+							frameBorder={0}
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowFullScreen></iframe>
+					</div>
+					<div className="video5">
+						<iframe
+							width="560"
+							height="315"
+							src="https://www.youtube.com/embed/_mwXjj8iH7w?start=3"
+							title="YouTube video player"
+							frameBorder={0}
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowFullScreen></iframe>
+					</div>
 				</div>
 			</div>
 		</div>

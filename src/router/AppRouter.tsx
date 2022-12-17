@@ -12,7 +12,6 @@ import {
 	RestaurantPage,
 	TeamPage,
 } from '@/pages';
-import { InitialPage } from '@/pages/InitialPage';
 
 import { createBrowserRouter, Route, Link } from 'react-router-dom';
 
@@ -29,12 +28,9 @@ export const AppRouter = createBrowserRouter([
 				children: [
 					{
 						index: true,
-						element: <InitialPage />,
-					},
-					{
-						path: '/home',
 						element: <HomePage />,
 					},
+
 					{
 						path: '/restaurante',
 						element: <RestaurantPage />,

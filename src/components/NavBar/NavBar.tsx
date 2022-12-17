@@ -7,7 +7,7 @@ const NavBar: React.FC<NavBarInterface> = () => {
 	return (
 		<div className="navbar sticky-top">
 			<NavLink
-				to={'home'}
+				to={'/'}
 				className={({ isActive }) =>
 					isActive ? 'isActive pointer' : 'pointer'
 				}>
