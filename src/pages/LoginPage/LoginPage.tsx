@@ -7,27 +7,31 @@ import './styles/LoginPage.css';
 export interface LoginPageInterface {}
 
 interface State {
-	title?: 'Inicia sesion o crea una cuenta' | 'Inicia sesión';
+	title?: 'Inicia sesion o crea una cuenta' | 'Iniciar sesión';
 	stateLogin?: boolean;
+	statepushAplication?: false;
 	buttonSubmit?: 'Continuar con e-mail' | 'Iniciar sesión';
 }
 
 const LoginPage: React.FC<LoginPageInterface> = () => {
 	const [state, setState] = useState<State>({
-		stateLogin: false,
-		buttonSubmit: 'Continuar con e-mail',
 		title: 'Inicia sesion o crea una cuenta',
+		stateLogin: false,
+		statepushAplication: false,
+		buttonSubmit: 'Continuar con e-mail',
 	});
 
 	const handleSubmit = (value: Values) => {
-		// console.log(value);
 		setState({
-			title: 'Inicia sesión',
+			...state,
+			title: 'Iniciar sesión',
 			stateLogin: true,
 			buttonSubmit: 'Iniciar sesión',
 		});
-
-		console.log('dentro');
+		if (state.stateLogin) {
+			// AQUI VA LA API REST AUTH
+			console.log('entro');
+		}
 	};
 
 	const validations = (values: Values) => {
@@ -64,7 +68,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 							<div className="container-p-input">
 								<p className="text-email">E-mail</p>
 								<input
-									className="form-control"
+									className="form-control auth"
 									type="text"
 									name="email"
 									onBlur={handleBlur}
@@ -98,6 +102,11 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 									{state && state.buttonSubmit}
 								</button>
 								<p className="text-center mt-5">O</p>
+								<p className="text-center">
+									Al iniciar sesion o crear una cuenta esta aceptando nuestros
+									<b className="text-info"> terminos y condiciones</b> y
+									<b className="text-info"> politica de privacidad</b>
+								</p>
 							</div>
 						</div>
 					</form>

@@ -1,3 +1,5 @@
+
+
 .homepage{
 background-color: black;
 color: white;
@@ -19,7 +21,7 @@ color: white;
 
 
 .grid {  
-    height: 500px;
+    height: 600px;
     width: 100%;
     /* background-color: aqua; */
     display: grid;
@@ -30,31 +32,41 @@ color: white;
     grid-template-areas:
       "video1 video2 video3 sidebar sidebar"
       "video4 video4 video5 sidebar sidebar";
-  }
-  
-  .sidebar { grid-area: sidebar;
-    background-color: brown;
- }
-  
-  .video1 { grid-area: video1;
-    background-color: blue;
- }
-  
-  .video2 { grid-area: video2; 
-    background-color: blueviolet;
 }
   
-  .video3 { grid-area: video3;
-    background-color: chartreuse;
+.sidebar { 
+  grid-area: sidebar;
+  background-color: brown;
+}
+  
+.video1 { 
+  grid-area: video1;
+  background-color: blue;
+}
+  
+.video2 { 
+  grid-area: video2; 
+  background-color: blueviolet;
+}
+  
+.video3 { 
+  grid-area: video3;
+  background-color: chartreuse;
+}
+  
+.video4 { 
+  grid-area: video4;
+  background-color: crimson;
  }
   
-  .video4 { grid-area: video4;
-    background-color: crimson;
- }
+.video5 { 
+  grid-area: video5;
+  background-color: darkblue;
+}
+
+@media (max-width: 600px) {
   
-  .video5 { grid-area: video5;
-    background-color: darkblue;
- }
+}
 
 .containt{
   

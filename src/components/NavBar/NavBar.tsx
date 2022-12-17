@@ -1,36 +1,68 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './styles/NavBar.css';
 export interface NavBarInterface {}
 
 const NavBar: React.FC<NavBarInterface> = () => {
 	return (
 		<div className="navbar sticky-top">
-			<Link to={'home'} className="pointer">
+			<NavLink
+				to={'home'}
+				className={({ isActive }) =>
+					isActive ? 'isActive pointer' : 'pointer'
+				}>
 				HOME
-			</Link>
-			<Link to={'restaurante'} className="pointer">
+			</NavLink>
+			<NavLink
+				to={'restaurante'}
+				className={({ isActive }) =>
+					isActive ? 'isActive pointer' : 'pointer'
+				}>
 				RESTAURANTES
-			</Link>
-			<Link to={'ven'} className="pointer">
+			</NavLink>
+			<NavLink
+				to={'ven'}
+				className={({ isActive }) =>
+					isActive ? 'isActive pointer' : 'pointer'
+				}>
 				VEN TE ENSEÑO
-			</Link>
+			</NavLink>
 
-			<Link to={'tour'} className="pointer">
+			<NavLink
+				to={'tour'}
+				className={({ isActive }) =>
+					isActive ? 'isActive pointer' : 'pointer'
+				}>
 				TOUR GASTRONOMICO
-			</Link>
-			<Link to={'videos'} className="pointer">
+			</NavLink>
+			<NavLink
+				to={'videos'}
+				className={({ isActive }) =>
+					isActive ? 'isActive pointer' : 'pointer'
+				}>
 				VIDEOS PUBLICADOS
-			</Link>
-			<Link to={'team'} className="pointer">
+			</NavLink>
+			<NavLink
+				to={'team'}
+				className={({ isActive }) =>
+					isActive ? 'isActive pointer' : 'pointer'
+				}>
 				TEAM JOSE ALVAREZ
-			</Link>
-			<Link to={'contactanos'} className="pointer">
+			</NavLink>
+			<NavLink
+				to={'contactanos'}
+				className={({ isActive }) =>
+					isActive ? 'isActive pointer' : 'pointer'
+				}>
 				CONTACTANOS
-			</Link>
-			<Link to={'login'} className="pointer">
-				INICIA SESION/REGISTRATE
-			</Link>
+			</NavLink>
+			<i className="fa-solid fa-magnifying-glass pointer white"></i>
+			<NavLink to={'login'} className="pointer btn btn-info">
+				Inicia Sesión
+			</NavLink>
+			<NavLink to={'register'} className="pointer btn btn-info">
+				Registrate
+			</NavLink>
 		</div>
 	);
 };

@@ -9,8 +9,10 @@ const HomePage: React.FC<HomePageInterface> = () => {
 		<div className="homepage">
 			<div className="mr-5 ml-5">
 				<div className="row">
-					<p className="mt-3 col-12 col-md-6">RECOMENDADOS DE LA SEMANA</p>
-					<p className="pointer mt-3 col-12 col-md-6 text-right">MOSTRAR MAS</p>
+					<p className=" mt-3 col-12 col-md-6">RECOMENDADOS DE LA SEMANA</p>
+					<p className="show-more pointer mt-3 col-12 col-md-6 text-right">
+						MOSTRAR MAS
+					</p>
 				</div>
 				<div className="d-flex contain-card">
 					<Card
@@ -69,7 +71,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						zone={'Cartagena'}
 					/>
 				</div>
-				<div className="mt-3 row">
+				{/* <div className="mt-3 row">
 					<p className="col-12 col-md-6 ">TOP 10 DE COLOMBIA</p>
 					<p className="pointer col-12 col-md-6 text-right">MOSTRAR MAS</p>
 				</div>
@@ -129,8 +131,8 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						specialized={'Pizza'}
 						zone={'Cartagena'}
 					/>
-				</div>
-				<div className="mt-3 row">
+				</div> */}
+				{/* <div className="mt-3 row">
 					<p className="col-12 col-md-6">TOP 10 DE CARTAGENA</p>
 					<p className="pointer col-12 col-md-6 text-right">MOSTRAR MAS</p>
 				</div>
@@ -190,7 +192,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						specialized={'Pizza'}
 						zone={'Cartagena'}
 					/>
-				</div>
+				</div> */}
 				<h3 className="text-center m-5">SOÑADORES QUE INSPIRAN</h3>
 
 				<div className="grid">

@@ -1,7 +1,9 @@
 .footer{
-background-color: black;
-color: white;
-height: 700px;
+    background-color: black;
+    color: white;
+    height: 700px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
 }
 .footer-container{
     display: flex;
@@ -19,6 +21,10 @@ height: 700px;
     background-color: black;
     height: 70px;
 }
-.youtube{
+
+.facebook{
+    background-color: aliceblue;
+}
+.instagram{
     background-color: white;
 }

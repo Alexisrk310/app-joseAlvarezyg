@@ -1,5 +1,7 @@
 import React from 'react';
 import './styles/Footer.css';
+import facebook from './img/facebook.png';
+import instagram from './img/instagram.png';
 export interface FooterInterface {}
 
 const Footer: React.FC<FooterInterface> = () => {
@@ -59,16 +61,16 @@ const Footer: React.FC<FooterInterface> = () => {
 				</div>
 				<div>
 					<img
-						src="https://www.unipile.com/wp-content/uploads/2022/06/logo-facebook-noir.png"
+						src={facebook}
 						alt="Facebook"
 						width={50}
 						height={50}
-						className="mr-3"
+						className="mr-3 facebook"
 					/>
 					<img
-						src="https://cdn-icons-png.flaticon.com/512/48/48968.png"
-						alt="Youtube"
-						className="youtube"
+						src={instagram}
+						alt="instagram"
+						className="instagram"
 						width={50}
 						height={50}
 					/>

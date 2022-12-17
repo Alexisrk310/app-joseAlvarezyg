@@ -1,3 +1,5 @@
+
+
 .initialpage{
 
 }
@@ -7,7 +9,7 @@
     background-image: url('../img/DSCF1657.jpg');
     background-position: 50% 47%;
     background-size: cover;
-    opacity: .8;
+    /* opacity: .8; */
 }
 
 .initial-img > * {
@@ -22,13 +24,31 @@
     align-items: center;
 
 }
+
 .initial-img > div > .come{
+    text-align: center;
     font-size: 30px;
+    font-family: 'Inter', sans-serif;
+   
 }
 .initial-img > div > .artist{
-    font-size: 60px;
+    font-size: 70px;
+    /* font-family: 'Martian Mono', monospace; */
+    /* font-family: 'Anton', sans-serif; */
+    /* font-family: 'Alfa Slab One', cursive; */
+    /* font-family: 'Martian Mono', monospace; */
+    /* font-family: 'Bungee', cursive; */
+    font-family: 'Inter', sans-serif;
+    /* letter-spacing: 10px; */
+    font-weight: 800;
+    /* border: solid ; */
+    text-align: center;
 }
 .initial-img > div > .seemore{
     border-radius: 10px;
     padding: 5px 20px;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    padding: 10px 20px;
 }
