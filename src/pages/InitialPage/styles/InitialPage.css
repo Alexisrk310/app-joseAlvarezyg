@@ -4,7 +4,7 @@
 
 }
 .initial-img{
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-image: url('../img/DSCF1657.jpg');
     background-position: 50% 47%;

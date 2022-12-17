@@ -1,3 +1,29 @@
 .registerpage{
 
 }
+
+.container-form-register{
+    padding: 30px;
+    background-color: white;
+    border-radius: 60px;
+    width: 550px;
+    /* height: 500px; */
+    display: flex;
+    flex-direction: column;
+   
+    justify-content: center;
+}
+.guion{
+    align-self: center;
+    font-size: 30px;
+}
+.address-short{
+    width: 90px !important;
+}
+.address-short:nth-child(2){
+    margin-left: 10px;
+}
+.validate-address{
+    font-size: 20px;
+    align-self: flex-end;
+}

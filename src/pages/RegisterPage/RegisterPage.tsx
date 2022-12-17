@@ -48,21 +48,25 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 		}
 
 		if (!values.tel) {
-			errors.name = 'Escriba su nombre';
+			errors.tel = 'Escriba su telefono';
 		}
 
 		if (!values.nameRestaurant) {
 			errors.nameRestaurant = 'Escriba su restaurante';
 		}
+
 		if (!values.addressOne) {
-			errors.addressOne = 'Escriba su direccion';
+			errors.addressOne = '*';
 		}
+
 		if (!values.addressTwo) {
-			errors.addressTwo = 'C';
+			errors.addressTwo = '*';
 		}
+
 		if (!values.addressThree) {
-			errors.addressThree = 'M';
+			errors.addressThree = '*';
 		}
+		console.log(errors);
 
 		return errors;
 	};
@@ -82,7 +86,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			validate={validations}>
 			{({ handleBlur, handleChange, handleSubmit, values, errors }) => (
 				<div className="loginpage">
-					<form className="container-form" onSubmit={handleSubmit}>
+					<form className="container-form-register" onSubmit={handleSubmit}>
 						<p className="text-center log-in">Crear cuenta</p>
 
 						<div className="container-input">
@@ -105,15 +109,100 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 								<input
 									className="form-control mt-2"
 									type="text"
-									name="password"
+									name="email"
 									onBlur={handleBlur}
 									onChange={handleChange}
-									value={values.password}
+									value={values.email}
 								/>
 								<ErrorMessage
-									name="password"
-									component={() => <MessageErrorType msg={errors.password} />}
+									name="email"
+									component={() => <MessageErrorType msg={errors.email} />}
 								/>
+								<p className="text-email">Telefono</p>
+								<input
+									className="form-control mt-2"
+									type="text"
+									name="tel"
+									onBlur={handleBlur}
+									onChange={handleChange}
+									value={values.tel}
+								/>
+								<ErrorMessage
+									name="tel"
+									component={() => <MessageErrorType msg={errors.tel} />}
+								/>
+								<p className="text-email">Nombre del restaurante</p>
+								<input
+									className="form-control mt-2"
+									type="text"
+									name="nameRestaurant"
+									onBlur={handleBlur}
+									onChange={handleChange}
+									value={values.nameRestaurant}
+								/>
+								<ErrorMessage
+									name="tel"
+									component={() => (
+										<MessageErrorType msg={errors.nameRestaurant} />
+									)}
+								/>
+
+								<p className="text-email">Direccion</p>
+								<div className="d-flex">
+									<input
+										className="form-control mt-2"
+										type="text"
+										name="addressOne"
+										onBlur={handleBlur}
+										onChange={handleChange}
+										value={values.addressOne}
+									/>
+									<ErrorMessage
+										name="tel"
+										component={() => (
+											<MessageErrorType
+												msg={errors.addressOne}
+												clase="validate-address"
+											/>
+										)}
+									/>
+
+									<input
+										className="form-control mt-2 address-short"
+										type="text"
+										name="addressTwo"
+										onBlur={handleBlur}
+										onChange={handleChange}
+										value={values.addressTwo}
+									/>
+									<ErrorMessage
+										name="tel"
+										component={() => (
+											<MessageErrorType
+												msg={errors.addressTwo}
+												clase="validate-address"
+											/>
+										)}
+									/>
+									<p className="text-email guion">-</p>
+									<input
+										className="form-control mt-2 address-short"
+										type="text"
+										name="addressThree"
+										onBlur={handleBlur}
+										onChange={handleChange}
+										value={values.addressThree}
+									/>
+									<ErrorMessage
+										name="tel"
+										component={() => (
+											<MessageErrorType
+												msg={errors.addressThree}
+												clase="validate-address"
+											/>
+										)}
+									/>
+								</div>
 
 								<button className="btn btn-info w-100 mt-3" type="submit">
 									Crear cuenta
