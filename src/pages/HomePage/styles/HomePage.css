@@ -1,73 +1,68 @@
-
-
-.homepage{
-background-color: black;
-color: white;
+.homepage {
+	background-color: black;
+	color: white;
 }
-.white{
-    color: white;
+.white {
+	color: white;
 }
-.black{
-    color: black;
+.black {
+	color: black;
 }
 
-.header-img > img{
-    width: 166px;
-    height: 150px;
+.header-img > img {
+	width: 166px;
+	height: 150px;
 }
-.contain-card{
-    flex-wrap: wrap;
+.contain-card {
+	flex-wrap: wrap;
 }
 
+.grid {
+	height: 600px;
+	width: 100%;
+	/* background-color: aqua; */
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	gap: 10px 10px;
+	grid-auto-flow: row;
+	grid-template-areas:
+		'video1 video2 video3 sidebar sidebar'
+		'video4 video4 video5 sidebar sidebar';
+}
 
-.grid {  
-    height: 600px;
-    width: 100%;
-    /* background-color: aqua; */
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 10px 10px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "video1 video2 video3 sidebar sidebar"
-      "video4 video4 video5 sidebar sidebar";
+.sidebar {
+	grid-area: sidebar;
+	background-color: brown;
 }
-  
-.sidebar { 
-  grid-area: sidebar;
-  background-color: brown;
+
+.video1 {
+	grid-area: video1;
+	background-color: blue;
 }
-  
-.video1 { 
-  grid-area: video1;
-  background-color: blue;
+
+.video2 {
+	grid-area: video2;
+	background-color: blueviolet;
 }
-  
-.video2 { 
-  grid-area: video2; 
-  background-color: blueviolet;
+
+.video3 {
+	grid-area: video3;
+	background-color: chartreuse;
 }
-  
-.video3 { 
-  grid-area: video3;
-  background-color: chartreuse;
+
+.video4 {
+	grid-area: video4;
+	background-color: crimson;
 }
-  
-.video4 { 
-  grid-area: video4;
-  background-color: crimson;
- }
-  
-.video5 { 
-  grid-area: video5;
-  background-color: darkblue;
+
+.video5 {
+	grid-area: video5;
+	background-color: darkblue;
 }
 
 @media (max-width: 600px) {
-  
 }
 
-.containt{
-  
+.containt {
 }

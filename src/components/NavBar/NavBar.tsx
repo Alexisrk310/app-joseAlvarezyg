@@ -9,21 +9,21 @@ const NavBar: React.FC<NavBarInterface> = () => {
 			<NavLink
 				to={'/'}
 				className={({ isActive }) =>
-					isActive ? 'isActive pointer' : 'pointer'
+					isActive ? 'isActive pointer navbar-brand' : 'pointer navbar-brand'
 				}>
 				HOME
 			</NavLink>
 			<NavLink
 				to={'restaurante'}
 				className={({ isActive }) =>
-					isActive ? 'isActive pointer' : 'pointer'
+					isActive ? 'isActive pointer navbar-brand' : 'pointer navbar-brand'
 				}>
 				RESTAURANTES
 			</NavLink>
 			<NavLink
 				to={'ven'}
 				className={({ isActive }) =>
-					isActive ? 'isActive pointer' : 'pointer'
+					isActive ? 'isActive pointer navbar-brand' : 'pointer navbar-brand'
 				}>
 				VEN TE ENSEÑO
 			</NavLink>
@@ -31,28 +31,28 @@ const NavBar: React.FC<NavBarInterface> = () => {
 			<NavLink
 				to={'tour'}
 				className={({ isActive }) =>
-					isActive ? 'isActive pointer' : 'pointer'
+					isActive ? 'isActive pointer navbar-brand' : 'pointer navbar-brand'
 				}>
 				TOUR GASTRONOMICO
 			</NavLink>
 			<NavLink
 				to={'videos'}
 				className={({ isActive }) =>
-					isActive ? 'isActive pointer' : 'pointer'
+					isActive ? 'isActive pointer navbar-brand' : 'pointer navbar-brand'
 				}>
 				VIDEOS PUBLICADOS
 			</NavLink>
 			<NavLink
 				to={'team'}
 				className={({ isActive }) =>
-					isActive ? 'isActive pointer' : 'pointer'
+					isActive ? 'isActive pointer navbar-brand' : 'pointer navbar-brand'
 				}>
 				TEAM JOSE ALVAREZ
 			</NavLink>
 			<NavLink
 				to={'contactanos'}
 				className={({ isActive }) =>
-					isActive ? 'isActive pointer' : 'pointer'
+					isActive ? 'isActive pointer navbar-brand' : 'pointer navbar-brand'
 				}>
 				CONTACTANOS
 			</NavLink>

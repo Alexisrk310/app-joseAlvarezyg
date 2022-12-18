@@ -1,29 +1,26 @@
-.navbar{
-    /* flex-wrap: wrap !important; */
-    background-color: black;
-    
-    
+.navbar {
+	/* flex-wrap: wrap !important; */
+	background-color: black;
 }
 
-.navbar > a{
-    font-family: 'Inter', sans-serif;
-    /* background-color: blue; */
-    color: white;
-    margin: 0px 0px;
-    margin-bottom: 0px;
-    font-weight: 200;
-    
+.navbar > a {
+	font-family: 'Inter', sans-serif;
+	/* background-color: blue; */
+	color: white;
+	margin: 0px 0px;
+	margin-bottom: 0px;
+	font-weight: 200;
+	font-size: 16px;
 }
 
-.navbar > a:hover{
-   color: aquamarine;
-    
+.navbar > a:hover {
+	color: aquamarine;
 }
 
-.navbar > a:nth-child(8){
-    color: aquamarine;   
+.navbar > a:nth-child(8) {
+	color: aquamarine;
 }
 
-.isActive{
-    color: aquamarine !important;
+.isActive {
+	color: aquamarine !important;
 }
