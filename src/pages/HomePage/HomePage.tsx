@@ -248,8 +248,8 @@ const HomePage: React.FC<HomePageInterface> = () => {
 					</div>
 					<div className="video5">
 						<iframe
-							width="560"
-							height="315"
+							height="100%"
+							width="100%"
 							src="https://www.youtube.com/embed/_mwXjj8iH7w?start=3"
 							title="YouTube video player"
 							frameBorder={0}
