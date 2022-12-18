@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles/Card.css';
 export interface CardInterface {
-	img: string;
-	title: string;
-	description: string;
-	specialized: string;
-	zone: string;
+	img?: string;
+	title?: string;
+	description?: string;
+	specialized?: string;
+	zone?: string;
 }
 
 const Card: React.FC<CardInterface> = ({

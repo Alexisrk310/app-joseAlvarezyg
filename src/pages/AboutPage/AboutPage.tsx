@@ -77,6 +77,31 @@ const AboutPage: React.FC<AboutPageInterface> = () => {
 					<div className="wave wave4"></div>
 				</div>
 			</div>
+			<div className="container-category">
+				<p className="text-category m-5">Categoria</p>
+				<div className="d-flex category">
+					<div>
+						<div className="entry">
+							<i className="fa-solid fa-leaf"></i>
+							Entrada
+						</div>
+						<div className="cocktail">
+							<i className="fa-solid fa-star"></i>
+							Coctelería
+						</div>
+					</div>
+					<div>
+						<div className="main-dishes">
+							<i className="fa-solid fa-star"></i>
+							Platos Fuertes
+						</div>
+						<div className="in-house">
+							<i className="fa-solid fa-house"></i>
+							En casa
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

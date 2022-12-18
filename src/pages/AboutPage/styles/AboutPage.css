@@ -45,7 +45,7 @@
 .container-carousel {
 	width: 100%;
 	height: 800px;
-	background-color: black;
+	background: url('../img/background.jpg');
 }
 .container-waves {
 	position: relative;
@@ -56,6 +56,7 @@
 }
 
 .container-waves .wave {
+	margin-top: 50px;
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -124,4 +125,59 @@
 
 .carousel-img {
 	object-fit: cover;
+}
+.container-category {
+	height: 700px;
+	font-family: 'Inter', sans-serif;
+	font-weight: 500;
+}
+
+.text-category {
+	font-size: 30px;
+	text-align: center;
+	margin-top: 10px;
+}
+.category {
+	justify-content: center;
+	align-items: center;
+}
+.entry {
+	background: url('../img/entry.jpg');
+}
+.fa-leaf {
+	font-size: 40px;
+	color: white;
+}
+.cocktail {
+	background: url('../img/cocktail.jpg');
+}
+.fa-star {
+	font-size: 40px;
+	color: white;
+}
+
+.main-dishes {
+	background: url('../img/main-dishes.jpg');
+}
+.in-house {
+	background: url('../img/inHouse.jpg');
+}
+.fa-house {
+	font-size: 40px;
+	color: white;
+}
+
+.entry,
+.cocktail,
+.main-dishes,
+.in-house {
+	font-size: 25px;
+	background-size: cover;
+	width: 350px;
+	height: 209px;
+	margin: 30px 70px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
