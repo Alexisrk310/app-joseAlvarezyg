@@ -1,12 +1,66 @@
 import React from 'react';
 import './styles/Footer.css';
-import facebook from './img/facebook.png';
-import instagram from './img/instagram.png';
+import facebook from './img/facebook2.png';
+import instagram from './img/instagram2.png';
+import youtube from './img/youtube2.png';
 export interface FooterInterface {}
 
 const Footer: React.FC<FooterInterface> = () => {
 	return (
 		<div className="footer">
+			<div className='footer-div'>
+				<p>Legal</p>
+				<p>Centro de Privacidad</p>
+				<p>Politicas de Privacidad</p>
+				<p>Cookies</p>
+				<p>Sobre Publicidad</p>
+				<p>Soporte</p>
+			</div>
+			<div className="footer-bottom fixed-bottom">
+				<div>
+					<p className="mb-0">Jose Alvarez Yg</p>
+				</div>
+				<div>
+					<img
+						src={facebook}
+						alt="Facebook"
+						width={50}
+						height={50}
+						className="mr-3 facebook pointer"
+						onClick={() =>
+							window.open('https://www.facebook.com/josealvarezyg')
+						}
+					/>
+					<img
+						src={youtube}
+						alt="youtube "
+						className="youtube pointer mr-3"
+						width={50}
+						height={50}
+						onClick={() =>
+							window.open('https://www.youtube.com/@josealvarezyg/featured')
+						}
+					/>
+					<img
+						src={instagram}
+						alt="instagram"
+						className="instagram pointer"
+						width={50}
+						height={50}
+						onClick={() =>
+							window.open('https://www.instagram.com/josealvarezyg_/?hl=es-la')
+						}
+					/>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default Footer;
+
+{
+	/* <div className="footer">
 			<div>
 				<div className="footer-container flex-wrap">
 					<div className="mt-5 ">
@@ -65,19 +119,22 @@ const Footer: React.FC<FooterInterface> = () => {
 						alt="Facebook"
 						width={50}
 						height={50}
-						className="mr-3 facebook"
+						className="mr-3 facebook pointer"
+						onClick={() =>
+							window.open('https://www.facebook.com/josealvarezyg')
+						}
 					/>
 					<img
 						src={instagram}
 						alt="instagram"
-						className="instagram"
+						className="instagram pointer"
 						width={50}
 						height={50}
+						onClick={() =>
+							window.open('https://www.instagram.com/josealvarezyg_/?hl=es-la')
+						}
 					/>
 				</div>
 			</div>
-		</div>
-	);
-};
-
-export default Footer;
+		</div> */
+}
