@@ -193,7 +193,10 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						zone={'Cartagena'}
 					/>
 				</div> */}
-				<h3 className="text-center m-5">SOÑADORES QUE INSPIRAN</h3>
+
+				{/* SOÑADORES QUE INSPIRAN */}
+
+				{/* <h3 className="text-center m-5">SOÑADORES QUE INSPIRAN</h3>
 
 				<div className="grid">
 					<div className="sidebar">
@@ -256,7 +259,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen></iframe>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

@@ -20,13 +20,13 @@ const NavBar: React.FC<NavBarInterface> = () => {
 				}>
 				RESTAURANTES
 			</NavLink>
-			<NavLink
+			{/* <NavLink
 				to={'ven'}
 				className={({ isActive }) =>
 					isActive ? 'isActive pointer navbar-brand' : 'pointer navbar-brand'
 				}>
 				VEN TE ENSEÑO
-			</NavLink>
+			</NavLink> */}
 
 			<NavLink
 				to={'tour'}

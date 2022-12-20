@@ -35,10 +35,10 @@ export const AppRouter = createBrowserRouter([
 						path: '/restaurante',
 						element: <RestaurantPage />,
 					},
-					{
-						path: '/ven',
-						element: <AboutPage />,
-					},
+					// {
+					// 	path: '/ven',
+					// 	element: <AboutPage />,
+					// },
 					{
 						path: '/contactanos',
 						element: <ContactUsPage />,
