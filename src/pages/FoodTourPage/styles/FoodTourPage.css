@@ -1,24 +1,36 @@
 .foodtourpage {
-	/* width: 100%; */
-	height: 700px;
+	display: flex;
+	height: 500px;
+	background-color: black;
+	font-family: 'Inter', sans-serif;
+}
+
+.tour-img-1 {
+	width: 100%;
+	height: 100%;
+	background-image: url('../img/tour1.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.tour-img-2 {
+	width: 100%;
+	height: 100%;
+	background-image: url('../img/tour2.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.tour-text {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	background: url('../img/DSCF1559.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 50% 20%;
+	text-align: center;
+	width: 100%;
 }
-.foodtourpage > p {
-	font-size: 100px;
+.tour-text > p {
+	font-size: 40px;
 	color: white;
 }
-
-.foodtourpage .tour {
-	font-family: 'Inter', sans-serif;
-}
-.foodtourpage .soon {
-	font-family: 'Inter', sans-serif;
+.tour-text > p:nth-child(2) {
 	font-weight: 800;
 }

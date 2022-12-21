@@ -5,8 +5,12 @@ export interface FoodTourPageInterface {}
 const FoodTourPage: React.FC<FoodTourPageInterface> = () => {
 	return (
 		<div className="foodtourpage">
-			<p className='tour'>Tour gastronomico</p>
-			<p className='soon'>Soon coming</p>
+			<div className="tour-img-1"></div>
+			<div className="tour-text">
+				<p>Tour Gastronomico</p>
+				<p>Soon cooming</p>
+			</div>
+			<div className="tour-img-2"></div>
 		</div>
 	);
 };
