@@ -1,3 +1,39 @@
-.contactuspage{
+.contactuspage {
+	background-image: url('../img/DSCF1560.jpg');
+	background-size: cover;
+	width: 100%;
+	height: 700px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Inter', sans-serif;
+}
+.contactuspage > h1 {
+	color: white;
+	padding: 50px;
+	font-weight: 800;
+	padding: 30px;
+}
 
+.contact-form {
+	background-color: white;
+	width: 500px;
+	height: 750px;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.form-contact {
+	/* height: 100%; */
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.input-contact {
+	width: 300px;
 }

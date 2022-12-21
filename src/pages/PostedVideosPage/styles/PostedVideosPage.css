@@ -65,3 +65,15 @@
 .video12 {
 	grid-area: video12;
 }
+
+@media screen and (max-width: 530px) {
+	.videos {
+		display: flex !important;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap !important;
+	}
+	/* .homepage {
+		height: 4000px;
+	} */
+}
