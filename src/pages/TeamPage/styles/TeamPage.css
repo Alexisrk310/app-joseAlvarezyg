@@ -68,3 +68,16 @@
 	color: white;
 	font-family: 'Inter', sans-serif;
 }
+.img-info-alexis {
+	width: 50%;
+	margin: 20px;
+}
+
+@media screen and (max-width: 335px) {
+	.container-team-modals {
+		flex-wrap: wrap;
+	}
+	.img-info-alexis {
+		width: 100%;
+	}
+}

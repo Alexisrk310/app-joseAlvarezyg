@@ -13,7 +13,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 	console.log(authState);
 
 	const handleSubmit = async (value: ValuesRegister) => {
-		console.log(value);
+		// console.log(value);
 
 		try {
 			const dataResp = await auth('register', value);
@@ -21,7 +21,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			console.log(dataResp);
 			console.log(resp);
 
-			if (dataResp.status === 200) {
+			if (dataResp.status == 200 || dataResp.status == 201) {
 				localStorage.setItem('@user', resp);
 			}
 		} catch (error) {
