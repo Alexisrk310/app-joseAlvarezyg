@@ -1,5 +1,6 @@
 import { MessageErrorType } from '@/components';
 import { Values } from '@/models/interface/authValues';
+import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React, { useState } from 'react';
 import './styles/LoginPage.css';
@@ -21,7 +22,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 		buttonSubmit: 'Continuar con e-mail',
 	});
 
-	const handleSubmit = (value: Values) => {
+	const handleSubmit = async (value: Values) => {
 		setState({
 			...state,
 			title: 'Iniciar sesión',
@@ -30,7 +31,16 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 		});
 		if (state.stateLogin) {
 			// AQUI VA LA API REST AUTH
-			console.log('entro');
+			try {
+				const dataResp = await auth('login', value);
+				const resp = await dataResp.json();
+
+				if (dataResp.status === 200) {
+					localStorage.setItem('@user', resp);
+				}
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 

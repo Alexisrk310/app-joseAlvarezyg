@@ -1,36 +1,28 @@
 import { MessageErrorType } from '@/components';
 import { Values } from '@/models/interface/authValues';
+import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import './styles/RegisterPage.css';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 export interface RegisterPageInterface {}
 
-// interface State {
-// 	title?: 'Inicia sesion o crea una cuenta' | 'Iniciar sesión';
-// 	stateLogin?: boolean;
-// 	statepushAplication?: false;
-// 	buttonSubmit?: 'Continuar con e-mail' | 'Iniciar sesión';
-// }
-
 const RegisterPage: React.FC<RegisterPageInterface> = () => {
-	// const [state, setState] = useState<State>({
-	// 	title: 'Inicia sesion o crea una cuenta',
-	// 	stateLogin: false,
-	// 	statepushAplication: false,
-	// 	buttonSubmit: 'Continuar con e-mail',
-	// });
+	const authState = useSelector((state: RootState) => state.auth);
+	console.log(authState);
 
-	const handleSubmit = (value: Values) => {
-		// setState({
-		// 	...state,
-		// 	title: 'Iniciar sesión',
-		// 	stateLogin: true,
-		// 	buttonSubmit: 'Iniciar sesión',
-		// });
-		// if (state.stateLogin) {
-		// 	// AQUI VA LA API REST AUTH
-		// 	console.log('entro');
-		// }
+	const handleSubmit = async (value: Values) => {
+		try {
+			const dataResp = await auth('register', value);
+			const resp = await dataResp.json();
+
+			if (dataResp.status === 200) {
+				localStorage.setItem('@user', resp);
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const validations = (values: Values) => {
@@ -46,7 +38,9 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 		) {
 			errors.email = '@example.com*';
 		}
-
+		if (!values.password) {
+			errors.password = 'Escriba su contraseña';
+		}
 		if (!values.tel) {
 			errors.tel = 'Escriba su telefono';
 		}
@@ -76,6 +70,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			initialValues={{
 				name: '',
 				email: '',
+				password: '',
 				tel: '',
 				nameRestaurant: '',
 				addressOne: '',
@@ -117,6 +112,19 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 								<ErrorMessage
 									name="email"
 									component={() => <MessageErrorType msg={errors.email} />}
+								/>
+								<p className="text-email">Contraseña</p>
+								<input
+									className="form-control mt-2"
+									type="password"
+									name="password"
+									onBlur={handleBlur}
+									onChange={handleChange}
+									value={values.password}
+								/>
+								<ErrorMessage
+									name="tel"
+									component={() => <MessageErrorType msg={errors.tel} />}
 								/>
 								<p className="text-email">Telefono</p>
 								<input
