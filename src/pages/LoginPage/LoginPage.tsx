@@ -1,5 +1,5 @@
 import { MessageErrorType } from '@/components';
-import { Values } from '@/models/interface/authValues';
+import { ValuesLogin } from '@/models/interface/authValues';
 import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React, { useState } from 'react';
@@ -22,7 +22,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 		buttonSubmit: 'Continuar con e-mail',
 	});
 
-	const handleSubmit = async (value: Values) => {
+	const handleSubmit = async (value: ValuesLogin) => {
 		setState({
 			...state,
 			title: 'Iniciar sesión',
@@ -46,8 +46,8 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 		}
 	};
 
-	const validations = (values: Values) => {
-		let errors: FormikErrors<Values> = {};
+	const validations = (values: ValuesLogin) => {
+		let errors: FormikErrors<ValuesLogin> = {};
 
 		if (!values.email) {
 			errors.email = 'Escribe tu correo';
