@@ -70,6 +70,83 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						specialized={'Pizza'}
 						zone={'Cartagena'}
 					/>
+					<Card
+						img={
+							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
+						}
+						title={'Restaurante'}
+						description={
+							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
+						}
+						specialized={'Pizza'}
+						zone={'Cartagena'}
+					/>
+					<Card
+						img={
+							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
+						}
+						title={'Restaurante'}
+						description={
+							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
+						}
+						specialized={'Pizza'}
+						zone={'Cartagena'}
+					/>
+					<Card
+						img={
+							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
+						}
+						title={'Restaurante'}
+						description={
+							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
+						}
+						specialized={'Pizza'}
+						zone={'Cartagena'}
+					/>
+					<Card
+						img={
+							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
+						}
+						title={'Restaurante'}
+						description={
+							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
+						}
+						specialized={'Pizza'}
+						zone={'Cartagena'}
+					/>
+					<Card
+						img={
+							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
+						}
+						title={'Restaurante'}
+						description={
+							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
+						}
+						specialized={'Pizza'}
+						zone={'Cartagena'}
+					/>
+					<Card
+						img={
+							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
+						}
+						title={'Restaurante'}
+						description={
+							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
+						}
+						specialized={'Pizza'}
+						zone={'Cartagena'}
+					/>
+					<Card
+						img={
+							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
+						}
+						title={'Restaurante'}
+						description={
+							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
+						}
+						specialized={'Pizza'}
+						zone={'Cartagena'}
+					/>
 				</div>
 				{/* <div className="mt-3 row">
 					<p className="col-12 col-md-6 ">TOP 10 DE COLOMBIA</p>
