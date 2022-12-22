@@ -34,6 +34,8 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 			try {
 				const dataResp = await auth('login', value);
 				const resp = await dataResp.json();
+				console.log(resp);
+				console.log(dataResp);
 
 				if (dataResp.status === 200) {
 					localStorage.setItem('@user', resp);
@@ -94,7 +96,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 										<p className="text-email">Contraseña</p>
 										<input
 											className="form-control mt-2"
-											type="text"
+											type="password"
 											name="password"
 											onBlur={handleBlur}
 											onChange={handleChange}

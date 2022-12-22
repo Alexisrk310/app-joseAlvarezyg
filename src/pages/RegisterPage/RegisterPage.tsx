@@ -1,5 +1,5 @@
 import { MessageErrorType } from '@/components';
-import { Values } from '@/models/interface/authValues';
+import { ValuesRegister } from '@/models/interface/authValues';
 import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React from 'react';
@@ -12,10 +12,14 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 	const authState = useSelector((state: RootState) => state.auth);
 	console.log(authState);
 
-	const handleSubmit = async (value: Values) => {
+	const handleSubmit = async (value: ValuesRegister) => {
+		console.log(value);
+
 		try {
 			const dataResp = await auth('register', value);
 			const resp = await dataResp.json();
+			console.log(dataResp);
+			console.log(resp);
 
 			if (dataResp.status === 200) {
 				localStorage.setItem('@user', resp);
@@ -25,44 +29,44 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 		}
 	};
 
-	const validations = (values: Values) => {
-		let errors: FormikErrors<Values> = {};
-		if (!values.name) {
-			errors.name = 'Escriba su nombre';
-		}
+	const validations = (values: ValuesRegister) => {
+		let errors: FormikErrors<ValuesRegister> = {};
+		// if (!values.name) {
+		// 	errors.name = 'Escriba su nombre';
+		// }
 
-		if (!values.email) {
-			errors.email = 'Escribe tu correo';
-		} else if (
-			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		) {
-			errors.email = '@example.com*';
-		}
-		if (!values.password) {
-			errors.password = 'Escriba su contraseña';
-		}
-		if (!values.tel) {
-			errors.tel = 'Escriba su telefono';
-		}
+		// if (!values.email) {
+		// 	errors.email = 'Escribe tu correo';
+		// } else if (
+		// 	!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+		// ) {
+		// 	errors.email = '@example.com*';
+		// }
+		// if (!values.password) {
+		// 	errors.password = 'Escriba su contraseña';
+		// }
+		// if (!values.tel) {
+		// 	errors.tel = 'Escriba su telefono';
+		// }
 
-		if (!values.nameRestaurant) {
-			errors.nameRestaurant = 'Escriba su restaurante';
-		}
+		// if (!values.nameRestaurant) {
+		// 	errors.nameRestaurant = 'Escriba su restaurante';
+		// }
 
-		if (!values.addressOne) {
-			errors.addressOne = '*';
-		}
+		// if (!values.addressOne) {
+		// 	errors.addressOne = '*';
+		// }
 
-		if (!values.addressTwo) {
-			errors.addressTwo = '*';
-		}
+		// if (!values.addressTwo) {
+		// 	errors.addressTwo = '*';
+		// }
 
-		if (!values.addressThree) {
-			errors.addressThree = '*';
-		}
-		console.log(errors);
+		// if (!values.addressThree) {
+		// 	errors.addressThree = '*';
+		// }
+		// console.log(errors);
 
-		return errors;
+		// return errors;
 	};
 
 	return (
@@ -71,11 +75,11 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 				name: '',
 				email: '',
 				password: '',
-				tel: '',
+				tel: 0,
 				nameRestaurant: '',
-				addressOne: '',
-				addressTwo: '',
-				addressThree: '',
+				addresOne: '',
+				addresTwo: '',
+				addresThree: '',
 			}}
 			onSubmit={handleSubmit}
 			validate={validations}>
@@ -123,13 +127,13 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									value={values.password}
 								/>
 								<ErrorMessage
-									name="tel"
-									component={() => <MessageErrorType msg={errors.tel} />}
+									name="password"
+									component={() => <MessageErrorType msg={errors.password} />}
 								/>
 								<p className="text-email">Telefono</p>
 								<input
 									className="form-control mt-2"
-									type="text"
+									type="number"
 									name="tel"
 									onBlur={handleBlur}
 									onChange={handleChange}
@@ -149,7 +153,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									value={values.nameRestaurant}
 								/>
 								<ErrorMessage
-									name="tel"
+									name="nameRestaurant"
 									component={() => (
 										<MessageErrorType msg={errors.nameRestaurant} />
 									)}
@@ -160,16 +164,16 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									<input
 										className="form-control mt-2"
 										type="text"
-										name="addressOne"
+										name="addresOne"
 										onBlur={handleBlur}
 										onChange={handleChange}
-										value={values.addressOne}
+										value={values.addresOne}
 									/>
 									<ErrorMessage
-										name="tel"
+										name="addresOne"
 										component={() => (
 											<MessageErrorType
-												msg={errors.addressOne}
+												msg={errors.addresOne}
 												clase="validate-address"
 											/>
 										)}
@@ -178,16 +182,16 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									<input
 										className="form-control mt-2 address-short"
 										type="text"
-										name="addressTwo"
+										name="addresTwo"
 										onBlur={handleBlur}
 										onChange={handleChange}
-										value={values.addressTwo}
+										value={values.addresTwo}
 									/>
 									<ErrorMessage
-										name="tel"
+										name="addresTwo"
 										component={() => (
 											<MessageErrorType
-												msg={errors.addressTwo}
+												msg={errors.addresTwo}
 												clase="validate-address"
 											/>
 										)}
@@ -196,16 +200,16 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									<input
 										className="form-control mt-2 address-short"
 										type="text"
-										name="addressThree"
+										name="addresThree"
 										onBlur={handleBlur}
 										onChange={handleChange}
-										value={values.addressThree}
+										value={values.addresThree}
 									/>
 									<ErrorMessage
-										name="tel"
+										name="addresThree"
 										component={() => (
 											<MessageErrorType
-												msg={errors.addressThree}
+												msg={errors.addresThree}
 												clase="validate-address"
 											/>
 										)}

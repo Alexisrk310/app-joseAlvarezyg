@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import './styles/Card.css';
 export interface CardInterface {
 	img?: string;
@@ -6,6 +6,7 @@ export interface CardInterface {
 	description?: string;
 	specialized?: string;
 	zone?: string;
+	evente?: MouseEventHandler<HTMLDivElement>;
 }
 
 const Card: React.FC<CardInterface> = ({
@@ -14,10 +15,12 @@ const Card: React.FC<CardInterface> = ({
 	description,
 	specialized,
 	zone,
+	evente,
 }) => {
 	return (
 		<div
-			className="card m-3 backgroud-img "
+			onClick={evente}
+			className="card m-3 backgroud-img"
 			style={{
 				width: 250,
 			}}>
