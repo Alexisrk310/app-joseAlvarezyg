@@ -6,6 +6,7 @@ import React from 'react';
 import './styles/RegisterPage.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import { AuthGoogle } from '@/components/AuthGoogle';
 export interface RegisterPageInterface {}
 
 const RegisterPage: React.FC<RegisterPageInterface> = () => {
@@ -31,42 +32,43 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 
 	const validations = (values: ValuesRegister) => {
 		let errors: FormikErrors<ValuesRegister> = {};
-		// if (!values.name) {
-		// 	errors.name = 'Escriba su nombre';
-		// }
+		if (!values.name) {
+			errors.name = 'Escriba su nombre';
+		}
 
-		// if (!values.email) {
-		// 	errors.email = 'Escribe tu correo';
-		// } else if (
-		// 	!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		// ) {
-		// 	errors.email = '@example.com*';
-		// }
-		// if (!values.password) {
-		// 	errors.password = 'Escriba su contraseña';
-		// }
-		// if (!values.tel) {
-		// 	errors.tel = 'Escriba su telefono';
-		// }
+		if (!values.email) {
+			errors.email = 'Escribe tu correo';
+		} else if (
+			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+		) {
+			errors.email = '@example.com*';
+		}
+		if (!values.password) {
+			errors.password = 'Escriba su contraseña';
+		}
+		if (!values.tel) {
+			errors.tel = 'Escriba su telefono';
+		} else if (!/^\d{10}$/.test(values.tel)) {
+			errors.tel = 'Solo se permiten 10 digitos';
+		}
 
-		// if (!values.nameRestaurant) {
-		// 	errors.nameRestaurant = 'Escriba su restaurante';
-		// }
+		if (!values.nameRestaurant) {
+			errors.nameRestaurant = 'Escriba su restaurante';
+		}
 
-		// if (!values.addressOne) {
-		// 	errors.addressOne = '*';
-		// }
+		if (!values.addresOne) {
+			errors.addresOne = '*';
+		}
 
-		// if (!values.addressTwo) {
-		// 	errors.addressTwo = '*';
-		// }
+		if (!values.addresTwo) {
+			errors.addresTwo = '*';
+		}
 
-		// if (!values.addressThree) {
-		// 	errors.addressThree = '*';
-		// }
-		// console.log(errors);
+		if (!values.addresThree) {
+			errors.addresThree = '*';
+		}
 
-		// return errors;
+		return errors;
 	};
 
 	return (
@@ -75,7 +77,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 				name: '',
 				email: '',
 				password: '',
-				tel: 0,
+				tel: '',
 				nameRestaurant: '',
 				addresOne: '',
 				addresTwo: '',
@@ -220,6 +222,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									Crear cuenta
 								</button>
 								<p className="text-center mt-5">O</p>
+								<AuthGoogle />
 								<p className="text-center">
 									Al iniciar sesion o crear una cuenta esta aceptando nuestros
 									<b className="text-info"> terminos y condiciones</b> y

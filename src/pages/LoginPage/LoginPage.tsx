@@ -1,4 +1,5 @@
 import { MessageErrorType } from '@/components';
+import { AuthGoogle } from '@/components/AuthGoogle';
 import { ValuesLogin } from '@/models/interface/authValues';
 import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
@@ -114,6 +115,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 									{state && state.buttonSubmit}
 								</button>
 								<p className="text-center mt-5">O</p>
+								<AuthGoogle />
 								<p className="text-center">
 									Al iniciar sesion o crear una cuenta esta aceptando nuestros
 									<b className="text-info"> terminos y condiciones</b> y

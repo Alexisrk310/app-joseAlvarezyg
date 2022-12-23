@@ -6,7 +6,7 @@ export interface ValuesRegister {
 	name: string;
 	email: string;
 	password: string;
-	tel: number;
+	tel: string;
 	nameRestaurant: string;
 	addresOne: string;
 	addresTwo: string;
