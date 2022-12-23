@@ -5,6 +5,7 @@ export const auth = async (endpoint: string, inputsValues: any) => {
 	return await fetch(urlRegister, {
 		method: 'POST',
 		headers: {
+			
 			'Content-type': 'application/json',
 		},
 		body: JSON.stringify(inputsValues),

@@ -33,7 +33,7 @@
 	display: none !important;
 	position: absolute;
 	right: 0;
-	top: 20px;
+	top: 20;
 }
 @media screen and (max-width: 879px) {
 	.navbar {
@@ -55,6 +55,7 @@
 	}
 	.responsive {
 		height: 420px !important;
+		transition: 0.3s;
 	}
 	.bar-toggle {
 		display: flex !important;

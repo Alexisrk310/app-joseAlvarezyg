@@ -7,6 +7,9 @@ import './styles/RegisterPage.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { AuthGoogle } from '@/components/AuthGoogle';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 export interface RegisterPageInterface {}
 
 const RegisterPage: React.FC<RegisterPageInterface> = () => {
@@ -21,8 +24,16 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			const resp = await dataResp.json();
 			console.log(dataResp);
 			console.log(resp);
+			const MySwal = withReactContent(Swal);
 
 			if (dataResp.status == 200 || dataResp.status == 201) {
+				MySwal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Cuenta creada',
+					showConfirmButton: false,
+					timer: 1500,
+				});
 				localStorage.setItem('@user', resp);
 			}
 		} catch (error) {

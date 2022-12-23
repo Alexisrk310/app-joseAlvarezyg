@@ -1,14 +1,21 @@
+import { ValuesLogin, ValuesRegister } from '@/models/interface';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import './styles/NavBar.css';
 export interface NavBarInterface {}
 
 const NavBar: React.FC<NavBarInterface> = () => {
+	const navigate = useNavigate();
 	const handleToggle = () => {
 		const bar = document.querySelector('.navbar');
 		const toggle = document.querySelector('.container-navbar');
 		toggle?.classList.toggle('responsive');
 		bar?.classList.toggle('bar-toggle');
+	};
+	const handleSignOff = () => {
+		localStorage.removeItem('@user');
+		navigate('/');
 	};
 	return (
 		<div className="container-navbar sticky-top">
@@ -64,12 +71,20 @@ const NavBar: React.FC<NavBarInterface> = () => {
 					CONTACTANOS
 				</NavLink>
 				<i className="fa-solid fa-magnifying-glass pointer white"></i>
-				<NavLink to={'login'} className="pointer btn btn-info">
-					Inicia Sesión
-				</NavLink>
-				<NavLink to={'register'} className="pointer btn btn-info">
-					Registrate
-				</NavLink>
+				{!JSON.parse(localStorage.getItem('@user') as any) ? (
+					<>
+						<NavLink to={'login'} className="pointer btn btn-info">
+							Inicia Sesión
+						</NavLink>
+						<NavLink to={'register'} className="pointer btn btn-info">
+							Registrate
+						</NavLink>
+					</>
+				) : (
+					<button className="pointer btn btn-info" onClick={handleSignOff}>
+						Cerrar sesión
+					</button>
+				)}
 			</div>
 			<i
 				className="fa-solid fa-bars barJose pointer"

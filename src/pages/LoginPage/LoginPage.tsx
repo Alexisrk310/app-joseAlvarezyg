@@ -4,7 +4,10 @@ import { ValuesLogin } from '@/models/interface/authValues';
 import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React, { useState } from 'react';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 import './styles/LoginPage.css';
+import { useNavigate } from 'react-router-dom';
 
 export interface LoginPageInterface {}
 
@@ -16,6 +19,8 @@ interface State {
 }
 
 const LoginPage: React.FC<LoginPageInterface> = () => {
+	const MySwal = withReactContent(Swal);
+	const navigate = useNavigate();
 	const [state, setState] = useState<State>({
 		title: 'Inicia sesion o crea una cuenta',
 		stateLogin: false,
@@ -38,8 +43,15 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 				console.log(resp);
 				console.log(dataResp);
 
-				if (dataResp.status === 200) {
-					localStorage.setItem('@user', resp);
+				if (resp.ok) {
+					localStorage.setItem('@user', JSON.stringify(resp));
+					navigate('/restaurante');
+				} else {
+					MySwal.fire({
+						icon: 'error',
+						title: 'Error',
+						text: 'Esta cuenta no existe',
+					});
 				}
 			} catch (error) {
 				console.log(error);
@@ -57,7 +69,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 		) {
 			errors.email = '@example.com*';
 		}
-		console.log(errors);
+
 		if (state.stateLogin) {
 			if (!values.password) {
 				errors.password = 'Escribe tu contraseña';
