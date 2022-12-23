@@ -1,15 +1,15 @@
-import { Values } from '@/models/interface';
+import { ValuesRegister } from '@/models/interface';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState: Values = {
+const initialState: ValuesRegister = {
 	name: '',
 	email: '',
 	password: '',
 	tel: '',
 	nameRestaurant: '',
-	addressOne: '',
-	addressTwo: '',
-	addressThree: '',
+	addresOne: '',
+	addresTwo: '',
+	addresThree: '',
 };
 export const authSlice = createSlice({
 	name: 'auth',

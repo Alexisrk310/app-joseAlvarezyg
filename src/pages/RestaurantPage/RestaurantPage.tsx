@@ -16,18 +16,6 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 					description="Lorem ipsum con papas"
 					specialized="Hamburguesa"
 				/>
-				<Card
-					img="https://s3images.coroflot.com/user_files/individual_files/547169_igfq9rhfz2gkzmgy7sujtv75f.jpg"
-					title="AMALA"
-					description="Lorem ipsum con papas"
-					specialized="Hamburguesa"
-				/>
-				<Card
-					img="https://s3images.coroflot.com/user_files/individual_files/547169_igfq9rhfz2gkzmgy7sujtv75f.jpg"
-					title="AMALA"
-					description="Lorem ipsum con papas"
-					specialized="Hamburguesa"
-				/>
 			</div>
 		</div>
 	);

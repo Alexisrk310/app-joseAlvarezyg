@@ -40,6 +40,10 @@ export const AppRouter = createBrowserRouter([
 						path: '/restaurante/:id',
 						element: <NameRestaurant />,
 					},
+					{
+						path: '/restaurante/crear',
+						element: <NameRestaurant />,
+					},
 					// {
 					// 	path: '/ven',
 					// 	element: <AboutPage />,
