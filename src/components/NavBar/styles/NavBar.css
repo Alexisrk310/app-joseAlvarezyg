@@ -1,6 +1,11 @@
-.navbar {
+.container-navbar {
 	/* flex-wrap: wrap !important; */
 	background-color: black;
+	width: 100%;
+	height: 90px;
+}
+.navbar {
+	height: 90px;
 }
 
 .navbar > a {
@@ -23,4 +28,43 @@
 
 .isActive {
 	color: aquamarine !important;
+}
+.barJose {
+	display: none !important;
+	position: absolute;
+	right: 0;
+	top: 20px;
+}
+@media screen and (max-width: 879px) {
+	.navbar {
+		display: none !important;
+	}
+	.barJose {
+		display: block !important;
+		font-size: 30px;
+		color: white;
+		margin-right: 20px;
+	}
+	.container-navbar {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+	.container-navbar {
+		height: 90px !important;
+	}
+	.responsive {
+		height: 420px !important;
+	}
+	.bar-toggle {
+		display: flex !important;
+	}
+	.container-navbar.responsive {
+		justify-content: center;
+	}
+	.container-navbar.responsive > * {
+		height: 100%;
+		display: flex !important;
+		flex-direction: column !important;
+	}
 }
