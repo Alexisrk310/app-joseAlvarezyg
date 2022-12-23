@@ -1,3 +1,13 @@
-.createrestaurant{
-
+.createrestaurant {
+	height: 100vh;
+	width: 100%;
+	background-image: url('../img/banground.jpg');
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.container-new-restaurant {
+	width: 600px;
+	height: 600px;
+	background-color: aliceblue;
 }

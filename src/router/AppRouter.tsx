@@ -15,6 +15,7 @@ import {
 } from '@/pages';
 
 import { createBrowserRouter } from 'react-router-dom';
+import { CreateRestaurant } from '@/pages/CreateRestaurant';
 
 export const AppRouter = createBrowserRouter([
 	{
@@ -42,7 +43,7 @@ export const AppRouter = createBrowserRouter([
 					},
 					{
 						path: '/restaurante/crear',
-						element: <NameRestaurant />,
+						element: <CreateRestaurant />,
 					},
 					// {
 					// 	path: '/ven',
