@@ -32,12 +32,11 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 	useEffect(() => {
 		const init = async () => {
 			//
-			console.log(local?.token || local?.id_token);
-
-			const data = await getRestaurant(local?.token || local?.id_token);
-			const resp = await data.json();
-			console.log(data);
-			console.log(resp);
+			// console.log(local?.token || local?.id_token);
+			// const data = await getRestaurant(local?.token || local?.id_token);
+			// const resp = await data.json();
+			// console.log(data);
+			// console.log(resp);
 		};
 		init();
 	}, []);

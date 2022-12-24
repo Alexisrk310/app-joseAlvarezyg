@@ -38,10 +38,11 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		console.log(profileImg.imgPlate);
 
 		const ValueRestaurant = {
-			imageRestaurant: profileImg.imgPlate,
+			image: profileImg.imgPlate,
 			specialty: values.specialty,
-			descriptionRestaurant: values.descriptionRestaurant,
+			description: values.description,
 		};
+		console.log(local.name);
 
 		try {
 			const addResta = await addRestaurant(
@@ -72,14 +73,14 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	};
 	const validations = (values: any) => {
 		let errors: FormikErrors<RestaurantValues> = {};
-		if (!values.nameRestaurant) {
-			errors.nameRestaurant = 'Escribe el nombre del restaurante';
+		if (!values.name) {
+			errors.name = 'Escribe el nombre del restaurante';
 		}
 		if (!values.specialty) {
 			errors.specialty = 'Escribe la especialidad del restaurante';
 		}
-		if (!values.descriptionRestaurant) {
-			errors.descriptionRestaurant = 'Escribe la descripción del restaurante';
+		if (!values.description) {
+			errors.description = 'Escribe la descripción del restaurante';
 		}
 
 		return errors;
@@ -88,9 +89,9 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		<>
 			<Formik
 				initialValues={{
-					nameRestaurant: '',
+					name: '',
 					specialty: '',
-					descriptionRestaurant: '',
+					description: '',
 					department: '',
 					city: '',
 					address: '',
@@ -138,7 +139,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 									// name="name"
 									// onBlur={handleBlur}
 									onChange={handleChange}
-									value={local.payload.name}
+									value={local?.payload?.name || local?.name}
 									readOnly
 								/>
 							</div>
@@ -148,16 +149,14 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 									type="text"
 									className="form-control"
 									id="exampleInputPassword1"
-									name="nameRestaurant"
+									name="name"
 									onBlur={handleBlur}
 									onChange={handleChange}
-									value={values.nameRestaurant}
+									value={values.name}
 								/>
 								<ErrorMessage
-									name="nameRestaurant"
-									component={() => (
-										<MessageErrorType msg={errors.nameRestaurant} />
-									)}
+									name="name"
+									component={() => <MessageErrorType msg={errors.name} />}
 								/>
 							</div>
 							<div className="form-group w-75">
@@ -182,14 +181,14 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 									// id="exampleFormControlTextarea1"
 									rows={10}
 									placeholder="Descripcion del restaurante"
-									name="descriptionRestaurant"
+									name="description"
 									onBlur={handleBlur}
 									onChange={handleChange}
-									value={values.descriptionRestaurant}></textarea>
+									value={values.description}></textarea>
 								<ErrorMessage
-									name="descriptionRestaurant"
+									name="description"
 									component={() => (
-										<MessageErrorType msg={errors.descriptionRestaurant} />
+										<MessageErrorType msg={errors.description} />
 									)}
 								/>
 							</div>

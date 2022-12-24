@@ -34,7 +34,10 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				localStorage.setItem('@user', resp);
+				localStorage.setItem(
+					'@user',
+					JSON.stringify(resp.data || resp.payload)
+				);
 			}
 		} catch (error) {
 			console.log(error);

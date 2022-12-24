@@ -3,6 +3,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import './styles/NavBar.css';
+import Swal from 'sweetalert2';
 export interface NavBarInterface {}
 
 const NavBar: React.FC<NavBarInterface> = () => {
@@ -14,8 +15,21 @@ const NavBar: React.FC<NavBarInterface> = () => {
 		bar?.classList.toggle('bar-toggle');
 	};
 	const handleSignOff = () => {
-		localStorage.removeItem('@user');
-		navigate('/');
+		Swal.fire({
+			title: 'Estas seguro de cerrar sesión?',
+			text: '',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Cerrar sesión',
+			cancelButtonText: 'Cancelar',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				localStorage.removeItem('@user');
+				navigate('/');
+			}
+		});
 	};
 	return (
 		<div className="container-navbar sticky-top">

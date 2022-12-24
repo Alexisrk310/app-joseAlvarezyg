@@ -39,12 +39,13 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 			// AQUI VA LA API REST AUTH
 			try {
 				const dataResp = await auth('login', value);
-				const resp = await dataResp
+				const resp = await dataResp.json();
 				console.log(resp);
 				console.log(dataResp);
 
 				if (resp.ok) {
-					localStorage.setItem('@user', JSON.stringify(resp));
+					localStorage.setItem('@user', JSON.stringify(resp.data || resp));
+
 					navigate('/restaurante');
 				} else {
 					MySwal.fire({

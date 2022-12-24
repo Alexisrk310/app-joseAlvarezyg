@@ -52,7 +52,6 @@ const AuthGoogle: React.FC<AuthGoogleInterface> = () => {
 		});
 		google.accounts.id.prompt();
 	}, []);
-	console.log(user);
 
 	return (
 		<div className="d-flex justify-content-center m-3">
