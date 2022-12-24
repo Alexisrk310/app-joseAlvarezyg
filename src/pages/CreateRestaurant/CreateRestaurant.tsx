@@ -39,6 +39,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 
 		const ValueRestaurant = {
 			image: profileImg.imgPlate,
+			name: values.name,
 			specialty: values.specialty,
 			description: values.description,
 		};
@@ -51,15 +52,14 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 			);
 			const resp = await addResta.json();
 			if (resp.ok) {
-				localStorage.setItem('@user', JSON.stringify(resp));
 				MySwal.fire({
 					position: 'top-end',
 					icon: 'success',
-					title: 'Cuenta creada',
+					title: 'Restaurante creado',
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				// navigate('/restaurante');
+				navigate('/restaurante');
 			} else {
 				MySwal.fire({
 					icon: 'error',

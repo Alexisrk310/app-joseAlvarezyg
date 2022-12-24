@@ -1,15 +1,26 @@
 import { AddPlate, Card, MessageErrorType } from '@/components';
 import { useFormValues } from '@/hooks/useFormValues';
 import { ValuesPlates } from '@/models/interface';
+import { postPlates } from '@/utilities/api/plate/postPlates';
 import { getRestaurant } from '@/utilities/api/resturant/getRestaurant';
 import { addRestaurant } from '@/utilities/api/resturant/postRestaurant';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import './styles/RestaurantPage.css';
 export interface RestaurantPageInterface {}
-
+interface responseGetRestaurant {
+	id: string;
+	name: string;
+	description: string;
+	specialty: string;
+	userId: string;
+}
 const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
+	const MySwal = withReactContent(Swal);
+	const [restaurant, setRestaurant] = useState([]);
 	const [plateImg, setPlateImg] = useState({
 		platesimg:
 			'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
@@ -31,18 +42,47 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 	const navigation = useNavigate();
 	useEffect(() => {
 		const init = async () => {
-			//
-			// console.log(local?.token || local?.id_token);
-			// const data = await getRestaurant(local?.token || local?.id_token);
-			// const resp = await data.json();
+			console.log(local?.token || local?.id_token);
+			const data = await getRestaurant(local?.token || local?.id_token);
+			const resp = await data.json();
 			// console.log(data);
-			// console.log(resp);
+			console.log(resp);
+			setRestaurant(resp.data);
+			console.log(restaurant);
 		};
 		init();
 	}, []);
 
 	const handleSubmit = async (values: ValuesPlates) => {
 		console.log(values);
+		const ValuesPlate = {
+			image: plateImg.platesimg,
+			name: values.namePlate,
+			description: values.descriptionPlate,
+		};
+		const resp = await postPlates(ValuesPlate, local?.token || local?.id_token);
+		const data = await resp.json();
+		try {
+			if (resp.ok) {
+				MySwal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Plato creado',
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			} else {
+				MySwal.fire({
+					icon: 'error',
+					title: 'Error',
+					text: 'No se creo el restaurante',
+				});
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		console.log(resp);
+		console.log(data);
 	};
 	const validations = (values: ValuesPlates) => {
 		let errors: FormikErrors<ValuesPlates> = {};
@@ -64,14 +104,16 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 				<p>RESTAURANTES</p>
 			</div>
 			<div className="mr-5 ml-5 mt-5 restaurant-card">
-				<Card
-					img="https://s3images.coroflot.com/user_files/individual_files/547169_igfq9rhfz2gkzmgy7sujtv75f.jpg"
-					title="AMALA"
-					description="Lorem ipsum con papas"
-					specialized="Hamburguesa"
-				/>
-				{/* <i className="fa-solid fa-plate-utensils addPlates"></i> */}
-				{/* <i className="fa-brands fa-whatsapp addPlates"></i> */}
+				{restaurant?.map((cardRestaurant: responseGetRestaurant) => (
+					<Card
+						img="https://s3images.coroflot.com/user_files/individual_files/547169_igfq9rhfz2gkzmgy7sujtv75f.jpg"
+						title={cardRestaurant?.name}
+						description={cardRestaurant.description}
+						specialized={cardRestaurant.specialty}
+						key={cardRestaurant.id}
+					/>
+				))}
+
 				<i
 					className="fa-sharp fa-solid fa-plus addPlates pointer"
 					itemType="button"
@@ -127,7 +169,7 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 															accept="image/*"
 															name="image-upload"
 															id="input"
-															required
+															// required
 															onChange={HandlePlates}
 														/>
 														<div className="label">
