@@ -39,7 +39,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 			// AQUI VA LA API REST AUTH
 			try {
 				const dataResp = await auth('login', value);
-				const resp = await dataResp.json();
+				const resp = await dataResp
 				console.log(resp);
 				console.log(dataResp);
 
