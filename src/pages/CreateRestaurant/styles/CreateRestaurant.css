@@ -5,9 +5,32 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-wrap: wrap;
 }
 .container-new-restaurant {
 	width: 600px;
 	height: 600px;
-	background-color: aliceblue;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 50px;
+}
+
+.img-responsive {
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+}
+.img-logo-restaurant {
+	align-self: flex-start;
+}
+.modalAddPlate {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }

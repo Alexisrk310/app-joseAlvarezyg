@@ -1,5 +1,4 @@
 import { auth } from '@/utilities/api/auth/auth';
-import jwtDecode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 export interface AuthGoogleInterface {}

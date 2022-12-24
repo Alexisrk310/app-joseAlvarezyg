@@ -30,7 +30,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 				</div>
 				<p className="qualification">Calificanos: Estrellas</p>
 			</div>
-			<div className="container-menu-items mr-5 ml-5 ">
+			<div className="container-menu-items mr-2 ml-2 ">
 				<h3 className="text-center white">PLATILLOS</h3>
 				<div className="menu-items mr-5 ml-5">
 					<Card

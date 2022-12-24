@@ -33,3 +33,13 @@
 	display: flex;
 	flex-wrap: wrap;
 }
+.addPlates {
+	font-size: 50px;
+	color: white;
+	position: fixed;
+	right: 20px;
+	bottom: 70px;
+	color: black;
+	background-color: white;
+	border-radius: 20px;
+}

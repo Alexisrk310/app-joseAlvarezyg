@@ -2,7 +2,7 @@ export interface RestaurantValues {
 	name?: string;
 	nameRestaurant: string;
 	specialty: string;
-	description: string;
+	descriptionRestaurant: string;
 	department?: string;
 	city?: string;
 	address?: string;

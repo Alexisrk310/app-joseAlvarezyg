@@ -1,0 +1,1 @@
+export { default as InputFilePreviewImage } from './InputFilePreviewImage';

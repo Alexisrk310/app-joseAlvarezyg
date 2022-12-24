@@ -77,7 +77,7 @@ const TeamPage: React.FC<TeamPageInterface> = () => {
 					itemType="button"
 					data-toggle="modal"
 					data-target="#staticBackdrop1">
-					<div className="jose">a</div>
+					<div className="jose"></div>
 					<p>Jose Alvarez</p>
 					<div
 						className="modal fade"
