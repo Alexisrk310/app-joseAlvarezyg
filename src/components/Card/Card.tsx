@@ -28,7 +28,7 @@ const Card: React.FC<CardInterface> = ({
 			<div className="card-body ">
 				<h5 className="card-title black">{title}</h5>
 				<p className="card-text black">{description}</p>
-				<small className="black">Especializad: {specialized}</small>
+				<small className="black">{specialized}</small>
 				<small className="black d-block">{zone}</small>
 			</div>
 		</div>

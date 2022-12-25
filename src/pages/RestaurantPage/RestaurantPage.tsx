@@ -14,6 +14,7 @@ export interface RestaurantPageInterface {}
 interface responseGetRestaurant {
 	id: string;
 	name: string;
+	image?: string;
 	description: string;
 	specialty: string;
 	userId: string;
@@ -46,9 +47,8 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 			const data = await getRestaurant(local?.token || local?.id_token);
 			const resp = await data.json();
 			// console.log(data);
-			console.log(resp);
-			setRestaurant(resp.data);
 			console.log(restaurant);
+			setRestaurant(resp.data);
 		};
 		init();
 	}, []);
@@ -81,8 +81,6 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 		} catch (error) {
 			console.log(error);
 		}
-		console.log(resp);
-		console.log(data);
 	};
 	const validations = (values: ValuesPlates) => {
 		let errors: FormikErrors<ValuesPlates> = {};
@@ -106,11 +104,12 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 			<div className="mr-5 ml-5 mt-5 restaurant-card">
 				{restaurant?.map((cardRestaurant: responseGetRestaurant) => (
 					<Card
-						img="https://s3images.coroflot.com/user_files/individual_files/547169_igfq9rhfz2gkzmgy7sujtv75f.jpg"
+						img={cardRestaurant?.image}
 						title={cardRestaurant?.name}
 						description={cardRestaurant.description}
 						specialized={cardRestaurant.specialty}
 						key={cardRestaurant.id}
+						evente={() => navigation(`/restaurante/${cardRestaurant.id}`)}
 					/>
 				))}
 

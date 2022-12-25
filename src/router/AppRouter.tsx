@@ -16,6 +16,7 @@ import {
 
 import { createBrowserRouter } from 'react-router-dom';
 import { CreateRestaurant } from '@/pages/CreateRestaurant';
+import { loaderPostRestaurant } from '@/pages/NameRestaurant/NameRestaurant';
 
 export const AppRouter = createBrowserRouter([
 	{
@@ -40,6 +41,7 @@ export const AppRouter = createBrowserRouter([
 					{
 						path: '/restaurante/:id',
 						element: <NameRestaurant />,
+						loader: loaderPostRestaurant,
 					},
 					{
 						path: '/restaurante/crear',

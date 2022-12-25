@@ -1,17 +1,12 @@
 // ENCONTRAR RESTAURANTE POR ID
-export const getRestaurantiD = async (
-	endpoint: string,
-	inputsValues: any,
-	token: string
-) => {
-	const urlGetRestaurant = `https://backen-appjose.vercel.app/restaurant/${endpoint}`;
+export const getRestaurantiD = async (id: string, token: string) => {
+	const urlGetRestaurant = `https://backen-appjose.vercel.app/restaurant/${id}`;
 	return await fetch(urlGetRestaurant, {
-		method: 'POST',
+		method: 'GET',
 		headers: {
 			'x-token': token,
 			'Content-type': 'application/json',
 		},
-		body: JSON.stringify(inputsValues),
 	});
 };
 // MOSTRAR TODOS LOS RESTAURANTES

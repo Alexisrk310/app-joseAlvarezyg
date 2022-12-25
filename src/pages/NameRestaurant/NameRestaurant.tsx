@@ -1,31 +1,59 @@
 import { Card } from '@/components';
-import React from 'react';
+import { getPlatesId } from '@/utilities/api/plate/getPlates';
+import {
+	getRestaurantiD,
+	getRestaurant,
+} from '@/utilities/api/resturant/getRestaurant';
+import React, { useEffect, useState } from 'react';
+import { useLoaderData, useRouteLoaderData } from 'react-router-dom';
 import './styles/NameRestaurant.css';
 export interface NameRestaurantInterface {}
 
+interface responseGetRestaurant {
+	id: string;
+	name: string;
+	description: string;
+	specialty: string;
+	userId: string;
+}
 const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
+	const [plate, setPlate] = useState([]);
+	const { dataRestaurantId }: any = useLoaderData();
+	const { data } = dataRestaurantId;
+	console.log(data);
+	useEffect(() => {
+		const init = async () => {
+			const local = JSON.parse(localStorage.getItem('@user') as any);
+			try {
+				const responsePlatesId = await getPlatesId(
+					local.token || local?.id_token,
+					data.id
+				);
+				const dataPlatesId = await responsePlatesId.json();
+				console.log(responsePlatesId);
+				console.log(dataPlatesId);
+
+				if (dataPlatesId.ok) {
+					setPlate(dataPlatesId.data);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		init();
+	}, []);
+
 	const tel = 3008277052;
 	return (
 		<div className="namerestaurant ">
 			<div className="content-restaurant ">
-				<img
-					src="https://s3images.coroflot.com/user_files/individual_files/547169_igfq9rhfz2gkzmgy7sujtv75f.jpg"
-					alt="logo"
-					className="banner-img"
-				/>
+				<img src={data.image} alt="logo" className="banner-img" />
 				<div className="d-flex ">
-					<img
-						src="https://s3images.coroflot.com/user_files/individual_files/547169_igfq9rhfz2gkzmgy7sujtv75f.jpg"
-						alt="logo"
-						className="logo-restaurant"
-					/>
+					<img src={data.image} alt="logo" className="logo-restaurant" />
 
 					<div className="m-5 title-name-restaurant ">
-						<p className="white">NOMBRE DEL RESTAURANTE</p>
-						<p className="white">
-							Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
-							ipsum Lorem ipsum
-						</p>
+						<b className="white">{data.name}</b>
+						<p className="white">{data.description}</p>
 					</div>
 				</div>
 				<p className="qualification">Calificanos: Estrellas</p>
@@ -33,12 +61,14 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			<div className="container-menu-items mr-2 ml-2 ">
 				<h3 className="text-center white">PLATILLOS</h3>
 				<div className="menu-items mr-5 ml-5">
-					<Card
-						img="https://static.wixstatic.com/media/54489f_6df5a3cb035d4542960a78e20b90e624~mv2_d_1500_1313_s_2.png/v1/fit/w_2500,h_1330,al_c/54489f_6df5a3cb035d4542960a78e20b90e624~mv2_d_1500_1313_s_2.png"
-						title="Restaurante"
-						description="Lorem ipsum Lorem ipsum Lorem ipsum"
-						specialized="Pizza"
-					/>
+					{plate?.map((plates: any) => (
+						<Card
+							img={plates?.image}
+							title={plates.name}
+							description={plates.description}
+						/>
+					))}
+
 					<hr className="mb-0" />
 				</div>
 			</div>
@@ -52,3 +82,15 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 };
 
 export default NameRestaurant;
+
+export const loaderPostRestaurant = async ({ params }: any) => {
+	const local = JSON.parse(localStorage.getItem('@user') as any);
+	const respRestaurantId = await getRestaurantiD(
+		params.id,
+		local.token || local?.id_token
+	);
+	const dataRestaurantId = await respRestaurantId.json();
+	console.log(params.id);
+
+	return { dataRestaurantId };
+};

@@ -46,7 +46,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 				if (resp.ok) {
 					localStorage.setItem('@user', JSON.stringify(resp.data || resp));
 
-					navigate('/restaurante');
+					navigate('/restaurante/crear');
 				} else {
 					MySwal.fire({
 						icon: 'error',
