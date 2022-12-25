@@ -130,6 +130,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 							img={plates?.image}
 							title={plates.name}
 							description={plates.description}
+							stateStart={true}
 						/>
 					))}
 

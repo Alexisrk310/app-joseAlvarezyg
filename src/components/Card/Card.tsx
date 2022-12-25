@@ -1,4 +1,6 @@
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 import './styles/Card.css';
 export interface CardInterface {
 	img?: string;
@@ -7,6 +9,7 @@ export interface CardInterface {
 	specialized?: string;
 	zone?: string;
 	evente?: MouseEventHandler<HTMLDivElement>;
+	stateStart?: boolean;
 }
 
 const Card: React.FC<CardInterface> = ({
@@ -16,7 +19,9 @@ const Card: React.FC<CardInterface> = ({
 	specialized,
 	zone,
 	evente,
+	stateStart,
 }) => {
+	const [value, setValue] = useState<number | null>(2);
 	return (
 		<div
 			onClick={evente}
@@ -30,6 +35,15 @@ const Card: React.FC<CardInterface> = ({
 				<p className="card-text black">{description}</p>
 				<small className="black">{specialized}</small>
 				<small className="black d-block">{zone}</small>
+				{stateStart ? (
+					<Rating
+						name="simple-controlled"
+						value={value}
+						onChange={(event, newValue) => {
+							setValue(newValue);
+						}}
+					/>
+				) : undefined}
 			</div>
 		</div>
 	);
