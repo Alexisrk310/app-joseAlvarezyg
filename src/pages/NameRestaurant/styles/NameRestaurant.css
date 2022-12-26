@@ -26,6 +26,10 @@
 }
 .container-menu-items {
 }
+.menu-items {
+	display: flex;
+	flex-wrap: wrap;
+}
 .whatsapp-atention {
 	font-size: 50px;
 	color: white;

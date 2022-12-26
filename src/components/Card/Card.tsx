@@ -10,6 +10,11 @@ export interface CardInterface {
 	zone?: string;
 	evente?: MouseEventHandler<HTMLDivElement>;
 	stateStart?: boolean;
+	valueRating?: number | null | any;
+	setValueRating?: number | null | any;
+	actions?: boolean;
+	hadleEditPlate?: MouseEventHandler<HTMLDivElement>;
+	hadleDeletePlate?: MouseEventHandler<HTMLDivElement>;
 }
 
 const Card: React.FC<CardInterface> = ({
@@ -20,8 +25,12 @@ const Card: React.FC<CardInterface> = ({
 	zone,
 	evente,
 	stateStart,
+	valueRating,
+	setValueRating,
+	actions,
+	hadleEditPlate,
+	hadleDeletePlate,
 }) => {
-	const [value, setValue] = useState<number | null>(2);
 	return (
 		<div
 			onClick={evente}
@@ -29,6 +38,17 @@ const Card: React.FC<CardInterface> = ({
 			style={{
 				width: 250,
 			}}>
+			{actions ? (
+				<div className="card-header text-right">
+					<i
+						className="fa-solid fa-pen-to-square pointer"
+						onClick={hadleEditPlate}></i>
+					<i
+						className="fa-solid fa-trash ml-2 pointer"
+						onClick={hadleDeletePlate}></i>
+				</div>
+			) : undefined}
+
 			<img src={img} className="card-img-top" width={10} alt={img} />
 			<div className="card-body ">
 				<h5 className="card-title black">{title}</h5>
@@ -38,9 +58,9 @@ const Card: React.FC<CardInterface> = ({
 				{stateStart ? (
 					<Rating
 						name="simple-controlled"
-						value={value}
+						value={valueRating}
 						onChange={(event, newValue) => {
-							setValue(newValue);
+							setValueRating(newValue);
 						}}
 					/>
 				) : undefined}

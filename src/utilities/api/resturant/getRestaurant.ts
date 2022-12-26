@@ -10,12 +10,11 @@ export const getRestaurantiD = async (id: string, token: string) => {
 	});
 };
 // MOSTRAR TODOS LOS RESTAURANTES
-export const getRestaurant = async (token: string) => {
+export const getRestaurant = async () => {
 	const urlGetRestaurant = `https://backen-appjose.vercel.app/restaurant`;
 	return await fetch(urlGetRestaurant, {
 		method: 'GET',
 		headers: {
-			'x-token': token,
 			'Content-type': 'application/json',
 		},
 	});

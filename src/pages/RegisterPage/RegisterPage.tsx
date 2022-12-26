@@ -9,10 +9,12 @@ import { RootState } from '@/store/store';
 import { AuthGoogle } from '@/components/AuthGoogle';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { useNavigate } from 'react-router-dom';
 
 export interface RegisterPageInterface {}
 
 const RegisterPage: React.FC<RegisterPageInterface> = () => {
+	const navigate = useNavigate();
 	const authState = useSelector((state: RootState) => state.auth);
 	console.log(authState);
 
@@ -25,19 +27,20 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			console.log(dataResp);
 			console.log(resp);
 			const MySwal = withReactContent(Swal);
+			console.log(resp);
 
 			if (dataResp.status == 200 || dataResp.status == 201) {
-				MySwal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: 'Cuenta creada',
-					showConfirmButton: false,
-					timer: 1500,
-				});
 				localStorage.setItem(
 					'@user',
 					JSON.stringify(resp.data || resp.payload)
 				);
+				navigate('/restaurante/crear');
+			} else {
+				MySwal.fire({
+					icon: 'error',
+					title: 'Error',
+					text: 'No se pudo crear tu cuenta',
+				});
 			}
 		} catch (error) {
 			console.log(error);

@@ -1,152 +1,76 @@
 import { Card } from '@/components';
-import React from 'react';
+import { responseGetRestaurant } from '@/models/interface';
+import { getPlatesAll } from '@/utilities/api/plate/getPlates';
+import { getRestaurant } from '@/utilities/api/resturant/getRestaurant';
+import React, { useEffect, useState } from 'react';
 
 import './styles/HomePage.css';
 export interface HomePageInterface {}
 
 const HomePage: React.FC<HomePageInterface> = () => {
+	const [plates, setPlates] = useState([]);
+	useEffect(() => {
+		const init = async () => {
+			const respPlatesAll = await getPlatesAll();
+			const dataPlatesAll = await respPlatesAll.json();
+			setPlates(dataPlatesAll.data);
+			console.log(respPlatesAll);
+			console.log(plates);
+			console.log(dataPlatesAll);
+		};
+		init();
+	}, []);
+	const [restaurant, setRestaurant] = useState([]);
+	useEffect(() => {
+		const init = async () => {
+			const data = await getRestaurant();
+			const resp = await data.json();
+			console.log(data);
+			console.log(resp);
+			setRestaurant(resp.data);
+		};
+		init();
+	}, []);
+
 	return (
 		<div className="homepage">
 			<div className="mr-5 ml-5">
 				<div className="row">
-					<p className=" mt-3 col-12 col-md-6">RECOMENDADOS DE LA SEMANA</p>
+					<p className=" mt-3 col-12 col-md-6">RESTAURANTES DE LA SEMANA</p>
 					<p className="show-more pointer mt-3 col-12 col-md-6 text-right">
 						MOSTRAR MAS
 					</p>
 				</div>
 				<div className="d-flex contain-card">
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
-					<Card
-						img={
-							'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-aa429d1533d621aa16a4c85bb4c8faaa_screen.jpg?ts=1597915301'
-						}
-						title={'Restaurante'}
-						description={
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ultrices lacus, non imperdiet libero'
-						}
-						specialized={'Pizza'}
-						zone={'Cartagena'}
-					/>
+					{restaurant?.map((cardRestaurant: responseGetRestaurant) => (
+						<Card
+							img={cardRestaurant?.image}
+							title={cardRestaurant?.name}
+							description={cardRestaurant.description}
+							specialized={cardRestaurant.specialty}
+							key={cardRestaurant.id}
+						/>
+					))}
+				</div>
+
+				{/* PLATILLOS */}
+
+				<div className="row">
+					<p className=" mt-3 col-12 col-md-6">PLATILLOS DE LA SEMANA</p>
+					<p className="show-more pointer mt-3 col-12 col-md-6 text-right">
+						MOSTRAR MAS
+					</p>
+				</div>
+				<div className="d-flex contain-card">
+					{plates?.map((plate: any) => (
+						<Card
+							img={plate.image}
+							title={plate.name}
+							description={plate.description}
+							specialized={plate.specialized}
+							key={plate.id}
+						/>
+					))}
 				</div>
 				{/* <div className="mt-3 row">
 					<p className="col-12 col-md-6 ">TOP 10 DE COLOMBIA</p>

@@ -46,10 +46,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		console.log(local.name);
 
 		try {
-			const addResta = await addRestaurant(
-				ValueRestaurant,
-				local?.token || local?.id_token
-			);
+			const addResta = await addRestaurant(ValueRestaurant, local?.token);
 			const resp = await addResta.json();
 			if (resp.ok) {
 				MySwal.fire({
@@ -139,7 +136,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 									// name="name"
 									// onBlur={handleBlur}
 									onChange={handleChange}
-									value={local?.payload?.name || local?.name}
+									value={local?.data.payload?.name || local?.name}
 									readOnly
 								/>
 							</div>

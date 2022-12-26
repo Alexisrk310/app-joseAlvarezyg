@@ -10,3 +10,12 @@ export interface RestaurantValues {
 	facebook?: string;
 	instagram?: string;
 }
+
+export interface responseGetRestaurant {
+	id: string;
+	name: string;
+	image?: string;
+	description: string;
+	specialty: string;
+	userId: string;
+}

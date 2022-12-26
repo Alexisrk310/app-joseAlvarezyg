@@ -1,14 +1,20 @@
 import { Card, MessageErrorType } from '@/components';
 import { ValuesPlates } from '@/models/interface';
+import { deletePlatesId } from '@/utilities/api/plate/deletePlates';
 import { getPlatesId } from '@/utilities/api/plate/getPlates';
 import { postPlates } from '@/utilities/api/plate/postPlates';
+import { putPlatesId } from '@/utilities/api/plate/putPlates';
 import {
 	getRestaurantiD,
 	getRestaurant,
 } from '@/utilities/api/resturant/getRestaurant';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { useLoaderData, useRouteLoaderData } from 'react-router-dom';
+import {
+	useLoaderData,
+	useNavigate,
+	useRouteLoaderData,
+} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import './styles/NameRestaurant.css';
@@ -22,12 +28,20 @@ interface responseGetRestaurant {
 	userId: string;
 }
 const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
+	const navigate = useNavigate();
+	const [valueRating, setValueRating] = React.useState<number | null>(2);
 	const local = JSON.parse(localStorage.getItem('@user') as any);
+	const [plate, setPlate] = useState<any>([]);
+	const { dataRestaurantId }: any = useLoaderData();
+	const { data: restaurant } = dataRestaurantId;
 	const MySwal = withReactContent(Swal);
 	const [plateImg, setPlateImg] = useState({
 		platesimg:
 			'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
 	});
+	console.log(restaurant);
+	// const validateActions =
+
 	const HandlePlates = (e: any) => {
 		const readerPlate = new FileReader();
 		readerPlate.onload = () => {
@@ -39,24 +53,21 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 		};
 		readerPlate.readAsDataURL(e.target.files[0]);
 	};
+	console.log(valueRating);
 
-	const [plate, setPlate] = useState([]);
-	const { dataRestaurantId }: any = useLoaderData();
-	const { data } = dataRestaurantId;
-	console.log(data);
 	useEffect(() => {
 		const init = async () => {
 			const local = JSON.parse(localStorage.getItem('@user') as any);
 			try {
 				const responsePlatesId = await getPlatesId(
 					local.token || local?.id_token,
-					data.id
+					restaurant.id
 				);
 				const dataPlatesId = await responsePlatesId.json();
-				console.log(responsePlatesId);
-				console.log(dataPlatesId);
 
 				if (dataPlatesId.ok) {
+					console.log(dataPlatesId);
+
 					setPlate(dataPlatesId.data);
 				}
 			} catch (error) {
@@ -78,6 +89,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 
 		return errors;
 	};
+
 	const handleSubmit = async (values: ValuesPlates) => {
 		console.log(values);
 		const ValuesPlate = {
@@ -85,10 +97,16 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			name: values.namePlate,
 			description: values.descriptionPlate,
 		};
-		const resp = await postPlates(ValuesPlate, local?.token || local?.id_token);
-		const data = await resp.json();
+
 		try {
+			const resp = await postPlates(
+				ValuesPlate,
+				local?.token || local?.id_token
+			);
+			const data = await resp.json();
 			if (resp.ok) {
+				console.log(data);
+
 				MySwal.fire({
 					position: 'top-end',
 					icon: 'success',
@@ -107,17 +125,59 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			console.log(error);
 		}
 	};
+	const handleEditPlate = (id: any) => {
+		// const respPlatesId = putPlatesId(local.token || local?.id_token, id);
+	};
+	const handleDeletePlate = (id: any) => {
+		Swal.fire({
+			title: 'Estas seguro de cerrar sesión?',
+			text: '',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Cerrar sesión',
+			cancelButtonText: 'Cancelar',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				const init = async () => {
+					try {
+						const respPlatesId = await deletePlatesId(
+							local.token || local?.id_token,
+							id
+						);
+						const dataPlatesId = await respPlatesId.json();
+						const navigate = useNavigate();
+						if (respPlatesId.ok) {
+							console.log(dataPlatesId);
+							navigate('/restaurante');
+						} else {
+							MySwal.fire({
+								icon: 'error',
+								title: 'Error',
+								text: 'No se pudo borrar el restaurante',
+							});
+						}
+					} catch (error) {
+						console.log(error);
+					}
+				};
+				init();
+			}
+		});
+	};
+	let validateOwner = false;
 	const tel = 3008277052;
 	return (
 		<div className="namerestaurant ">
 			<div className="content-restaurant ">
-				<img src={data.image} alt="logo" className="banner-img" />
+				<img src={restaurant.image} alt="logo" className="banner-img" />
 				<div className="d-flex ">
-					<img src={data.image} alt="logo" className="logo-restaurant" />
+					<img src={restaurant.image} alt="logo" className="logo-restaurant" />
 
 					<div className="m-5 title-name-restaurant ">
-						<b className="white">{data.name}</b>
-						<p className="white">{data.description}</p>
+						<b className="white">{restaurant.name}</b>
+						<p className="white">{restaurant.description}</p>
 					</div>
 				</div>
 				<p className="qualification">Calificanos: Estrellas</p>
@@ -125,14 +185,28 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			<div className="container-menu-items mr-2 ml-2 ">
 				<h3 className="text-center white">PLATILLOS</h3>
 				<div className="menu-items mr-5 ml-5">
-					{plate?.map((plates: any) => (
-						<Card
-							img={plates?.image}
-							title={plates.name}
-							description={plates.description}
-							stateStart={true}
-						/>
-					))}
+					{plate?.map((plates: any) => {
+						// let buf = Buffer.from(plates.image.data);
+						// let base64 = buf.toString('base64');
+						// return <img className="card-img-top" alt="${base64}" src= />`;
+						console.log(plates.image);
+						plates.restaurantid === restaurant.id
+							? (validateOwner = true)
+							: undefined;
+						return (
+							<Card
+								img={`data:image/jpeg;base64,${plates?.image}`}
+								title={plates?.name}
+								description={plates?.description}
+								stateStart={true}
+								valueRating={valueRating}
+								setValueRating={setValueRating}
+								actions={validateOwner}
+								hadleDeletePlate={() => handleDeletePlate(plates?.id)}
+								key={plates.id}
+							/>
+						);
+					})}
 
 					<hr className="mb-0" />
 				</div>
@@ -277,7 +351,6 @@ export const loaderPostRestaurant = async ({ params }: any) => {
 		local.token || local?.id_token
 	);
 	const dataRestaurantId = await respRestaurantId.json();
-	console.log(params.id);
 
 	return { dataRestaurantId };
 };

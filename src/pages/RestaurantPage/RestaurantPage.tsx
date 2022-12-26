@@ -1,6 +1,6 @@
 import { AddPlate, Card, MessageErrorType } from '@/components';
 import { useFormValues } from '@/hooks/useFormValues';
-import { ValuesPlates } from '@/models/interface';
+import { responseGetRestaurant, ValuesPlates } from '@/models/interface';
 import { postPlates } from '@/utilities/api/plate/postPlates';
 import { getRestaurant } from '@/utilities/api/resturant/getRestaurant';
 import { addRestaurant } from '@/utilities/api/resturant/postRestaurant';
@@ -11,14 +11,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import './styles/RestaurantPage.css';
 export interface RestaurantPageInterface {}
-interface responseGetRestaurant {
-	id: string;
-	name: string;
-	image?: string;
-	description: string;
-	specialty: string;
-	userId: string;
-}
+
 const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 	const [restaurant, setRestaurant] = useState([]);
 
@@ -26,11 +19,10 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 	const navigation = useNavigate();
 	useEffect(() => {
 		const init = async () => {
-			console.log(local?.token || local?.id_token);
-			const data = await getRestaurant(local?.token || local?.id_token);
+			const data = await getRestaurant();
 			const resp = await data.json();
-			// console.log(data);
-			console.log(restaurant);
+			console.log(data);
+			console.log(resp);
 			setRestaurant(resp.data);
 		};
 		init();
