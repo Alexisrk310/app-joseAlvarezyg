@@ -13,8 +13,8 @@ export interface CardInterface {
 	valueRating?: number | null | any;
 	setValueRating?: number | null | any;
 	actions?: boolean;
-	hadleEditPlate?: MouseEventHandler<HTMLDivElement>;
-	hadleDeletePlate?: MouseEventHandler<HTMLDivElement>;
+	handleEditPlate?: MouseEventHandler<HTMLDivElement>;
+	handleDeletePlate?: MouseEventHandler<HTMLDivElement>;
 }
 
 const Card: React.FC<CardInterface> = ({
@@ -28,8 +28,8 @@ const Card: React.FC<CardInterface> = ({
 	valueRating,
 	setValueRating,
 	actions,
-	hadleEditPlate,
-	hadleDeletePlate,
+	handleEditPlate,
+	handleDeletePlate,
 }) => {
 	return (
 		<div
@@ -42,10 +42,13 @@ const Card: React.FC<CardInterface> = ({
 				<div className="card-header text-right">
 					<i
 						className="fa-solid fa-pen-to-square pointer"
-						onClick={hadleEditPlate}></i>
+						onClick={handleEditPlate}
+						itemType="button"
+						data-toggle="modal"
+						data-target="#staticBackdrop2001"></i>
 					<i
 						className="fa-solid fa-trash ml-2 pointer"
-						onClick={hadleDeletePlate}></i>
+						onClick={handleDeletePlate}></i>
 				</div>
 			) : undefined}
 

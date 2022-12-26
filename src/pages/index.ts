@@ -1,5 +1,6 @@
 export * from './AboutPage';
 export * from './ContactUsPage';
+export * from './CreateRestaurant';
 export * from './FoodTourPage';
 export * from './HomePage';
 export * from './LoginPage';

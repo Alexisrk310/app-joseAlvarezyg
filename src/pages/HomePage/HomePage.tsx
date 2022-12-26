@@ -8,9 +8,10 @@ import './styles/HomePage.css';
 export interface HomePageInterface {}
 
 const HomePage: React.FC<HomePageInterface> = () => {
+	const [restaurant, setRestaurant] = useState([]);
 	const [plates, setPlates] = useState([]);
 	useEffect(() => {
-		const init = async () => {
+		const initPlates = async () => {
 			const respPlatesAll = await getPlatesAll();
 			const dataPlatesAll = await respPlatesAll.json();
 			setPlates(dataPlatesAll.data);
@@ -18,18 +19,16 @@ const HomePage: React.FC<HomePageInterface> = () => {
 			console.log(plates);
 			console.log(dataPlatesAll);
 		};
-		init();
-	}, []);
-	const [restaurant, setRestaurant] = useState([]);
-	useEffect(() => {
-		const init = async () => {
+
+		const initRestaurant = async () => {
 			const data = await getRestaurant();
 			const resp = await data.json();
 			console.log(data);
 			console.log(resp);
-			setRestaurant(resp.data);
+			setRestaurant(resp.data.data);
 		};
-		init();
+		initPlates();
+		initRestaurant();
 	}, []);
 
 	return (

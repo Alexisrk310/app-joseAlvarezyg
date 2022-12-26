@@ -3,6 +3,7 @@ import { LayoutPage } from '@/layout/LayoutPage';
 import {
 	AboutPage,
 	ContactUsPage,
+	CreateRestaurant,
 	FoodTourPage,
 	HomePage,
 	LoginPage,
@@ -15,7 +16,6 @@ import {
 } from '@/pages';
 
 import { createBrowserRouter } from 'react-router-dom';
-import { CreateRestaurant } from '@/pages/CreateRestaurant';
 import { loaderPostRestaurant } from '@/pages/NameRestaurant/NameRestaurant';
 
 export const AppRouter = createBrowserRouter([

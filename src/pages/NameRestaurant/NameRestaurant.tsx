@@ -27,20 +27,29 @@ interface responseGetRestaurant {
 	specialty: string;
 	userId: string;
 }
+interface actionPlate {
+	actions: 'EDIT' | 'ADD';
+}
 const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	const navigate = useNavigate();
+	const [idEdit, setidEdit] = useState('');
+	const [actionsPlate, setActionsPlate] = useState<actionPlate>({
+		actions: 'ADD',
+	});
 	const [valueRating, setValueRating] = React.useState<number | null>(2);
 	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const [plate, setPlate] = useState<any>([]);
 	const { dataRestaurantId }: any = useLoaderData();
-	const { data: restaurant } = dataRestaurantId;
+	const { response: restaurant } = dataRestaurantId;
+
 	const MySwal = withReactContent(Swal);
 	const [plateImg, setPlateImg] = useState({
 		platesimg:
 			'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
 	});
-	console.log(restaurant);
+	// console.log(restaurant.tel);
 	// const validateActions =
+	console.log(restaurant.id);
 
 	const HandlePlates = (e: any) => {
 		const readerPlate = new FileReader();
@@ -60,8 +69,8 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			const local = JSON.parse(localStorage.getItem('@user') as any);
 			try {
 				const responsePlatesId = await getPlatesId(
-					local.token || local?.id_token,
-					restaurant.id
+					local?.token,
+					restaurant?.id
 				);
 				const dataPlatesId = await responsePlatesId.json();
 
@@ -99,10 +108,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 		};
 
 		try {
-			const resp = await postPlates(
-				ValuesPlate,
-				local?.token || local?.id_token
-			);
+			const resp = await postPlates(ValuesPlate, local?.token);
 			const data = await resp.json();
 			if (resp.ok) {
 				console.log(data);
@@ -125,9 +131,15 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			console.log(error);
 		}
 	};
-	const handleEditPlate = (id: any) => {
-		// const respPlatesId = putPlatesId(local.token || local?.id_token, id);
+
+	const handleEditPlates = async (values: ValuesPlates) => {
+		const respPutPlates = await putPlatesId(local?.token, idEdit, values);
+		const dataPutPlates = await respPutPlates.json();
+		console.log(respPutPlates);
+
+		console.log(dataPutPlates);
 	};
+
 	const handleDeletePlate = (id: any) => {
 		Swal.fire({
 			title: 'Estas seguro de cerrar sesión?',
@@ -147,10 +159,10 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 							id
 						);
 						const dataPlatesId = await respPlatesId.json();
-						const navigate = useNavigate();
+
 						if (respPlatesId.ok) {
 							console.log(dataPlatesId);
-							navigate('/restaurante');
+							navigate(`/restaurante/${restaurant?.id}`);
 						} else {
 							MySwal.fire({
 								icon: 'error',
@@ -166,6 +178,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			}
 		});
 	};
+
 	let validateOwner = false;
 	const tel = 3008277052;
 	return (
@@ -186,23 +199,24 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 				<h3 className="text-center white">PLATILLOS</h3>
 				<div className="menu-items mr-5 ml-5">
 					{plate?.map((plates: any) => {
-						// let buf = Buffer.from(plates.image.data);
-						// let base64 = buf.toString('base64');
-						// return <img className="card-img-top" alt="${base64}" src= />`;
-						console.log(plates.image);
 						plates.restaurantid === restaurant.id
 							? (validateOwner = true)
 							: undefined;
+
 						return (
 							<Card
-								img={`data:image/jpeg;base64,${plates?.image}`}
+								// img={`data:image/jpeg;base64,${plates?.image}`}
 								title={plates?.name}
 								description={plates?.description}
 								stateStart={true}
 								valueRating={valueRating}
 								setValueRating={setValueRating}
 								actions={validateOwner}
-								hadleDeletePlate={() => handleDeletePlate(plates?.id)}
+								handleDeletePlate={() => handleDeletePlate}
+								handleEditPlate={() => {
+									setidEdit(plates.id);
+									setActionsPlate({ actions: 'EDIT' });
+								}}
 								key={plates.id}
 							/>
 						);
@@ -219,7 +233,9 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			<i
 				className="fa-brands fa-whatsapp whatsapp-atention pointer"
 				onClick={() => {
-					window.open(`https://api.whatsapp.com/send/?phone=57${tel}`);
+					window.open(
+						`https://api.whatsapp.com/send?phone=57${restaurant.tel}&text=Se%20encuentra%20disponible%3F`
+					);
 				}}></i>
 
 			<Formik
@@ -227,7 +243,9 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					namePlate: '',
 					descriptionPlate: '',
 				}}
-				onSubmit={handleSubmit}
+				onSubmit={
+					actionsPlate.actions == 'ADD' ? handleSubmit : handleEditPlates
+				}
 				validate={validations}>
 				{({ handleBlur, handleChange, handleSubmit, values, errors }) => (
 					<div
@@ -242,7 +260,9 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 							<div className="modal-content">
 								<div className="modal-header">
 									<h5 className="modal-title" id="staticBackdropLabel">
-										Agrega un plato
+										{actionsPlate.actions == 'EDIT'
+											? 'Editar plato'
+											: 'Agrega un plato'}
 									</h5>
 									<button
 										type="button"
@@ -284,41 +304,45 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 													</div>
 												</div>
 											</div>
-											<div className="form-group w-75">
-												<input
-													placeholder="Nombre del restaurante"
-													type="text"
-													className="form-control"
-													id="exampleInputPassword1"
-													name="namePlate"
-													onChange={handleChange}
-													value={values.namePlate}
-													onBlur={handleBlur}
-												/>
-												<ErrorMessage
-													name="namePlate"
-													component={() => (
-														<MessageErrorType msg={errors.namePlate} />
-													)}
-												/>
-											</div>
-											<div className="form-group w-75">
-												<textarea
-													className="form-control"
-													id="exampleFormControlTextarea1"
-													rows={10}
-													placeholder="Descripcion del restaurante"
-													name="descriptionPlate"
-													onChange={handleChange}
-													onBlur={handleBlur}
-													value={values.descriptionPlate}></textarea>
-												<ErrorMessage
-													name="descriptionPlate"
-													component={() => (
-														<MessageErrorType msg={errors.descriptionPlate} />
-													)}
-												/>
-											</div>
+
+											<>
+												<div className="form-group w-75">
+													<input
+														placeholder="Nombre del restaurante"
+														type="text"
+														className="form-control"
+														id="exampleInputPassword1"
+														name="namePlate"
+														onChange={handleChange}
+														value={values.namePlate}
+														onBlur={handleBlur}
+													/>
+													<ErrorMessage
+														name="namePlate"
+														component={() => (
+															<MessageErrorType msg={errors.namePlate} />
+														)}
+													/>
+												</div>
+												<div className="form-group w-75">
+													<textarea
+														className="form-control"
+														id="exampleFormControlTextarea1"
+														rows={10}
+														placeholder="Descripcion del restaurante"
+														name="descriptionPlate"
+														onChange={handleChange}
+														onBlur={handleBlur}
+														value={values.descriptionPlate}></textarea>
+													<ErrorMessage
+														name="descriptionPlate"
+														component={() => (
+															<MessageErrorType msg={errors.descriptionPlate} />
+														)}
+													/>
+												</div>
+											</>
+
 											<button type="submit" className="btn btn-success">
 												Guardar plato
 											</button>
