@@ -2,6 +2,7 @@ import { Card } from '@/components';
 import { responseGetRestaurant } from '@/models/interface';
 import { getPlatesAll } from '@/utilities/api/plate/getPlates';
 import { getRestaurant } from '@/utilities/api/resturant/getRestaurant';
+import { getRatingPlates } from '@/utilities/api/startRating/getRating';
 import React, { useEffect, useState } from 'react';
 
 import './styles/HomePage.css';
@@ -14,10 +15,13 @@ const HomePage: React.FC<HomePageInterface> = () => {
 		const initPlates = async () => {
 			const respPlatesAll = await getPlatesAll();
 			const dataPlatesAll = await respPlatesAll.json();
-			setPlates(dataPlatesAll.data);
+			
 			console.log(respPlatesAll);
 			console.log(plates);
 			console.log(dataPlatesAll);
+			setPlates(dataPlatesAll.data);
+			console.log(plates);
+			
 		};
 
 		const initRestaurant = async () => {
@@ -27,6 +31,13 @@ const HomePage: React.FC<HomePageInterface> = () => {
 			console.log(resp);
 			setRestaurant(resp.data.data);
 		};
+		const initGetRatingPlates = async () => {
+			const respRatingPlates = await getRatingPlates();
+			const dataRatingPlates = await respRatingPlates.json();
+			console.log(respRatingPlates);
+			console.log(dataRatingPlates);
+		};
+		initGetRatingPlates();
 		initPlates();
 		initRestaurant();
 	}, []);

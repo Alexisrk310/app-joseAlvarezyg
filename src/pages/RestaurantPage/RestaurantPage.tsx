@@ -42,7 +42,11 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 						specialized={cardRestaurant.specialty}
 						key={cardRestaurant.id}
 						// stateStart={true}
-						evente={() => navigation(`/restaurante/${cardRestaurant.id}`)}
+						evente={() =>
+							!local?.token || !local?.data?.token
+								? navigation(`/restaurante/${cardRestaurant.id}`)
+								: undefined
+						}
 					/>
 				))}
 			</div>

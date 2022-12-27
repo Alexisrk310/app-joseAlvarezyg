@@ -4,7 +4,17 @@ export const getPlatesId = async (token: string, id: string) => {
 	return await fetch(urlGetRestaurant, {
 		method: 'GET',
 		headers: {
-			'x-token': token,
+			'Content-type': 'application/json',
+		},
+	});
+};
+
+// PLATES FOR ID
+export const getPlatesUnique = async (id: string) => {
+	const urlGetRestaurant = `https://backen-appjose.vercel.app/plate/plate/${id}`;
+	return await fetch(urlGetRestaurant, {
+		method: 'GET',
+		headers: {
 			'Content-type': 'application/json',
 		},
 	});

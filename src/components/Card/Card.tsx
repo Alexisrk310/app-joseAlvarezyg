@@ -15,6 +15,7 @@ export interface CardInterface {
 	actions?: boolean;
 	handleEditPlate?: MouseEventHandler<HTMLDivElement>;
 	handleDeletePlate?: MouseEventHandler<HTMLDivElement>;
+	idRating?: MouseEventHandler<HTMLDivElement>;
 }
 
 const Card: React.FC<CardInterface> = ({
@@ -30,6 +31,7 @@ const Card: React.FC<CardInterface> = ({
 	actions,
 	handleEditPlate,
 	handleDeletePlate,
+	idRating,
 }) => {
 	return (
 		<div
@@ -60,6 +62,7 @@ const Card: React.FC<CardInterface> = ({
 				<small className="black d-block">{zone}</small>
 				{stateStart ? (
 					<Rating
+						onClick={idRating}
 						name="simple-controlled"
 						value={valueRating}
 						onChange={(event, newValue) => {

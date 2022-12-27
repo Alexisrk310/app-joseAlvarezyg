@@ -46,9 +46,14 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		console.log(local.name);
 
 		try {
-			const addResta = await addRestaurant(ValueRestaurant, local?.token);
+			const addResta = await addRestaurant(
+				ValueRestaurant,
+				local?.token || local?.data?.token
+			);
 			const resp = await addResta.json();
 			if (resp.ok) {
+				console.log(resp);
+
 				MySwal.fire({
 					position: 'top-end',
 					icon: 'success',
@@ -58,11 +63,13 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				});
 				navigate('/restaurante');
 			} else {
+				console.log(resp);
 				MySwal.fire({
 					icon: 'error',
 					title: 'Error',
-					text: 'No se creo el restaurante',
+					text: resp.msg,
 				});
+				navigate('/restaurante');
 			}
 		} catch (error) {
 			console.log(error);
@@ -136,7 +143,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 									// name="name"
 									// onBlur={handleBlur}
 									onChange={handleChange}
-									value={local?.data.payload?.name || local?.name}
+									value={local?.data?.payload?.name || local?.name}
 									readOnly
 								/>
 							</div>
