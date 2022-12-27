@@ -9,7 +9,10 @@ import {
 	getRestaurantiD,
 	getRestaurant,
 } from '@/utilities/api/resturant/getRestaurant';
-import { postRatingPlates } from '@/utilities/api/startRating/postRating';
+import {
+	postRatingPlates,
+	postRatingRestaurant,
+} from '@/utilities/api/startRating/postRating';
 
 import { Rating } from '@mui/material';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
@@ -66,7 +69,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	});
 	// console.log(restaurant.tel);
 	// const validateActions =
-	console.log(restaurant);
+	console.log(restaurant.id);
 
 	const HandlePlates = (e: any) => {
 		const readerPlate = new FileReader();
@@ -78,6 +81,16 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			}
 		};
 		readerPlate.readAsDataURL(e.target.files[0]);
+	};
+
+	const handleRatingRestaurant = async () => {
+		const respRatingRestaurant = await postRatingRestaurant(
+			{ rate: valueRatingRestaurant },
+			restaurant?.id
+		);
+		const dataRatingRestaurant = await respRatingRestaurant.json();
+		console.log(respRatingRestaurant);
+		console.log(dataRatingRestaurant);
 	};
 
 	useEffect(() => {
@@ -114,7 +127,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					idPlate
 				);
 				const dataRating = await respRating.json();
-				setValueRating(0);
+
 				console.log(dataRating);
 			} catch (error) {
 				console.log(error);
@@ -292,6 +305,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 						value={valueRatingRestaurant}
 						onChange={(event, newValue) => {
 							setValueRatingRestaurant(newValue);
+							handleRatingRestaurant();
 						}}
 					/>
 				</p>

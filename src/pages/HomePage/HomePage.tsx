@@ -12,6 +12,7 @@ export interface HomePageInterface {}
 const HomePage: React.FC<HomePageInterface> = () => {
 	const [restaurant, setRestaurant] = useState([]);
 	const [plates, setPlates] = useState([]);
+	const [valueRating, setValueRating] = React.useState<number | null>(0);
 	useEffect(() => {
 		const initPlates = async () => {
 			const respPlatesAll = await getPlatesAll();
@@ -58,6 +59,10 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							title={cardRestaurant?.name}
 							description={cardRestaurant.description}
 							specialized={cardRestaurant.specialty}
+							stateStart={true}
+							valueRating={cardRestaurant.rate}
+							disableRating={true}
+							onChangee={false}
 							key={cardRestaurant.id}
 						/>
 					))}
@@ -78,6 +83,10 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							title={plate.name}
 							description={plate.description}
 							specialized={plate.specialized}
+							stateStart={true}
+							valueRating={plate.rate}
+							disableRating={true}
+							onChangee={false}
 							key={plate.id}
 						/>
 					))}

@@ -47,6 +47,10 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 								? navigation(`/restaurante/${cardRestaurant.id}`)
 								: undefined
 						}
+						stateStart={true}
+						valueRating={cardRestaurant.rate}
+						disableRating={true}
+						onChangee={false}
 					/>
 				))}
 			</div>

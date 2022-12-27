@@ -18,4 +18,5 @@ export interface responseGetRestaurant {
 	description: string;
 	specialty: string;
 	userId: string;
+	rate?: number;
 }
