@@ -6,10 +6,9 @@ const initialState: ValuesRegister = {
 	email: '',
 	password: '',
 	tel: '',
-	nameRestaurant: '',
-	addresOne: '',
-	addresTwo: '',
-	addresThree: '',
+	addressOne: '',
+	addressTwo: '',
+	addressThree: '',
 };
 export const authSlice = createSlice({
 	name: 'auth',
