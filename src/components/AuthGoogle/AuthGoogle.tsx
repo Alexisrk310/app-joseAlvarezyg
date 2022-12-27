@@ -1,6 +1,8 @@
 import { auth } from '@/utilities/api/auth/auth';
 import React, { useEffect, useState } from 'react';
+import GoogleLogin from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
+
 export interface AuthGoogleInterface {}
 
 interface userI {
@@ -12,52 +14,95 @@ interface userI {
 
 const AuthGoogle: React.FC<AuthGoogleInterface> = () => {
 	const navigate = useNavigate();
-	const [user, setUser] = useState<userI>({ name: null });
-	const handleCallbackResponse = (response: any) => {
-		const authGoogle = async () => {
-			const id_token = { id_token: response.credential };
-			try {
-				const dataResp = await auth('loginGoogle', id_token);
-				const resp = await dataResp.json();
-				console.log(resp);
-				console.log(dataResp);
 
-				if (resp.ok) {
-					localStorage.setItem('@user', JSON.stringify(resp));
-					navigate('/restaurante');
-				}
-			} catch (error) {
-				console.log(error);
-			}
+	// const [user, setUser] = useState<userI>({ name: null });
+	// const handleCallbackResponse = (response: any) => {
+	// 	const authGoogle = async () => {
+	// 		const id_token = { id_token: response.credential };
+	// 		try {
+	// 			const dataResp = await auth('loginGoogle', id_token);
+	// 			const resp = await dataResp.json();
+	// 			console.log(resp);
+	// 			console.log(dataResp);
+
+	// 			if (resp.ok) {
+	// 				localStorage.setItem('@user', JSON.stringify(resp));
+	// 				navigate('/restaurante');
+	// 			}
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	};
+	// 	authGoogle();
+	// 	document.getElementById('signInDiv')!.hidden = true;
+	// };
+	// const handleSignout = () => {
+	// 	setUser({ name: null });
+	// 	document.getElementById('signInDiv')!.hidden = false;
+	// };
+	// useEffect(() => {
+	// 	google.accounts!.id.initialize({
+	// 		client_id:
+	// 			'640139910507-tcp9qrg1jbhupsmvr1i9rfmarmnb6n5s.apps.googleusercontent.com',
+	// 		callback: handleCallbackResponse,
+	// 	});
+	// 	const docGetId = document.getElementById('signInDiv')!;
+
+	// 	google.accounts.id.renderButton(docGetId, {
+	// 		theme: 'outline',
+	// 		size: 'large',
+	// 		type: 'standard',
+	// 	});
+	// 	google.accounts.id.prompt();
+	// }, []);
+
+	const onSucces = async (res: any) => {
+		console.log('LOGIN SUCCESS! Current user: ', res.profileObj);
+
+		const id_token = {
+			id_token: res.tokenId,
 		};
-		authGoogle();
-		document.getElementById('signInDiv')!.hidden = true;
-	};
-	const handleSignout = () => {
-		setUser({ name: null });
-		document.getElementById('signInDiv')!.hidden = false;
-	};
-	useEffect(() => {
-		google.accounts!.id.initialize({
-			client_id:
-				'640139910507-tcp9qrg1jbhupsmvr1i9rfmarmnb6n5s.apps.googleusercontent.com',
-			callback: handleCallbackResponse,
-		});
-		const docGetId = document.getElementById('signInDiv')!;
+		const local = localStorage.getItem(
+			'oauth2_ss::http://localhost:5173::1::DEFAULT::_ss_'
+		);
+		console.log(local);
 
-		google.accounts.id.renderButton(docGetId, {
-			theme: 'outline',
-			size: 'large',
-			type: 'standard',
-		});
-		google.accounts.id.prompt();
-	}, []);
+		try {
+			const dataResp = await auth('loginGoogle', id_token);
+			const resp = await dataResp.json();
+			console.log(resp);
+			console.log(dataResp);
 
+			if (resp.ok) {
+				localStorage.setItem('@user', JSON.stringify(resp));
+				navigate('/restaurante');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	const onFailure = (res: any) => {
+		console.log('LOGIN FAILED! res: ', res);
+	};
+
+	const clientId =
+		'640139910507-tcp9qrg1jbhupsmvr1i9rfmarmnb6n5s.apps.googleusercontent.com';
 	return (
-		<div className="d-flex justify-content-center m-3">
-			<div id="signInDiv"></div>
-			{user && <img src={user.picture} />}
+		<div id="signInButton d-flex justify-content-center m-3">
+			<GoogleLogin
+				clientId={clientId}
+				buttonText="Login"
+				onSuccess={onSucces}
+				onFailure={onFailure}
+				cookiePolicy={'single_host_origin'}
+				isSignedIn={true}
+			/>
 		</div>
+		// 	<div className="d-flex justify-content-center m-3">
+		// 		<div id="signInDiv"></div>
+		// 		{user && <img src={user.picture} />}
+		// 	</div>
+		// ;
 	);
 };
 

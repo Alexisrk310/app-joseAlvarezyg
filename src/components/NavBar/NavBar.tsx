@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import './styles/NavBar.css';
 import Swal from 'sweetalert2';
+import Logout from '../AuthGoogle/Logout';
 export interface NavBarInterface {}
 
 const NavBar: React.FC<NavBarInterface> = () => {
@@ -31,6 +32,8 @@ const NavBar: React.FC<NavBarInterface> = () => {
 			}
 		});
 	};
+	const local = JSON.parse(localStorage.getItem('@user') as any);
+
 	return (
 		<div className="container-navbar sticky-top">
 			<div className="navbar">
@@ -94,10 +97,12 @@ const NavBar: React.FC<NavBarInterface> = () => {
 							Registrate
 						</NavLink>
 					</>
-				) : (
+				) : !local.data.token ? (
 					<button className="pointer btn btn-info" onClick={handleSignOff}>
 						Cerrar sesión
 					</button>
+				) : (
+					<Logout event={handleSignOff} />
 				)}
 			</div>
 			<i

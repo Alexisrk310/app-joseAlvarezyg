@@ -3,11 +3,12 @@ import { AuthGoogle } from '@/components/AuthGoogle';
 import { ValuesLogin } from '@/models/interface/authValues';
 import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import './styles/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import { gapi } from 'gapi-script';
 
 export interface LoginPageInterface {}
 
@@ -19,6 +20,8 @@ interface State {
 }
 
 const LoginPage: React.FC<LoginPageInterface> = () => {
+	const clientId =
+		'640139910507-tcp9qrg1jbhupsmvr1i9rfmarmnb6n5s.apps.googleusercontent.com';
 	const MySwal = withReactContent(Swal);
 	const navigate = useNavigate();
 	const [state, setState] = useState<State>({
@@ -27,6 +30,16 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 		statepushAplication: false,
 		buttonSubmit: 'Continuar con e-mail',
 	});
+
+	useEffect(() => {
+		function start() {
+			gapi.client.init({
+				clientId: clientId,
+				scope: '',
+			});
+		}
+		gapi.load('client:auth2', start);
+	}, []);
 
 	const handleSubmit = async (value: ValuesLogin) => {
 		setState({
