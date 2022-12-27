@@ -52,10 +52,8 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	const [plate, setPlate] = useState<any>([]);
 	const { dataRestaurantId }: any = useLoaderData();
 	const { response: restaurant } = dataRestaurantId;
-	console.log(
-		restaurant.userId + ' idUserRestaurant',
-		local?.id || local?.data?.id + ' user'
-	);
+	console.log(restaurant);
+
 	// console.log(dataRestaurantId);
 
 	const [handleChange, formValues, setFormValues] = useFormValues({
@@ -69,7 +67,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	});
 	// console.log(restaurant.tel);
 	// const validateActions =
-	console.log(restaurant.id);
 
 	const HandlePlates = (e: any) => {
 		const readerPlate = new FileReader();
@@ -286,13 +283,13 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	return (
 		<div className="namerestaurant ">
 			<div className="content-restaurant ">
-				<img src={restaurant.image} alt="logo" className="banner-img" />
+				<img src={restaurant?.image} alt="logo" className="banner-img" />
 				<div className="d-flex ">
-					<img src={restaurant.image} alt="logo" className="logo-restaurant" />
+					<img src={restaurant?.image} alt="logo" className="logo-restaurant" />
 
 					<div className="m-5 title-name-restaurant ">
-						<b className="white">{restaurant.name}</b>
-						<p className="white">{restaurant.description}</p>
+						<b className="white">{restaurant?.name}</b>
+						<p className="white">{restaurant?.description}</p>
 					</div>
 				</div>
 				<p className="qualification">
@@ -455,6 +452,7 @@ export const loaderPostRestaurant = async ({ params }: any) => {
 	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const respRestaurantId = await getRestaurantiD(params.id);
 	const dataRestaurantId = await respRestaurantId.json();
+	console.log(dataRestaurantId);
 
 	return { dataRestaurantId };
 };

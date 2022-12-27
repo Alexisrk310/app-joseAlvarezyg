@@ -58,7 +58,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				navigate('/restaurante');
+				// navigate('/restaurante');
 			} else {
 				console.log(resp);
 				MySwal.fire({
@@ -66,7 +66,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					title: 'Error',
 					text: resp.msg,
 				});
-				navigate('/restaurante');
+				// navigate('/restaurante');
 			}
 		} catch (error) {
 			console.log(error);

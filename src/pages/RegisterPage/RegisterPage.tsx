@@ -70,20 +70,17 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			errors.tel = 'Solo se permiten 10 digitos';
 		}
 
-		if (!values.nameRestaurant) {
-			errors.nameRestaurant = 'Escriba su restaurante';
+		
+		if (!values.addressOne) {
+			errors.addressOne = '*';
 		}
 
-		if (!values.addresOne) {
-			errors.addresOne = '*';
+		if (!values.addressTwo) {
+			errors.addressTwo = '*';
 		}
 
-		if (!values.addresTwo) {
-			errors.addresTwo = '*';
-		}
-
-		if (!values.addresThree) {
-			errors.addresThree = '*';
+		if (!values.addressThree) {
+			errors.addressThree = '*';
 		}
 
 		return errors;
@@ -96,10 +93,10 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 				email: '',
 				password: '',
 				tel: '',
-				nameRestaurant: '',
-				addresOne: '',
-				addresTwo: '',
-				addresThree: '',
+				
+				addressOne: '',
+				addressTwo: '',
+				addressThree: '',
 			}}
 			onSubmit={handleSubmit}
 			validate={validations}>
@@ -163,21 +160,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									name="tel"
 									component={() => <MessageErrorType msg={errors.tel} />}
 								/>
-								<p className="text-email">Nombre del restaurante</p>
-								<input
-									className="form-control mt-2"
-									type="text"
-									name="nameRestaurant"
-									onBlur={handleBlur}
-									onChange={handleChange}
-									value={values.nameRestaurant}
-								/>
-								<ErrorMessage
-									name="nameRestaurant"
-									component={() => (
-										<MessageErrorType msg={errors.nameRestaurant} />
-									)}
-								/>
+								
 
 								<p className="text-email">Direccion</p>
 								<div className="d-flex">
@@ -187,13 +170,13 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 										name="addresOne"
 										onBlur={handleBlur}
 										onChange={handleChange}
-										value={values.addresOne}
+										value={values.addressOne}
 									/>
 									<ErrorMessage
 										name="addresOne"
 										component={() => (
 											<MessageErrorType
-												msg={errors.addresOne}
+												msg={errors.addressOne}
 												clase="validate-address"
 											/>
 										)}
@@ -205,13 +188,13 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 										name="addresTwo"
 										onBlur={handleBlur}
 										onChange={handleChange}
-										value={values.addresTwo}
+										value={values.addressTwo}
 									/>
 									<ErrorMessage
 										name="addresTwo"
 										component={() => (
 											<MessageErrorType
-												msg={errors.addresTwo}
+												msg={errors.addressTwo}
 												clase="validate-address"
 											/>
 										)}
@@ -223,13 +206,13 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 										name="addresThree"
 										onBlur={handleBlur}
 										onChange={handleChange}
-										value={values.addresThree}
+										value={values.addressThree}
 									/>
 									<ErrorMessage
 										name="addresThree"
 										component={() => (
 											<MessageErrorType
-												msg={errors.addresThree}
+												msg={errors.addressThree}
 												clase="validate-address"
 											/>
 										)}

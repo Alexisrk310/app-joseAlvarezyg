@@ -23,7 +23,7 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 			const resp = await data.json();
 			console.log(data);
 			console.log(resp);
-			setRestaurant(resp.data.data);
+			setRestaurant(resp.data);
 		};
 		init();
 	}, []);

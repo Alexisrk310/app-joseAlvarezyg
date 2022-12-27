@@ -88,15 +88,18 @@ const AuthGoogle: React.FC<AuthGoogleInterface> = () => {
 	const clientId =
 		'640139910507-tcp9qrg1jbhupsmvr1i9rfmarmnb6n5s.apps.googleusercontent.com';
 	return (
-		<div id="signInButton d-flex justify-content-center m-3">
-			<GoogleLogin
-				clientId={clientId}
-				buttonText="Login"
-				onSuccess={onSucces}
-				onFailure={onFailure}
-				cookiePolicy={'single_host_origin'}
-				isSignedIn={true}
-			/>
+		<div className="d-flex justify-content-center m-2 w-100">
+			<div id="signInButton ">
+				<GoogleLogin
+					clientId={clientId}
+					buttonText="Iniciar sesión con Google"
+					onSuccess={onSucces}
+					onFailure={onFailure}
+					cookiePolicy={'single_host_origin'}
+					isSignedIn={true}
+					// prompt={c}
+				/>
+			</div>
 		</div>
 		// 	<div className="d-flex justify-content-center m-3">
 		// 		<div id="signInDiv"></div>
