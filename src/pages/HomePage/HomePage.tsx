@@ -29,16 +29,16 @@ const HomePage: React.FC<HomePageInterface> = () => {
 			const data = await getRestaurant();
 			const resp = await data.json();
 			console.log(data);
-			console.log(resp);
-			setRestaurant(resp.data.data);
+			console.log(resp.data);
+			setRestaurant(resp.data);
 		};
-		const initGetRatingPlates = async () => {
-			const respRatingPlates = await getRatingPlates();
-			const dataRatingPlates = await respRatingPlates.json();
-			console.log(respRatingPlates);
-			console.log(dataRatingPlates);
-		};
-		initGetRatingPlates();
+		// const initGetRatingPlates = async () => {
+		// 	const respRatingPlates = await getRatingPlates();
+		// 	const dataRatingPlates = await respRatingPlates.json();
+		// 	console.log(respRatingPlates);
+		// 	console.log(dataRatingPlates);
+		// };
+		// initGetRatingPlates();
 		initPlates();
 		initRestaurant();
 	}, []);
@@ -53,17 +53,17 @@ const HomePage: React.FC<HomePageInterface> = () => {
 					</p>
 				</div>
 				<div className="d-flex contain-card">
-					{restaurant?.map((cardRestaurant: responseGetRestaurant) => (
+					{restaurant?.map((cardRestaurant: responseGetRestaurant | any) => (
 						<Card
 							img={cardRestaurant?.image}
 							title={cardRestaurant?.name}
-							description={cardRestaurant.description}
-							specialized={cardRestaurant.specialty}
+							description={cardRestaurant?.description}
+							specialized={cardRestaurant?.specialty}
 							stateStart={true}
-							valueRating={cardRestaurant.rate}
+							valueRating={parseInt(cardRestaurant?.promedio)}
 							disableRating={true}
 							onChangee={false}
-							key={cardRestaurant.id}
+							key={cardRestaurant?.id}
 						/>
 					))}
 				</div>
@@ -79,15 +79,15 @@ const HomePage: React.FC<HomePageInterface> = () => {
 				<div className="d-flex contain-card">
 					{plates?.map((plate: any) => (
 						<Card
-							img={plate.image}
-							title={plate.name}
-							description={plate.description}
-							specialized={plate.specialized}
+							img={plate?.image}
+							title={plate?.name}
+							description={plate?.description}
+							specialized={plate?.specialized}
 							stateStart={true}
-							valueRating={plate.rate}
-							disableRating={true}
+							valueRating={parseInt(plate?.promedio)}
+							// disableRating={true}
 							onChangee={false}
-							key={plate.id}
+							key={plate?.id}
 						/>
 					))}
 				</div>

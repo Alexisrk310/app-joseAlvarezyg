@@ -97,7 +97,7 @@ const NavBar: React.FC<NavBarInterface> = () => {
 							Registrate
 						</NavLink>
 					</>
-				) : !local.data.token ? (
+				) : !local?.data?.token ? (
 					<button className="pointer btn btn-info" onClick={handleSignOff}>
 						Cerrar sesión
 					</button>

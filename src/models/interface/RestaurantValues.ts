@@ -1,6 +1,5 @@
 export interface RestaurantValues {
 	name?: string;
-
 	specialty: string;
 	description: string;
 	department?: string;
@@ -18,5 +17,5 @@ export interface responseGetRestaurant {
 	description: string;
 	specialty: string;
 	userId: string;
-	rate?: number;
+	promedio?: string | number;
 }

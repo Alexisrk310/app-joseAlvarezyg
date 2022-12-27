@@ -20,6 +20,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 
 	const handleSubmit = async (value: ValuesRegister) => {
 		// console.log(value);
+		console.log(value);
 
 		try {
 			const dataResp = await auth('register', value);

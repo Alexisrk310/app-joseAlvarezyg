@@ -46,10 +46,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		console.log(local.name);
 
 		try {
-			const addResta = await addRestaurant(
-				ValueRestaurant,
-				local?.token || local?.data?.token
-			);
+			const addResta = await addRestaurant(ValueRestaurant, local?.token);
 			const resp = await addResta.json();
 			if (resp.ok) {
 				console.log(resp);

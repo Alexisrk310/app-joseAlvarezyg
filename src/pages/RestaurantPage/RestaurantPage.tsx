@@ -48,7 +48,7 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 								: undefined
 						}
 						stateStart={true}
-						valueRating={cardRestaurant.rate}
+						valueRating={cardRestaurant?.promedio}
 						disableRating={true}
 						onChangee={false}
 					/>
