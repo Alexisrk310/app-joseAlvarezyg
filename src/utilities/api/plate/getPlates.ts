@@ -1,5 +1,5 @@
 // PLATES FOR ID
-export const getPlatesId = async (token: string, id: string) => {
+export const getPlatesId = async ( id: string) => {
 	const urlGetRestaurant = `https://backen-appjose.vercel.app/plate/${id}`;
 	return await fetch(urlGetRestaurant, {
 		method: 'GET',

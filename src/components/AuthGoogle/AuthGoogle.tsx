@@ -75,7 +75,7 @@ const AuthGoogle: React.FC<AuthGoogleInterface> = () => {
 
 			if (resp.ok) {
 				localStorage.setItem('@user', JSON.stringify(resp));
-				navigate('/restaurante');
+				navigate('/restaurante/crear');
 			}
 		} catch (error) {
 			console.log(error);

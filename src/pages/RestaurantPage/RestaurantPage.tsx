@@ -34,7 +34,7 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 				<p>RESTAURANTES</p>
 			</div>
 			<div className="mr-5 ml-5 mt-5 restaurant-card">
-				{restaurant?.map((cardRestaurant: responseGetRestaurant) => (
+				{restaurant?.map((cardRestaurant: responseGetRestaurant | any) => (
 					<Card
 						img={cardRestaurant?.image}
 						title={cardRestaurant?.name}
@@ -48,9 +48,8 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 								: undefined
 						}
 						stateStart={true}
-						valueRating={cardRestaurant?.promedio}
+						valueRating={parseInt(cardRestaurant?.promedio)}
 						disableRating={true}
-						onChangee={false}
 					/>
 				))}
 			</div>

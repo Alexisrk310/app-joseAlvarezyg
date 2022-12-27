@@ -70,7 +70,6 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			errors.tel = 'Solo se permiten 10 digitos';
 		}
 
-		
 		if (!values.addressOne) {
 			errors.addressOne = '*';
 		}
@@ -93,7 +92,6 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 				email: '',
 				password: '',
 				tel: '',
-				
 				addressOne: '',
 				addressTwo: '',
 				addressThree: '',
@@ -160,20 +158,19 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									name="tel"
 									component={() => <MessageErrorType msg={errors.tel} />}
 								/>
-								
 
 								<p className="text-email">Direccion</p>
 								<div className="d-flex">
 									<input
 										className="form-control mt-2"
 										type="text"
-										name="addresOne"
+										name="addressOne"
 										onBlur={handleBlur}
 										onChange={handleChange}
 										value={values.addressOne}
 									/>
 									<ErrorMessage
-										name="addresOne"
+										name="addressOne"
 										component={() => (
 											<MessageErrorType
 												msg={errors.addressOne}
@@ -185,13 +182,13 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									<input
 										className="form-control mt-2 address-short"
 										type="text"
-										name="addresTwo"
+										name="addressTwo"
 										onBlur={handleBlur}
 										onChange={handleChange}
 										value={values.addressTwo}
 									/>
 									<ErrorMessage
-										name="addresTwo"
+										name="addressTwo"
 										component={() => (
 											<MessageErrorType
 												msg={errors.addressTwo}
@@ -203,13 +200,13 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									<input
 										className="form-control mt-2 address-short"
 										type="text"
-										name="addresThree"
+										name="addressThree"
 										onBlur={handleBlur}
 										onChange={handleChange}
 										value={values.addressThree}
 									/>
 									<ErrorMessage
-										name="addresThree"
+										name="addressThree"
 										component={() => (
 											<MessageErrorType
 												msg={errors.addressThree}

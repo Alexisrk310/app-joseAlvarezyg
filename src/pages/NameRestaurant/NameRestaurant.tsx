@@ -52,7 +52,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	const [plate, setPlate] = useState<any>([]);
 	const { dataRestaurantId }: any = useLoaderData();
 	const { response: restaurant } = dataRestaurantId;
-	console.log(restaurant);
+	console.log(restaurant[0]);
 
 	// console.log(dataRestaurantId);
 
@@ -83,7 +83,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	const handleRatingRestaurant = async () => {
 		const respRatingRestaurant = await postRatingRestaurant(
 			{ rate: valueRatingRestaurant },
-			restaurant?.id
+			restaurant[0]?.id
 		);
 		const dataRatingRestaurant = await respRatingRestaurant.json();
 		console.log(respRatingRestaurant);
@@ -91,16 +91,12 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	};
 
 	useEffect(() => {
-		restaurant.userId == local?.id || local?.data?.id
+		restaurant[0].userId == local?.id || local?.data?.id
 			? setActions(true)
 			: setActions(false);
 		const init = async () => {
-			const local = JSON.parse(localStorage.getItem('@user') as any);
 			try {
-				const responsePlatesId = await getPlatesId(
-					local?.token || local?.data?.token,
-					restaurant?.id
-				);
+				const responsePlatesId = await getPlatesId(restaurant[0]?.id);
 				const dataPlatesId = await responsePlatesId.json();
 				console.log(dataPlatesId);
 
@@ -197,6 +193,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 						showConfirmButton: false,
 						timer: 1500,
 					});
+					window.location.href = `/restaurante/${restaurant[0].id}`;
 				} else {
 					MySwal.fire({
 						icon: 'error',
@@ -279,17 +276,22 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			}
 		});
 	};
+	console.log(restaurant[0]);
 
 	return (
 		<div className="namerestaurant ">
 			<div className="content-restaurant ">
-				<img src={restaurant?.image} alt="logo" className="banner-img" />
+				<img src={restaurant[0]?.image} alt="logo" className="banner-img" />
 				<div className="d-flex ">
-					<img src={restaurant?.image} alt="logo" className="logo-restaurant" />
+					<img
+						src={restaurant[0]?.image}
+						alt="logo"
+						className="logo-restaurant"
+					/>
 
 					<div className="m-5 title-name-restaurant ">
-						<b className="white">{restaurant?.name}</b>
-						<p className="white">{restaurant?.description}</p>
+						<b className="white">{restaurant[0]?.name}</b>
+						<p className="white">{restaurant[0]?.description}</p>
 					</div>
 				</div>
 				<p className="qualification">
@@ -311,6 +313,8 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 				<h3 className="text-center white">PLATILLOS</h3>
 				<div className="menu-items mr-5 ml-5">
 					{plate?.map((plates: any) => {
+						console.log(plates);
+
 						return (
 							<Card
 								// img={`data:image/jpeg;base64,${plates?.image}`}
@@ -319,13 +323,14 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 								stateStart={true}
 								valueRating={plates.id == idPlate ? valueRating : 0}
 								setValueRating={setValueRating}
-								idRating={() => setIdPlate(plates.id)}
+								// idRating={() => setIdPlate(plates.id)}
 								actions={actions}
 								handleDeletePlate={() => handleDeletePlate(plates.id)}
 								handleEditPlate={() => {
 									setIdPlate(plates.id);
 									setActionsPlate({ actions: 'EDIT' });
 								}}
+								// onChangee={false}
 								key={plates.id}
 							/>
 						);
@@ -334,17 +339,22 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					<hr className="mb-0" />
 				</div>
 			</div>
-			<i
-				className="fa-sharp fa-solid fa-plus addPlates pointer"
-				itemType="button"
-				data-toggle="modal"
-				data-target="#staticBackdrop2001"
-				onClick={() => setActionsPlate({ actions: 'ADD' })}></i>
+			{restaurant[0].userId == local?.id || local?.data?.id ? (
+				<i
+					className="fa-sharp fa-solid fa-plus addPlates pointer"
+					itemType="button"
+					data-toggle="modal"
+					data-target="#staticBackdrop2001"
+					onClick={() => setActionsPlate({ actions: 'ADD' })}></i>
+			) : (
+				<></>
+			)}
+
 			<i
 				className="fa-brands fa-whatsapp whatsapp-atention pointer"
 				onClick={() => {
 					window.open(
-						`https://api.whatsapp.com/send?phone=57${restaurant.tel}&text=Se%20encuentra%20disponible%3F`
+						`https://api.whatsapp.com/send?phone=57${restaurant[0].tel}&text=Se%20encuentra%20disponible%3F`
 					);
 				}}></i>
 

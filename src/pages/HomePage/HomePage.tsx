@@ -31,6 +31,8 @@ const HomePage: React.FC<HomePageInterface> = () => {
 			console.log(data);
 			console.log(resp.data);
 			setRestaurant(resp.data);
+			console.log(restaurant);
+			
 		};
 		// const initGetRatingPlates = async () => {
 		// 	const respRatingPlates = await getRatingPlates();
@@ -85,7 +87,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							specialized={plate?.specialized}
 							stateStart={true}
 							valueRating={parseInt(plate?.promedio)}
-							// disableRating={true}
+							disableRating={true}
 							onChangee={false}
 							key={plate?.id}
 						/>
