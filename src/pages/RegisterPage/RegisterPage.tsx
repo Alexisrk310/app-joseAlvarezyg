@@ -4,8 +4,8 @@ import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React from 'react';
 import './styles/RegisterPage.css';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '@/store/store';
 import { AuthGoogle } from '@/components/AuthGoogle';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -15,8 +15,8 @@ export interface RegisterPageInterface {}
 
 const RegisterPage: React.FC<RegisterPageInterface> = () => {
 	const navigate = useNavigate();
-	const authState = useSelector((state: RootState) => state.auth);
-	console.log(authState);
+	// const authState = useSelector((state: RootState) => state.auth);
+	// console.log(authState);
 
 	const handleSubmit = async (value: ValuesRegister) => {
 		// console.log(value);
