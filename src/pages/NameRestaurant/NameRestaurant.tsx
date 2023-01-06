@@ -91,9 +91,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	};
 
 	useEffect(() => {
-		restaurant[0].userId == local?.id || local?.data?.id
-			? setActions(true)
-			: setActions(false);
 		const init = async () => {
 			try {
 				const responsePlatesId = await getPlatesId(restaurant[0]?.id);
@@ -131,24 +128,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 
 	useEffect(() => {
 		const init = async () => {
-			// try {
-			// 	const responsePlatesId = await getPlatesId(
-			// 		local?.token || local?.data?.token,
-			// 		idPlate
-			// 	);
-			// 	const dataPlatesId = await responsePlatesId.json();
-			// 	console.log(responsePlatesId);
-			// 	console.log(dataPlatesId, 'este');
-
-			// 	if (dataPlatesId.ok) {
-			// 		setFormValues({
-			// 			namePlate: dataPlatesId?.name,
-			// 			descriptionPlate: dataPlatesId?.description,
-			// 		});
-			// 	}
-			// } catch (error) {
-			// 	console.log(error);
-			// }
 			try {
 				const respPlatesUnique = await getPlatesUnique(idPlate);
 				const dataPlatesUnique = await respPlatesUnique.json();
@@ -167,6 +146,16 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 		if (idPlate != '') init();
 	}, [idPlate]);
 
+	useEffect(() => {
+		local?.token || local?.data?.token != undefined
+			? setActions(true)
+			: setActions(false);
+
+		console.log(restaurant[0].id, local?.id || local?.data?.id);
+	}, [local?.token || local?.data?.token || actions]);
+	// restaurant[0].userId == local?.id || local?.data?.id
+	// ? console.log(restaurant[0].id, local?.id || local?.data?.id)
+	// : setActions(false)
 	const handleSubmit = async (e: any) => {
 		console.log(e);
 		e.preventDefault();
@@ -339,16 +328,14 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					<hr className="mb-0" />
 				</div>
 			</div>
-			{restaurant[0].userId == local?.id || local?.data?.id ? (
+			{local?.token || local?.data?.token ? (
 				<i
 					className="fa-sharp fa-solid fa-plus addPlates pointer"
 					itemType="button"
 					data-toggle="modal"
 					data-target="#staticBackdrop2001"
 					onClick={() => setActionsPlate({ actions: 'ADD' })}></i>
-			) : (
-				<></>
-			)}
+			) : undefined}
 
 			<i
 				className="fa-brands fa-whatsapp whatsapp-atention pointer"

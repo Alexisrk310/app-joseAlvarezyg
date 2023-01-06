@@ -23,10 +23,9 @@ const Logout: React.FC<Logout> = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				localStorage.removeItem('@user');
-				navigate('/');
+				navigate('/login');
 			}
 		});
-		navigate('restaurante');
 	};
 	const clientId =
 		'640139910507-tcp9qrg1jbhupsmvr1i9rfmarmnb6n5s.apps.googleusercontent.com';

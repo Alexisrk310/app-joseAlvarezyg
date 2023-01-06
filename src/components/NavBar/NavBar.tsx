@@ -8,6 +8,7 @@ import Logout from '../AuthGoogle/Logout';
 export interface NavBarInterface {}
 
 const NavBar: React.FC<NavBarInterface> = () => {
+	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const navigate = useNavigate();
 	const handleToggle = () => {
 		const bar = document.querySelector('.navbar');
@@ -28,11 +29,10 @@ const NavBar: React.FC<NavBarInterface> = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				localStorage.removeItem('@user');
-				navigate('/');
+				navigate('/login');
 			}
 		});
 	};
-	const local = JSON.parse(localStorage.getItem('@user') as any);
 
 	return (
 		<div className="container-navbar sticky-top">

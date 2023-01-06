@@ -93,7 +93,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 							showConfirmButton: false,
 							timer: 1500,
 						});
-						// navigate('/restaurante');
+						navigate('/restaurante');
 					} else {
 						console.log(resp);
 						MySwal.fire({
@@ -184,9 +184,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 						placeholder="Nombre"
 						type="text"
 						className="form-control"
-						id="exampleInputPassword1"
 						// name="name"
-
 						onChange={handleChange}
 						value={local?.data?.payload?.name || local?.name}
 						readOnly
@@ -197,7 +195,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 						placeholder="Nombre del restaurante"
 						type="text"
 						className="form-control"
-						id="exampleInputPassword1"
 						name="name"
 						onChange={handleChange}
 						value={formValues.name}
@@ -208,7 +205,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 						placeholder="Especialidad"
 						type="text"
 						className="form-control"
-						id="exampleInputPassword1"
 						name="specialty"
 						onChange={handleChange}
 						value={formValues.specialty}
@@ -217,7 +213,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				<div className="form-group w-75">
 					<textarea
 						className="form-control"
-						// id="exampleFormControlTextarea1"
 						rows={10}
 						placeholder="Descripcion del restaurante"
 						name="description"
@@ -225,11 +220,19 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 						value={formValues.description}></textarea>
 				</div>
 				<div className="d-flex  w-75">
-					<button
+					<p
 						onClick={() => setActions(!actions)}
 						className="btn btn-info m-1 w-100">
-						{actions === true ? 'Editar' : 'Crear'}
-					</button>
+						{actions === true ? (
+							<>
+								Editar <i className="fa-solid fa-pen-to-square"></i>
+							</>
+						) : (
+							<>
+								Crear <i className="fa-solid fa-circle-plus"></i>
+							</>
+						)}
+					</p>
 					<button
 						type="submit"
 						onClick={() => setState(true)}
