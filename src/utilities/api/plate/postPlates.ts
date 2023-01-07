@@ -5,6 +5,7 @@ export const postPlates = async (inputsValues: any, token: string) => {
 		headers: {
 			'x-token': token,
 			'Content-type': 'application/json',
+			// 'Content-Type': 'multipart/form-data',
 		},
 		body: JSON.stringify(inputsValues),
 	});

@@ -187,7 +187,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					MySwal.fire({
 						icon: 'error',
 						title: 'Error',
-						text: 'No se creo el restaurante',
+						text: 'No se pudo crear el plato',
 					});
 				}
 			} catch (error) {
@@ -195,10 +195,16 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			}
 		} else if (actionsPlate.actions == 'EDIT') {
 			try {
+				const ValuesPlate = {
+					image: plateImg.platesimg,
+					name: formValues.namePlate,
+					description: formValues.descriptionPlate,
+				};
+
 				const respPutPlates = await putPlatesId(
 					local?.token || local?.data?.token,
 					idPlate,
-					formValues
+					ValuesPlate
 				);
 				const dataPutPlates = await respPutPlates.json();
 				if (respPutPlates.ok) {
@@ -217,7 +223,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					});
 				}
 				console.log(respPutPlates);
-
 				console.log(dataPutPlates);
 			} catch (error) {
 				console.log(error);
@@ -269,7 +274,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 
 	return (
 		<div className="namerestaurant ">
-			<div className="content-restaurant ">
+			<div className="content-restaurant">
 				<img src={restaurant[0]?.image} alt="logo" className="banner-img" />
 				<div className="d-flex ">
 					<img

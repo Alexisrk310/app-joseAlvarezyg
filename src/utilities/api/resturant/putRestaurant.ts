@@ -10,6 +10,7 @@ export const putRestaurant = async (
 		headers: {
 			'x-token': token,
 			'Content-type': 'application/json',
+			// 'Content-Type': 'multipart/form-data',
 		},
 		body: JSON.stringify(inputsValues),
 	});

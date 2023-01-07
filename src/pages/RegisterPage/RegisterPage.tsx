@@ -143,7 +143,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 								<p className="text-email">Telefono</p>
 								<input
 									className="form-control mt-2"
-									type="number"
+									type="tel"
 									name="tel"
 									onBlur={handleBlur}
 									onChange={handleChange}

@@ -9,6 +9,8 @@ export const putPlatesId = async (
 		headers: {
 			'x-token': token,
 			'Content-type': 'application/json',
+			// 'Content-Type': 'multipart/form-data',
+		
 		},
 		body: JSON.stringify(inputValues),
 	});
