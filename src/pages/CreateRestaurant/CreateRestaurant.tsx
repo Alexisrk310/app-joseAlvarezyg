@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import AddAndCreatePlates from './components/addAndCreatePlates';
+import AddAndCreatePlates from './components/AddAndCreatePlates';
 import './styles/CreateRestaurant.css';
 export interface CreateRestaurantInterface {}
 interface actionPlate {
