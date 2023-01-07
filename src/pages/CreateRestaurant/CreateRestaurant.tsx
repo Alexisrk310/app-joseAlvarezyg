@@ -1,14 +1,7 @@
-import { MessageErrorType } from '@/components';
-import { AddPlate } from '@/components/AddPlate';
-import { InputFilePreviewImage } from '@/components/InputFilePreviewImage';
 import { useFormValues } from '@/hooks/useFormValues';
-import { RestaurantValues } from '@/models/interface/RestaurantValues';
-import { postPlates } from '@/utilities/api/plate/postPlates';
-import { putPlatesId } from '@/utilities/api/plate/putPlates';
 import { getRestaurantiD } from '@/utilities/api/resturant/getRestaurant';
 import { addRestaurant } from '@/utilities/api/resturant/postRestaurant';
 import { putRestaurant } from '@/utilities/api/resturant/putRestaurant';
-import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
