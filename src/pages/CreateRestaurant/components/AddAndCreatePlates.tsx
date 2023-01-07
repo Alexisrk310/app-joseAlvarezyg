@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-export const AddAndCreatePlates = ({ actionsPlate }: any) => {
+const AddAndCreatePlates = ({ actionsPlate }: any) => {
 	const [handleChange, formValues, setFormValues] = useFormValues({
 		image: '',
 		name: '',
@@ -199,3 +199,5 @@ export const AddAndCreatePlates = ({ actionsPlate }: any) => {
 		</>
 	);
 };
+
+export default AddAndCreatePlates;
