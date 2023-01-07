@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import '../styles/CreateRestaurant.css';
+
 const AddAndCreatePlates = ({ actionsPlate }: any) => {
 	const [handleChange, formValues, setFormValues] = useFormValues({
 		image: '',
@@ -12,7 +14,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 		description: '',
 	});
 	const [plateImg, setPlateImg] = useState(
-		'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+		'https://static.vecteezy.com/system/resources/previews/004/794/379/non_2x/illustration-graphic-of-food-plate-logo-perfect-to-use-for-food-company-free-vector.jpg'
 	);
 	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const MySwal = withReactContent(Swal);
@@ -25,6 +27,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 				name: formValues.namePlate,
 				description: formValues.descriptionPlate,
 			};
+			console.log(local?.token || local?.data?.token);
 
 			try {
 				const resp = await postPlates(
@@ -89,15 +92,15 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 		// 	}
 		// }
 	};
-	// const HandlePlates = (e: any) => {
-	// 	const readerPlate = new FileReader();
-	// 	readerPlate.onload = () => {
-	// 		if (readerPlate.readyState === 2) {
-	// 			setPlateImg(readerPlate.result as string);
-	// 		}
-	// 	};
-	// 	readerPlate.readAsDataURL(e.target.files[0]);
-	// };
+	const HandlePlate = (e: any) => {
+		const readerPlate = new FileReader();
+		readerPlate.onload = () => {
+			if (readerPlate.readyState === 2) {
+				setPlateImg(readerPlate.result as string);
+			}
+		};
+		readerPlate.readAsDataURL(e.target.files[0]);
+	};
 	return (
 		<>
 			<div
@@ -140,14 +143,14 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 														className="img-plate"
 													/>
 												</div>
-												{/* <input
+												<input
 													type="file"
 													accept="image/*"
 													name="image-upload"
 													id="input"
 													// required
-													onChange={HandlePlates}
-												/> */}
+													onChange={HandlePlate}
+												/>
 												<div className="label">
 													<label className="image-upload-plate" htmlFor="input">
 														Elige la foto

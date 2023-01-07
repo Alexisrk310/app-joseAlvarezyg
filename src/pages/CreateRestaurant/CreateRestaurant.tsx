@@ -92,13 +92,19 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 			name: formValues.name,
 			specialty: formValues.specialty,
 			description: formValues.description,
+			department: formValues.department,
+			city: formValues.city,
+			address: formValues.address,
+			tel: formValues.tel,
+			facebook: formValues.facebook,
+			instagram: formValues.instagram,
 		};
 
 		try {
 			const respModifyResta = await putRestaurant(
 				ValueRestaurantEdit,
-				local?.token,
-				local?.id
+				local?.token || local?.data?.token,
+				local?.id || local?.data?.id
 			);
 			const dataModifyResta = await respModifyResta.json();
 			if (dataModifyResta.ok) {
@@ -135,6 +141,12 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 			name: formValues.name,
 			specialty: formValues.specialty,
 			description: formValues.description,
+			department: formValues.department,
+			city: formValues.city,
+			address: formValues.address,
+			tel: formValues.tel,
+			facebook: formValues.facebook,
+			instagram: formValues.instagram,
 		};
 
 		try {
@@ -249,16 +261,20 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					{actions === true ? (
 						<button
 							type="submit"
+							itemType="button"
+							data-toggle="modal"
+							data-target="#staticBackdropInfo"
 							className="btn m-1 btn-primary w-100"
-							onClick={handleEdit}>
-							Editar restaurante
+							onClick={() => setActionsPlate({ actions: 'EDIT' })}>
+							Editar mas informacion
 						</button>
 					) : (
 						<p
 							itemType="button"
 							data-toggle="modal"
 							data-target="#staticBackdropInfo"
-							className="btn m-1 btn-primary w-100">
+							className="btn m-1 btn-primary w-100"
+							onClick={() => setActionsPlate({ actions: 'ADD' })}>
 							Mas informacion
 						</p>
 					)}
@@ -368,7 +384,9 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 								className="btn btn-success"
 								data-dismiss="modal"
 								onClick={handleSubmit}>
-								Crear restaurante
+								{actionsPlate.actions == 'EDIT'
+									? 'Editar plato'
+									: 'Añadir plato'}
 							</button>
 							<button
 								type="button"

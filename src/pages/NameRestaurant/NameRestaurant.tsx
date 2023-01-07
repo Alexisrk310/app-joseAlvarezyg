@@ -1,22 +1,18 @@
-import { Card, MessageErrorType } from '@/components';
+import { Card } from '@/components';
 import { useFormValues } from '@/hooks/useFormValues';
-import { ValuesPlates } from '@/models/interface';
+
 import { deletePlatesId } from '@/utilities/api/plate/deletePlates';
 import { getPlatesId, getPlatesUnique } from '@/utilities/api/plate/getPlates';
-import { postPlates } from '@/utilities/api/plate/postPlates';
-import { putPlatesId } from '@/utilities/api/plate/putPlates';
-import {
-	getRestaurantiD,
-	getRestaurant,
-} from '@/utilities/api/resturant/getRestaurant';
+
+import { getRestaurantiD } from '@/utilities/api/resturant/getRestaurant';
 import {
 	postRatingPlates,
 	postRatingRestaurant,
 } from '@/utilities/api/startRating/postRating';
 
 import { Rating } from '@mui/material';
-import { ErrorMessage, Formik, FormikErrors } from 'formik';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import {
 	useLoaderData,
 	useNavigate,
@@ -61,10 +57,10 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 		descriptionPlate: '',
 	});
 	const MySwal = withReactContent(Swal);
-	const [plateImg, setPlateImg] = useState({
-		platesimg:
-			'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-	});
+	// const [plateImg, setPlateImg] = useState({
+	// 	platesimg:
+	// 		'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+	// });
 	// console.log(restaurant.tel);
 	// const validateActions =
 
@@ -321,14 +317,14 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					<hr className="mb-0" />
 				</div>
 			</div>
-			{local?.token || local?.data?.token ? (
+			{/* {local?.token || local?.data?.token ? (
 				<i
 					className="fa-sharp fa-solid fa-plus addPlates pointer"
 					itemType="button"
 					data-toggle="modal"
 					data-target="#staticBackdrop2001"
 					onClick={() => setActionsPlate({ actions: 'ADD' })}></i>
-			) : undefined}
+			) : undefined} */}
 
 			<i
 				className="fa-brands fa-whatsapp whatsapp-atention pointer"
