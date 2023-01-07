@@ -89,15 +89,15 @@ export const AddAndCreatePlates = ({ actionsPlate }: any) => {
 		// 	}
 		// }
 	};
-	const HandlePlates = (e: any) => {
-		const readerPlate = new FileReader();
-		readerPlate.onload = () => {
-			if (readerPlate.readyState === 2) {
-				setPlateImg(readerPlate.result as string);
-			}
-		};
-		readerPlate.readAsDataURL(e.target.files[0]);
-	};
+	// const HandlePlates = (e: any) => {
+	// 	const readerPlate = new FileReader();
+	// 	readerPlate.onload = () => {
+	// 		if (readerPlate.readyState === 2) {
+	// 			setPlateImg(readerPlate.result as string);
+	// 		}
+	// 	};
+	// 	readerPlate.readAsDataURL(e.target.files[0]);
+	// };
 	return (
 		<>
 			<div
@@ -140,14 +140,14 @@ export const AddAndCreatePlates = ({ actionsPlate }: any) => {
 														className="img-plate"
 													/>
 												</div>
-												<input
+												{/* <input
 													type="file"
 													accept="image/*"
 													name="image-upload"
 													id="input"
 													// required
 													onChange={HandlePlates}
-												/>
+												/> */}
 												<div className="label">
 													<label className="image-upload-plate" htmlFor="input">
 														Elige la foto
