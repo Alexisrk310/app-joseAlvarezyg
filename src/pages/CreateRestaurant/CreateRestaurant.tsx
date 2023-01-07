@@ -3,6 +3,8 @@ import { AddPlate } from '@/components/AddPlate';
 import { InputFilePreviewImage } from '@/components/InputFilePreviewImage';
 import { useFormValues } from '@/hooks/useFormValues';
 import { RestaurantValues } from '@/models/interface/RestaurantValues';
+import { postPlates } from '@/utilities/api/plate/postPlates';
+import { putPlatesId } from '@/utilities/api/plate/putPlates';
 import { getRestaurantiD } from '@/utilities/api/resturant/getRestaurant';
 import { addRestaurant } from '@/utilities/api/resturant/postRestaurant';
 import { putRestaurant } from '@/utilities/api/resturant/putRestaurant';
@@ -11,10 +13,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { AddAndCreatePlates } from './components/addAndCreatePlates';
 import './styles/CreateRestaurant.css';
 export interface CreateRestaurantInterface {}
-
+interface actionPlate {
+	actions: 'EDIT' | 'ADD';
+}
 const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
+	const [actionsPlate, setActionsPlate] = useState<actionPlate>({
+		actions: 'ADD',
+	});
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
 	const local = JSON.parse(localStorage.getItem('@user') as any);
@@ -263,6 +271,20 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					)}
 				</div>
 			</div>
+			<div className="buttonPlates align-self-start m-5">
+				<div className="plate-logo"></div>
+				<button
+					className="btn btn-primary mt-2"
+					itemType="button"
+					data-toggle="modal"
+					data-target="#staticBackdrop2001"
+					onClick={() => setActionsPlate({ actions: 'ADD' })}>
+					Añadir plato
+				</button>
+			</div>
+			{/* ADD PLATE */}
+			<AddAndCreatePlates actionsPlate={actionsPlate} />
+			{/* END PLATE */}
 			<div
 				className="modal fade"
 				id="staticBackdropInfo"

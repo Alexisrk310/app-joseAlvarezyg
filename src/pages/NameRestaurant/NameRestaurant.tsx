@@ -68,18 +68,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	// console.log(restaurant.tel);
 	// const validateActions =
 
-	const HandlePlates = (e: any) => {
-		const readerPlate = new FileReader();
-		readerPlate.onload = () => {
-			if (readerPlate.readyState === 2) {
-				setPlateImg({
-					platesimg: readerPlate.result,
-				} as any);
-			}
-		};
-		readerPlate.readAsDataURL(e.target.files[0]);
-	};
-
 	const handleRatingRestaurant = async () => {
 		const respRatingRestaurant = await postRatingRestaurant(
 			{ rate: valueRatingRestaurant },
@@ -156,79 +144,79 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	// restaurant[0].userId == local?.id || local?.data?.id
 	// ? console.log(restaurant[0].id, local?.id || local?.data?.id)
 	// : setActions(false)
-	const handleSubmit = async (e: any) => {
-		console.log(e);
-		e.preventDefault();
-		if (actionsPlate.actions == 'ADD') {
-			const ValuesPlate = {
-				image: plateImg.platesimg,
-				name: formValues.namePlate,
-				description: formValues.descriptionPlate,
-			};
+	// const handleSubmit = async (e: any) => {
+	// 	console.log(e);
+	// 	e.preventDefault();
+	// 	if (actionsPlate.actions == 'ADD') {
+	// 		const ValuesPlate = {
+	// 			image: plateImg.platesimg,
+	// 			name: formValues.namePlate,
+	// 			description: formValues.descriptionPlate,
+	// 		};
 
-			try {
-				const resp = await postPlates(
-					ValuesPlate,
-					local?.token || local?.data?.token
-				);
-				const data = await resp.json();
-				if (resp.ok) {
-					console.log(data);
+	// 		try {
+	// 			const resp = await postPlates(
+	// 				ValuesPlate,
+	// 				local?.token || local?.data?.token
+	// 			);
+	// 			const data = await resp.json();
+	// 			if (resp.ok) {
+	// 				console.log(data);
 
-					MySwal.fire({
-						position: 'top-end',
-						icon: 'success',
-						title: 'Plato creado',
-						showConfirmButton: false,
-						timer: 1500,
-					});
-					window.location.href = `/restaurante/${restaurant[0].id}`;
-				} else {
-					MySwal.fire({
-						icon: 'error',
-						title: 'Error',
-						text: 'No se pudo crear el plato',
-					});
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		} else if (actionsPlate.actions == 'EDIT') {
-			try {
-				const ValuesPlate = {
-					image: plateImg.platesimg,
-					name: formValues.namePlate,
-					description: formValues.descriptionPlate,
-				};
+	// 				MySwal.fire({
+	// 					position: 'top-end',
+	// 					icon: 'success',
+	// 					title: 'Plato creado',
+	// 					showConfirmButton: false,
+	// 					timer: 1500,
+	// 				});
+	// 				window.location.href = `/restaurante/${restaurant[0].id}`;
+	// 			} else {
+	// 				MySwal.fire({
+	// 					icon: 'error',
+	// 					title: 'Error',
+	// 					text: 'No se pudo crear el plato',
+	// 				});
+	// 			}
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	} else if (actionsPlate.actions == 'EDIT') {
+	// 		try {
+	// 			const ValuesPlate = {
+	// 				image: plateImg.platesimg,
+	// 				name: formValues.namePlate,
+	// 				description: formValues.descriptionPlate,
+	// 			};
 
-				const respPutPlates = await putPlatesId(
-					local?.token || local?.data?.token,
-					idPlate,
-					ValuesPlate
-				);
-				const dataPutPlates = await respPutPlates.json();
-				if (respPutPlates.ok) {
-					MySwal.fire({
-						position: 'top-end',
-						icon: 'success',
-						title: 'Plato Editado',
-						showConfirmButton: false,
-						timer: 1500,
-					});
-				} else {
-					MySwal.fire({
-						icon: 'error',
-						title: 'Error',
-						text: 'No se pudo editar el plato',
-					});
-				}
-				console.log(respPutPlates);
-				console.log(dataPutPlates);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-	};
+	// 			const respPutPlates = await putPlatesId(
+	// 				local?.token || local?.data?.token,
+	// 				idPlate,
+	// 				ValuesPlate
+	// 			);
+	// 			const dataPutPlates = await respPutPlates.json();
+	// 			if (respPutPlates.ok) {
+	// 				MySwal.fire({
+	// 					position: 'top-end',
+	// 					icon: 'success',
+	// 					title: 'Plato Editado',
+	// 					showConfirmButton: false,
+	// 					timer: 1500,
+	// 				});
+	// 			} else {
+	// 				MySwal.fire({
+	// 					icon: 'error',
+	// 					title: 'Error',
+	// 					text: 'No se pudo editar el plato',
+	// 				});
+	// 			}
+	// 			console.log(respPutPlates);
+	// 			console.log(dataPutPlates);
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	}
+	// };
 
 	const handleDeletePlate = (id: any) => {
 		console.log('eliminando');
@@ -350,7 +338,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					);
 				}}></i>
 
-			<div
+			{/* <div
 				className="modal fade"
 				id="staticBackdrop2001"
 				data-backdrop="static"
@@ -443,7 +431,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
