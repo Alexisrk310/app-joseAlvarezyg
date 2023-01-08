@@ -65,14 +65,15 @@
 	border-radius: 5px;
 	margin-top: 1rem;
 }
+.resize {
+	resize: none;
+}
 .img-of-restaurant {
 	width: 150px;
 	height: 150px;
 	object-fit: cover;
 }
-#input[type='file'] {
-	display: none;
-}
+
 .label {
 	width: 100%;
 	margin-top: 1rem;
@@ -113,9 +114,6 @@
 	.createrestaurant {
 		height: 1500px;
 	}
-	/* .homepage {
-		height: 4000px;
-	} */
 }
 /* ADD PLATES */
 
@@ -140,8 +138,8 @@
 	border-radius: 30px;
 }
 .container-plate {
-	height: 200px;
-	width: 200px;
+	height: 300px;
+	width: 300px;
 	border-radius: 10px;
 	background-color: rgba(255, 255, 255, 0.5);
 }
@@ -164,8 +162,9 @@
 	height: 150px;
 	object-fit: cover;
 }
-#input[type='file'] {
-	display: none;
+#inputPlate {
+	background-color: white;
+	color: white;
 }
 .label-plate {
 	width: 100%;

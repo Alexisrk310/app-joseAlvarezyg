@@ -302,7 +302,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 								valueRating={plates.id == idPlate ? valueRating : 0}
 								setValueRating={setValueRating}
 								// idRating={() => setIdPlate(plates.id)}
-								actions={actions}
+								// actions={actions}
 								handleDeletePlate={() => handleDeletePlate(plates.id)}
 								handleEditPlate={() => {
 									setIdPlate(plates.id);

@@ -14,7 +14,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 		description: '',
 	});
 	const [plateImg, setPlateImg] = useState(
-		'https://static.vecteezy.com/system/resources/previews/004/794/379/non_2x/illustration-graphic-of-food-plate-logo-perfect-to-use-for-food-company-free-vector.jpg'
+		'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
 	);
 	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const MySwal = withReactContent(Swal);
@@ -142,20 +142,21 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 														id="img"
 														className="img-plate"
 													/>
+													<input
+														type="file"
+														accept="image/*"
+														name="image-upload"
+														id="inputPlate"
+														// required
+														onChange={HandlePlate}
+													/>
 												</div>
-												<input
-													type="file"
-													accept="image/*"
-													name="image-upload"
-													id="input"
-													// required
-													onChange={HandlePlate}
-												/>
-												<div className="label">
+
+												{/* <div className="label">
 													<label className="image-upload-plate" htmlFor="input">
 														Elige la foto
 													</label>
-												</div>
+												</div> */}
 											</div>
 										</div>
 									</div>

@@ -9,13 +9,17 @@ import withReactContent from 'sweetalert2-react-content';
 import AddAndCreatePlates from './components/AddAndCreatePlates';
 import './styles/CreateRestaurant.css';
 export interface CreateRestaurantInterface {}
-interface actionPlate {
+interface actionRestaurantAndPlate {
 	actions: 'EDIT' | 'ADD';
 }
 const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
-	const [actionsPlate, setActionsPlate] = useState<actionPlate>({
+	const [actionsPlate, setActionsPlate] = useState<actionRestaurantAndPlate>({
 		actions: 'ADD',
 	});
+	const [actionRestaurant, setActionRestaurant] =
+		useState<actionRestaurantAndPlate>({
+			actions: 'ADD',
+		});
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
 	const local = JSON.parse(localStorage.getItem('@user') as any);
@@ -83,99 +87,99 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		init();
 	}, []);
 
-	const handleEdit = async () => {
-		// EDITAR RESTAURANTE
-		console.log('Editar restaurante');
-
-		const ValueRestaurantEdit = {
-			image: profileImg.imgPlate,
-			name: formValues.name,
-			specialty: formValues.specialty,
-			description: formValues.description,
-			department: formValues.department,
-			city: formValues.city,
-			address: formValues.address,
-			tel: formValues.tel,
-			facebook: formValues.facebook,
-			instagram: formValues.instagram,
-		};
-
-		try {
-			const respModifyResta = await putRestaurant(
-				ValueRestaurantEdit,
-				local?.token || local?.data?.token,
-				local?.id || local?.data?.id
-			);
-			const dataModifyResta = await respModifyResta.json();
-			if (dataModifyResta.ok) {
-				console.log(dataModifyResta);
-
-				MySwal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: dataModifyResta.msg,
-					showConfirmButton: false,
-					timer: 1500,
-				});
-				// navigate('/restaurante');
-			} else {
-				console.log(dataModifyResta);
-				MySwal.fire({
-					icon: 'error',
-					title: 'Error',
-					text: dataModifyResta.msg,
-				});
-				// navigate('/restaurante');
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
 	const handleSubmit = async (e: any) => {
-		e.preventDefault();
-		const local = JSON.parse(localStorage.getItem('@user') as any);
+		if (actionRestaurant.actions == 'ADD') {
+			e.preventDefault();
+			const local = JSON.parse(localStorage.getItem('@user') as any);
 
-		const ValueRestaurant = {
-			image: profileImg.imgPlate,
-			name: formValues.name,
-			specialty: formValues.specialty,
-			description: formValues.description,
-			department: formValues.department,
-			city: formValues.city,
-			address: formValues.address,
-			tel: formValues.tel,
-			facebook: formValues.facebook,
-			instagram: formValues.instagram,
-		};
+			const ValueRestaurant = {
+				image: profileImg.imgPlate,
+				name: formValues.name,
+				specialty: formValues.specialty,
+				description: formValues.description,
+				department: formValues.department,
+				city: formValues.city,
+				// address: formValues.address,
+				tel: parseInt(formValues.tel),
+				facebook: formValues.facebook,
+				instagram: formValues.instagram,
+			};
 
-		try {
-			const addResta = await addRestaurant(
-				ValueRestaurant,
-				local?.token || local?.data?.token
-			);
-			const resp = await addResta.json();
-			console.log(resp);
-			if (resp.ok) {
-				MySwal.fire({
-					position: 'top-end',
-					icon: 'success',
-					title: 'Restaurante creado',
-					showConfirmButton: false,
-					timer: 1500,
-				});
-				navigate('/restaurante');
-			} else {
+			try {
+				const addResta = await addRestaurant(
+					ValueRestaurant,
+					local?.token || local?.data?.token
+				);
+				const resp = await addResta.json();
 				console.log(resp);
-				MySwal.fire({
-					icon: 'error',
-					title: 'Error',
-					text: resp.msg,
-				});
-				// navigate('/restaurante');
+				if (resp.ok) {
+					MySwal.fire({
+						position: 'top-end',
+						icon: 'success',
+						title: 'Restaurante creado',
+						showConfirmButton: false,
+						timer: 1500,
+					});
+					navigate('/restaurante');
+				} else {
+					console.log(resp);
+					MySwal.fire({
+						icon: 'error',
+						title: 'Error',
+						text: resp.msg,
+					});
+					// navigate('/restaurante');
+				}
+			} catch (error) {
+				console.log(error);
 			}
-		} catch (error) {
-			console.log(error);
+		} else if (actionRestaurant.actions == 'EDIT') {
+			// EDITAR RESTAURANTE
+			console.log('Editar restaurante');
+
+			const ValueRestaurantEdit = {
+				image: profileImg.imgPlate,
+				name: formValues.name,
+				specialty: formValues.specialty,
+				description: formValues.description,
+				department: formValues.department,
+				city: formValues.city,
+				// address: formValues.address,
+				tel: parseInt(formValues.tel),
+				facebook: formValues.facebook,
+				instagram: formValues.instagram,
+			};
+
+			try {
+				const respModifyResta = await putRestaurant(
+					ValueRestaurantEdit,
+					local?.token || local?.data?.token,
+					local?.id || local?.data?.id
+				);
+				const dataModifyResta = await respModifyResta.json();
+				if (dataModifyResta.ok) {
+					console.log(dataModifyResta);
+
+					MySwal.fire({
+						position: 'top-end',
+						icon: 'success',
+						title: dataModifyResta.msg,
+						showConfirmButton: false,
+						timer: 1500,
+					});
+					// navigate('/restaurante');
+				} else {
+					console.log(dataModifyResta);
+					MySwal.fire({
+						icon: 'error',
+						title: 'Error',
+						text: dataModifyResta.msg,
+					});
+					// navigate('/restaurante');
+				}
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 
@@ -241,7 +245,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				</div>
 				<div className="form-group w-75">
 					<textarea
-						className="form-control"
+						className="form-control resize"
 						rows={10}
 						placeholder="Descripcion del restaurante"
 						name="description"
@@ -265,7 +269,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 							data-toggle="modal"
 							data-target="#staticBackdropInfo"
 							className="btn m-1 btn-primary w-100"
-							onClick={() => setActionsPlate({ actions: 'EDIT' })}>
+							onClick={() => setActionRestaurant({ actions: 'EDIT' })}>
 							Editar mas informacion
 						</button>
 					) : (
@@ -274,7 +278,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 							data-toggle="modal"
 							data-target="#staticBackdropInfo"
 							className="btn m-1 btn-primary w-100"
-							onClick={() => setActionsPlate({ actions: 'ADD' })}>
+							onClick={() => setActionRestaurant({ actions: 'ADD' })}>
 							Mas informacion
 						</p>
 					)}
@@ -292,6 +296,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				</button>
 			</div>
 			{/* ADD PLATE */}
+
 			<AddAndCreatePlates actionsPlate={actionsPlate} />
 			{/* END PLATE */}
 			<div
@@ -337,7 +342,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											value={formValues.city}
 										/>
 									</div>
-									<div className="form-group w-75">
+									{/* <div className="form-group w-75">
 										<input
 											type="text"
 											name="address"
@@ -346,11 +351,11 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											onChange={handleChange}
 											value={formValues.address}
 										/>
-									</div>
+									</div> */}
 									<div className="form-group w-75">
 										<input
 											type="tel"
-											name="address"
+											name="tel"
 											className="form-control"
 											placeholder="Telefono"
 											onChange={handleChange}
@@ -384,9 +389,9 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 								className="btn btn-success"
 								data-dismiss="modal"
 								onClick={handleSubmit}>
-								{actionsPlate.actions == 'EDIT'
-									? 'Editar plato'
-									: 'Añadir plato'}
+								{actionRestaurant.actions == 'EDIT'
+									? 'Editar Restaurante'
+									: 'Añadir Restaurante'}
 							</button>
 							<button
 								type="button"
