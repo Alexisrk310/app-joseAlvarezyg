@@ -295,13 +295,12 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 
 						return (
 							<Card
-								// img={`data:image/jpeg;base64,${plates?.image}`}
 								title={plates?.name}
 								description={plates?.description}
 								stateStart={true}
 								valueRating={plates.id == idPlate ? valueRating : 0}
 								setValueRating={setValueRating}
-								// idRating={() => setIdPlate(plates.id)}
+								idRating={() => setIdPlate(plates.id)}
 								// actions={actions}
 								handleDeletePlate={() => handleDeletePlate(plates.id)}
 								handleEditPlate={() => {

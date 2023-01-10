@@ -58,7 +58,13 @@ const Card: React.FC<CardInterface> = ({
 				</div>
 			) : undefined}
 
-			<img src={img} className="card-img-top" width={10} alt={img} />
+			<img
+				src={img}
+				className="card-img-top"
+				width={10}
+				height={248}
+				alt={img}
+			/>
 			<div className="card-body ">
 				<h5 className="card-title black">{title}</h5>
 				<p className="card-text black">{description}</p>

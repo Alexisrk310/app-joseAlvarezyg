@@ -2,7 +2,7 @@
 	background-image: url('../img/DSCF1560.jpg');
 	background-size: cover;
 	width: 100%;
-	height: 700px;
+	/* height: 0%; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -36,4 +36,8 @@
 }
 .input-contact {
 	width: 300px;
+}
+.textarea-contact {
+	resize: none;
+	height: 150px !important;
 }

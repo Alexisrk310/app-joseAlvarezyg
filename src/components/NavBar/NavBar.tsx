@@ -51,6 +51,17 @@ const NavBar: React.FC<NavBarInterface> = () => {
 					}>
 					RESTAURANTES
 				</NavLink>
+				{local.token || local?.data?.token ? (
+					<NavLink
+						to={'restaurante/crear'}
+						className={({ isActive }) =>
+							isActive
+								? 'isActive pointer navbar-brand'
+								: 'pointer navbar-brand'
+						}>
+						MI RESTAURANTE
+					</NavLink>
+				) : undefined}
 				{/* <NavLink
 				to={'ven'}
 				className={({ isActive }) =>
@@ -87,7 +98,7 @@ const NavBar: React.FC<NavBarInterface> = () => {
 					}>
 					CONTACTANOS
 				</NavLink>
-				<i className="fa-solid fa-magnifying-glass pointer white"></i>
+				{/* <i className="fa-solid fa-magnifying-glass pointer white"></i> */}
 				{!JSON.parse(localStorage.getItem('@user') as any) ? (
 					<>
 						<NavLink to={'login'} className="pointer btn btn-info">

@@ -1,12 +1,33 @@
 import { MessageErrorType } from '@/components';
 import { ContactValues } from '@/models/interface';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
-import React from 'react';
+import emailjs from '@emailjs/browser';
+import React, { useRef } from 'react';
+
 import './styles/ContactUsPage.css';
 export interface ContactUsPageInterface {}
 
 const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
-	const handleSubmit = (value: ContactValues) => {};
+	const form = useRef();
+	const handleSubmit = (value: ContactValues) => {
+		console.log(form.current as any);
+
+		emailjs
+			.sendForm(
+				'service_7lkr3r6',
+				'template_axvzoia',
+				form.current as any,
+				'TjewiMush9fCx2oFx'
+			)
+			.then(
+				(result) => {
+					console.log(result.text);
+				},
+				(error) => {
+					console.log(error.text);
+				}
+			);
+	};
 
 	const validations = (values: ContactValues) => {
 		let errors: FormikErrors<ContactValues> = {};
@@ -40,7 +61,10 @@ const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
 				<div className="contactuspage">
 					<h1 className="contact">CONTACTENOS</h1>
 					<div className="contact-form">
-						<form className="form-contact" onSubmit={handleSubmit}>
+						<form
+							className="form-contact"
+							onSubmit={handleSubmit}
+							ref={form as any}>
 							<h4 className="text-center">Formulario de contacto</h4>
 
 							<div className="form-group input-contact">
@@ -91,7 +115,7 @@ const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
 							<div className="form-group input-contact">
 								<label>¿En que podemos ayudarte?</label>
 								<textarea
-									className="form-control"
+									className="form-control textarea-contact"
 									rows={3}
 									name="question"
 									value={values.question}

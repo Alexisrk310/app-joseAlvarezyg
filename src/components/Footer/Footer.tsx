@@ -8,7 +8,7 @@ export interface FooterInterface {}
 const Footer: React.FC<FooterInterface> = () => {
 	return (
 		<div className="footer">
-			<div className='footer-div'>
+			<div className="footer-div">
 				<p>Legal</p>
 				<p>Centro de Privacidad</p>
 				<p>Politicas de Privacidad</p>
