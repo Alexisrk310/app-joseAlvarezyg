@@ -7,10 +7,11 @@ const NoFoundPage: React.FC<NoFoundPageInterface> = () => {
 	const error: any = useRouteError();
 
 	return (
-		<div>
-			<h1>404</h1>
-			<p>Page not found</p>
-			<p>{error.statusText || error.message}</p>
+		<div className="nofoundpage">
+			<h1 className="white mt-5">Error: 404</h1>
+			<p className="white">Pagina no encontrada</p>
+			<small className="white">Regresa a la pagina anterior</small>
+			{/* <p>{error.statusText || error.message}</p> */}
 		</div>
 	);
 };
