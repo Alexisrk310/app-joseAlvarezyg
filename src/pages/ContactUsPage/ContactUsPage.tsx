@@ -3,11 +3,13 @@ import { ContactValues } from '@/models/interface';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import emailjs from '@emailjs/browser';
 import React, { useRef } from 'react';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import './styles/ContactUsPage.css';
 export interface ContactUsPageInterface {}
 
 const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
+	const MySwal = withReactContent(Swal);
 	const form = useRef();
 	const handleSubmit = (value: ContactValues) => {
 		console.log(form.current as any);
@@ -20,11 +22,21 @@ const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
 				'TjewiMush9fCx2oFx'
 			)
 			.then(
-				(result) => {
-					console.log(result.text);
+				() => {
+					MySwal.fire({
+						position: 'top-end',
+						icon: 'success',
+						title: 'Se ha enviado correctamente',
+						showConfirmButton: false,
+						timer: 1500,
+					});
 				},
-				(error) => {
-					console.log(error.text);
+				() => {
+					MySwal.fire({
+						icon: 'error',
+						title: 'Error',
+						text: 'No se pudo enviar',
+					});
 				}
 			);
 	};

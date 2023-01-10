@@ -51,7 +51,7 @@ const NavBar: React.FC<NavBarInterface> = () => {
 					}>
 					RESTAURANTES
 				</NavLink>
-				{local.token || local?.data?.token ? (
+				{local?.token || local?.data?.token ? (
 					<NavLink
 						to={'restaurante/crear'}
 						className={({ isActive }) =>

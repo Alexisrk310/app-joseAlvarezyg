@@ -1,8 +1,7 @@
 import { Card } from '@/components';
 import { responseGetRestaurant } from '@/models/interface';
-import { getPlatesAll } from '@/utilities/api/plate/getPlates';
-import { getRestaurant } from '@/utilities/api/resturant/getRestaurant';
-import { getRatingPlates } from '@/utilities/api/startRating/getRating';
+import { getPlatesPopulate } from '@/utilities/api/plate/getPlates';
+import { getRestaurantPopulate } from '@/utilities/api/resturant/getRestaurant';
 
 import React, { useEffect, useState } from 'react';
 
@@ -12,27 +11,35 @@ export interface HomePageInterface {}
 const HomePage: React.FC<HomePageInterface> = () => {
 	const [restaurant, setRestaurant] = useState([]);
 	const [plates, setPlates] = useState([]);
-	const [valueRating, setValueRating] = React.useState<number | null>(0);
+
 	useEffect(() => {
 		const initPlates = async () => {
-			const respPlatesAll = await getPlatesAll();
-			const dataPlatesAll = await respPlatesAll.json();
+			try {
+				const respPlatePopulate = await getPlatesPopulate();
+				const dataPlatePopulate = await respPlatePopulate.json();
 
-			console.log(respPlatesAll);
-			console.log(plates);
-			console.log(dataPlatesAll);
-			setPlates(dataPlatesAll.data);
-			console.log(plates);
+				console.log(respPlatePopulate);
+				console.log(plates);
+				setPlates(dataPlatePopulate?.data);
+				console.log(dataPlatePopulate);
+
+				console.log(plates);
+			} catch (error) {
+				console.log(error);
+			}
 		};
 
 		const initRestaurant = async () => {
-			const data = await getRestaurant();
-			const resp = await data.json();
-			console.log(data);
-			console.log(resp.data);
-			setRestaurant(resp.data);
-			console.log(restaurant);
-			
+			try {
+				const data = await getRestaurantPopulate();
+				const resp = await data.json();
+				console.log(data);
+				console.log(resp);
+				setRestaurant(resp?.data);
+				console.log(restaurant);
+			} catch (error) {
+				console.log(error);
+			}
 		};
 		// const initGetRatingPlates = async () => {
 		// 	const respRatingPlates = await getRatingPlates();

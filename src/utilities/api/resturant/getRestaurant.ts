@@ -18,3 +18,14 @@ export const getRestaurant = async () => {
 		},
 	});
 };
+
+// MOSTRAR TODOS LOS RESTAURANTES RECOMENDADOS / POPULATE
+export const getRestaurantPopulate = async () => {
+	const urlGetRestaurant = `https://backen-appjose.vercel.app/populate/restaurant`;
+	return await fetch(urlGetRestaurant, {
+		method: 'GET',
+		headers: {
+			'Content-type': 'application/json',
+		},
+	});
+};
