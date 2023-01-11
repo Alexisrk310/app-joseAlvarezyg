@@ -1,4 +1,4 @@
-import { Card } from '@/components';
+import { Card, ModalPlate } from '@/components';
 import { useFormValues } from '@/hooks/useFormValues';
 
 import { deletePlatesId } from '@/utilities/api/plate/deletePlates';
@@ -62,11 +62,15 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	// const validateActions =
 
 	const handleRatingRestaurant = async () => {
-		const respRatingRestaurant = await postRatingRestaurant(
-			{ rate: valueRatingRestaurant },
-			restaurant[0]?.id
-		);
-		const dataRatingRestaurant = await respRatingRestaurant.json();
+		try {
+			const respRatingRestaurant = await postRatingRestaurant(
+				{ rate: valueRatingRestaurant },
+				restaurant[0]?.id
+			);
+			const dataRatingRestaurant = await respRatingRestaurant.json();
+		} catch (error) {
+			throw error;
+		}
 	};
 
 	useEffect(() => {
@@ -74,6 +78,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			try {
 				const responsePlatesId = await getPlatesId(restaurant[0]?.id);
 				const dataPlatesId = await responsePlatesId.json();
+				console.log(dataPlatesId.data);
 
 				if (dataPlatesId.ok) {
 					setPlate(dataPlatesId.data);
@@ -214,7 +219,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 				const init = async () => {
 					try {
 						const respPlatesId = await deletePlatesId(
-							local.token || local?.data?.token,
+							local?.token || local?.data?.token,
 							id
 						);
 						const dataPlatesId = await respPlatesId.json();
@@ -236,6 +241,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			}
 		});
 	};
+	console.log(idPlate);
 
 	return (
 		<div className="namerestaurant ">
@@ -273,10 +279,12 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 				<div className="menu-items mr-5 ml-5">
 					{plate?.map((plates: any) => (
 						<Card
+							evente={() => setIdPlate(plates?.id)}
+							idData={plates?.id}
 							title={plates?.name}
 							description={plates?.description}
 							stateStart={true}
-							valueRating={plates.id == idPlate ? valueRating : 0}
+							valueRating={plates.id == idPlate ? valueRating : valueRating}
 							setValueRating={setValueRating}
 							idRating={() => setIdPlate(plates.id)}
 							// actions={actions}
@@ -292,6 +300,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 
 					<hr className="mb-0" />
 				</div>
+				<ModalPlate id={idPlate} />
 			</div>
 			{/* {local?.token || local?.data?.token ? (
 				<i

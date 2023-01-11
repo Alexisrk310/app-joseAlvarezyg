@@ -18,6 +18,8 @@ export interface CardInterface {
 	idRating?: MouseEventHandler<HTMLDivElement>;
 	disableRating?: boolean;
 	onChangee?: boolean;
+	idData?: string;
+	eventeModal?: MouseEventHandler<HTMLDivElement>;
 }
 
 const Card: React.FC<CardInterface> = ({
@@ -36,10 +38,15 @@ const Card: React.FC<CardInterface> = ({
 	idRating,
 	disableRating,
 	onChangee = true,
+	idData,
+	eventeModal,
 }) => {
 	return (
 		<div
 			onClick={evente}
+			itemType="button"
+			data-toggle="modal"
+			data-target={'#staticBackdrop' + idData}
 			className="card m-3 backgroud-img"
 			style={{
 				width: 250,
@@ -64,6 +71,7 @@ const Card: React.FC<CardInterface> = ({
 				width={10}
 				height={248}
 				alt={img}
+				onClick={eventeModal}
 			/>
 			<div className="card-body ">
 				<h5 className="card-title black">{title}</h5>
