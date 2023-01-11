@@ -35,7 +35,7 @@
 	right: 0;
 	top: 20;
 }
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 1113px) {
 	.navbar {
 		display: none !important;
 	}

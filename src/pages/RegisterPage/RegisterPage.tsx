@@ -48,8 +48,8 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 		let errors: FormikErrors<ValuesRegister> = {};
 		if (!values.name) {
 			errors.name = 'Escriba su nombre';
-		} else if (!/^[a-zA-Z0-9]{4,20}$/.test(values.name)) {
-			errors.name = 'Minimo 4 y maximo 20 caracteres ';
+		} else if (!/^[a-zA-Z0-9]{4,50}$/.test(values.name)) {
+			errors.name = 'Minimo 4, maximo 50 caracteres ';
 		}
 
 		if (!values.email) {

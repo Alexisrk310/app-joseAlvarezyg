@@ -129,9 +129,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 						</div>
 						<div className="modal-body">
 							<div className="d-flex container-team-modals">
-								<form
-									className="modalAddPlate"
-									onSubmit={handleSubmitCreateAndEdit}>
+								<div className="modalAddPlate">
 									<div className="m-3">
 										<div className="page-plate">
 											<div className="container-plate">
@@ -163,7 +161,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 
 									<div className="form-group w-75">
 										<input
-											placeholder="Nombre del restaurante"
+											placeholder="Nombre del plato"
 											type="text"
 											className="form-control"
 											id="exampleInputPassword1"
@@ -177,19 +175,20 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 											className="form-control"
 											id="exampleFormControlTextarea1"
 											rows={10}
-											placeholder="Descripcion del restaurante"
+											placeholder="Descripcion del plato"
 											name="descriptionPlate"
 											onChange={handleChange}
 											value={formValues.descriptionPlate}></textarea>
 									</div>
-
-									<button type="submit" className="btn btn-success">
-										Guardar plato
-									</button>
-								</form>
+								</div>
 							</div>
 						</div>
 						<div className="modal-footer">
+							<button
+								className="btn btn-success"
+								onClick={handleSubmitCreateAndEdit}>
+								Guardar plato
+							</button>
 							<button
 								type="button"
 								className="btn btn-secondary"
