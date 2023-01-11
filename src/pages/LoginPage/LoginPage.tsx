@@ -53,8 +53,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 			try {
 				const dataResp = await auth('login', value);
 				const resp = await dataResp.json();
-				console.log(resp);
-				console.log(dataResp);
+			
 
 				if (resp.ok) {
 					localStorage.setItem('@user', JSON.stringify(resp.data || resp));
@@ -68,7 +67,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 					});
 				}
 			} catch (error) {
-				console.log(error);
+				throw(error)
 			}
 		}
 	};

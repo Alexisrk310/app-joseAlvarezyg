@@ -8,8 +8,8 @@
 	flex-wrap: wrap;
 }
 .container-new-restaurant {
-	width: 600px;
-	height: 600px;
+	width: 500px;
+	height: 500px;
 	background-color: white;
 	display: flex;
 	justify-content: center;
@@ -23,9 +23,11 @@
 	height: 200px;
 	border-radius: 100px;
 }
+
 .img-logo-restaurant {
 	align-self: flex-start;
 }
+
 .modalAddPlate {
 	width: 100%;
 	height: 100%;
@@ -44,10 +46,11 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 30px;
+	margin: 60px 20px;
 }
 .container-preview-restaurant {
-	height: 300px;
-	width: 300px;
+	height: 250px;
+	width: 200px;
 	border-radius: 10px;
 	background-color: rgba(255, 255, 255, 0.5);
 }
@@ -86,16 +89,18 @@
 	height: 50px;
 	color: white;
 	border-radius: 10px;
-	background-color: black;
+	background-color: #007bff;
 	text-align: center;
 	cursor: pointer;
 }
 .editAndCreate {
 	font-size: 25px;
 }
+/* PLATES */
 .buttonPlates {
-	width: 300px;
-	height: 300px;
+	width: 230px;
+	height: 260px;
+	margin: 60px 20px;
 	background-color: #f4f4f4;
 	display: flex;
 	justify-content: center;
@@ -110,7 +115,7 @@
 }
 
 /* ADDANDCREATEPLATES */
-@media screen and (max-width: 1013px) {
+@media screen and (max-width: 1026px) {
 	.createrestaurant {
 		height: 1500px;
 	}

@@ -23,7 +23,6 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 		try {
 			const dataResp = await auth('register', value);
 			const resp = await dataResp.json();
-			console.log(resp);
 
 			if (dataResp.status == 200 || dataResp.status == 201) {
 				localStorage.setItem(
@@ -39,7 +38,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 				});
 			}
 		} catch (error) {
-			console.log(error);
+			throw error;
 		}
 	};
 

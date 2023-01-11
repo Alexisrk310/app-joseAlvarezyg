@@ -61,18 +61,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		setProfileImg({
 			imgPlate: base64,
 		} as any);
-
-		// const readerProfile = new FileReader();
-		// console.log(e.target.files[0]);
-		// readerProfile.onload = () => {
-		// 	if (readerProfile.readyState === 2) {
-		// 		setProfileImg({
-		// 			imgPlate: readerProfile.result,
-		// 		} as any);
-		// 	}
-		// };
-		// readerProfile.readAsDataURL(e.target.files[0]);
-		// console.log(e);
 	};
 
 	useEffect(() => {
@@ -111,7 +99,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					local?.token || local?.data?.token
 				);
 				const resp = await addResta.json();
-				console.log(resp);
+
 				if (resp.ok) {
 					MySwal.fire({
 						position: 'top-end',
@@ -122,7 +110,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					});
 					navigate('/restaurante');
 				} else {
-					console.log(resp);
 					MySwal.fire({
 						icon: 'error',
 						title: 'Error',
@@ -131,11 +118,10 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					// navigate('/restaurante');
 				}
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
 		} else if (actionRestaurant.actions == 'EDIT') {
 			// EDITAR RESTAURANTE
-			console.log('Editar restaurante');
 
 			const ValueRestaurantEdit = {
 				image: profileImg.imgPlate,
@@ -158,8 +144,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				);
 				const dataModifyResta = await respModifyResta.json();
 				if (dataModifyResta.ok) {
-					console.log(dataModifyResta);
-
 					MySwal.fire({
 						position: 'top-end',
 						icon: 'success',
@@ -169,7 +153,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					});
 					// navigate('/restaurante');
 				} else {
-					console.log(dataModifyResta);
 					MySwal.fire({
 						icon: 'error',
 						title: 'Error',
@@ -178,14 +161,14 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					// navigate('/restaurante');
 				}
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
 		}
 	};
 
 	return (
 		<div className="createrestaurant">
-			<div className=" m-5 align-self-start">
+			<div className=" align-self-start">
 				<div className="page-all">
 					<div className="container-preview-restaurant">
 						<div className="img-holder">
@@ -284,7 +267,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					)}
 				</div>
 			</div>
-			<div className="buttonPlates align-self-start m-5">
+			<div className="buttonPlates align-self-start">
 				<div className="plate-logo"></div>
 				<button
 					className="btn btn-primary mt-2"

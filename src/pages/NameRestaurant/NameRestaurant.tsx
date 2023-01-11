@@ -48,9 +48,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	const [plate, setPlate] = useState<any>([]);
 	const { dataRestaurantId }: any = useLoaderData();
 	const { response: restaurant } = dataRestaurantId;
-	console.log(restaurant[0]);
-
-	// console.log(dataRestaurantId);
 
 	const [handleChange, formValues, setFormValues] = useFormValues({
 		namePlate: '',
@@ -70,8 +67,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			restaurant[0]?.id
 		);
 		const dataRatingRestaurant = await respRatingRestaurant.json();
-		console.log(respRatingRestaurant);
-		console.log(dataRatingRestaurant);
 	};
 
 	useEffect(() => {
@@ -79,15 +74,12 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			try {
 				const responsePlatesId = await getPlatesId(restaurant[0]?.id);
 				const dataPlatesId = await responsePlatesId.json();
-				console.log(dataPlatesId);
 
 				if (dataPlatesId.ok) {
-					console.log(dataPlatesId);
-
 					setPlate(dataPlatesId.data);
 				}
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
 		};
 		init();
@@ -101,10 +93,8 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					idPlate
 				);
 				const dataRating = await respRating.json();
-
-				console.log(dataRating);
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
 		};
 		valueRating !== 0 && init();
@@ -115,27 +105,22 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			try {
 				const respPlatesUnique = await getPlatesUnique(idPlate);
 				const dataPlatesUnique = await respPlatesUnique.json();
-				console.log(respPlatesUnique);
-				console.log(dataPlatesUnique);
+
 				setFormValues({
 					namePlate: dataPlatesUnique.data.name,
 					descriptionPlate: dataPlatesUnique.data.description,
 				});
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
-			console.log('cambio id');
-			console.log(idPlate);
 		};
 		if (idPlate != '') init();
 	}, [idPlate]);
-
+	// ACTIONS STATE EDIT WITH TOKEN ID
 	useEffect(() => {
 		local?.token || local?.data?.token != undefined
 			? setActions(true)
 			: setActions(false);
-
-		console.log(restaurant[0].id, local?.id || local?.data?.id);
 	}, [local?.token || local?.data?.token || actions]);
 	// restaurant[0].userId == local?.id || local?.data?.id
 	// ? console.log(restaurant[0].id, local?.id || local?.data?.id)
@@ -215,8 +200,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	// };
 
 	const handleDeletePlate = (id: any) => {
-		console.log('eliminando');
-
 		Swal.fire({
 			title: 'Estas seguro de eliminar este plato?',
 			text: '',
@@ -237,7 +220,6 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 						const dataPlatesId = await respPlatesId.json();
 
 						if (respPlatesId.ok) {
-							console.log(dataPlatesId);
 							navigate(`/restaurante/${restaurant?.id}`);
 						} else {
 							MySwal.fire({
@@ -247,14 +229,13 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 							});
 						}
 					} catch (error) {
-						console.log(error);
+						throw error;
 					}
 				};
 				init();
 			}
 		});
 	};
-	console.log(restaurant[0]);
 
 	return (
 		<div className="namerestaurant ">
@@ -290,28 +271,24 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			<div className="container-menu-items mr-2 ml-2 ">
 				<h3 className="text-center white">PLATILLOS</h3>
 				<div className="menu-items mr-5 ml-5">
-					{plate?.map((plates: any) => {
-						console.log(plates);
-
-						return (
-							<Card
-								title={plates?.name}
-								description={plates?.description}
-								stateStart={true}
-								valueRating={plates.id == idPlate ? valueRating : 0}
-								setValueRating={setValueRating}
-								idRating={() => setIdPlate(plates.id)}
-								// actions={actions}
-								handleDeletePlate={() => handleDeletePlate(plates.id)}
-								handleEditPlate={() => {
-									setIdPlate(plates.id);
-									setActionsPlate({ actions: 'EDIT' });
-								}}
-								// onChangee={false}
-								key={plates.id}
-							/>
-						);
-					})}
+					{plate?.map((plates: any) => (
+						<Card
+							title={plates?.name}
+							description={plates?.description}
+							stateStart={true}
+							valueRating={plates.id == idPlate ? valueRating : 0}
+							setValueRating={setValueRating}
+							idRating={() => setIdPlate(plates.id)}
+							// actions={actions}
+							handleDeletePlate={() => handleDeletePlate(plates.id)}
+							handleEditPlate={() => {
+								setIdPlate(plates.id);
+								setActionsPlate({ actions: 'EDIT' });
+							}}
+							// onChangee={false}
+							key={plates.id}
+						/>
+					))}
 
 					<hr className="mb-0" />
 				</div>
@@ -434,10 +411,8 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 export default NameRestaurant;
 
 export const loaderPostRestaurant = async ({ params }: any) => {
-	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const respRestaurantId = await getRestaurantiD(params.id);
 	const dataRestaurantId = await respRestaurantId.json();
-	console.log(dataRestaurantId);
 
 	return { dataRestaurantId };
 };

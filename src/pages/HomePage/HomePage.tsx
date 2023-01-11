@@ -18,14 +18,9 @@ const HomePage: React.FC<HomePageInterface> = () => {
 				const respPlatePopulate = await getPlatesPopulate();
 				const dataPlatePopulate = await respPlatePopulate.json();
 
-				console.log(respPlatePopulate);
-				console.log(plates);
 				setPlates(dataPlatePopulate?.data);
-				console.log(dataPlatePopulate);
-
-				console.log(plates);
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
 		};
 
@@ -33,12 +28,10 @@ const HomePage: React.FC<HomePageInterface> = () => {
 			try {
 				const data = await getRestaurantPopulate();
 				const resp = await data.json();
-				console.log(data);
-				console.log(resp);
+
 				setRestaurant(resp?.data);
-				console.log(restaurant);
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
 		};
 		// const initGetRatingPlates = async () => {

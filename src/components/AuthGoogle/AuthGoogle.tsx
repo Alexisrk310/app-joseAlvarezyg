@@ -57,32 +57,27 @@ const AuthGoogle: React.FC<AuthGoogleInterface> = () => {
 	// }, []);
 
 	const onSucces = async (res: any) => {
-		console.log('LOGIN SUCCESS! Current user: ', res.profileObj);
-
 		const id_token = {
 			id_token: res.tokenId,
 		};
 		const local = localStorage.getItem(
 			'oauth2_ss::http://localhost:5173::1::DEFAULT::_ss_'
 		);
-		console.log(local);
 
 		try {
 			const dataResp = await auth('loginGoogle', id_token);
 			const resp = await dataResp.json();
-			console.log(resp);
-			console.log(dataResp);
 
 			if (resp.ok) {
 				localStorage.setItem('@user', JSON.stringify(resp));
 				navigate('/restaurante/crear');
 			}
 		} catch (error) {
-			console.log(error);
+			throw error;
 		}
 	};
 	const onFailure = (res: any) => {
-		console.log('LOGIN FAILED! res: ', res);
+		throw res;
 	};
 
 	const clientId =

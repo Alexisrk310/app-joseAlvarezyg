@@ -54,12 +54,13 @@ const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
 			errors.email = '@example.com*';
 		}
 		if (!values.tel) {
-			errors.tel = 'Escribe tu telefono';
+			errors.tel = 'Escriba su telefono';
+		} else if (!/^\d{10}$/.test(values.tel)) {
+			errors.tel = 'Solo se permiten 10 digitos';
 		}
 		if (!values.question) {
 			errors.question = 'Es que podemos ayudarte?';
 		}
-		console.log(errors);
 
 		return errors;
 	};
@@ -112,7 +113,7 @@ const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
 							<div className="form-group input-contact">
 								<label>Telefono</label>
 								<input
-									type="text"
+									type="number"
 									className="form-control"
 									name="tel"
 									value={values.tel}

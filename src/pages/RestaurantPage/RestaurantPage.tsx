@@ -19,11 +19,14 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 	const navigation = useNavigate();
 	useEffect(() => {
 		const init = async () => {
-			const data = await getRestaurant();
-			const resp = await data.json();
-			console.log(data);
-			console.log(resp);
-			setRestaurant(resp.data);
+			try {
+				const data = await getRestaurant();
+				const resp = await data.json();
+
+				setRestaurant(resp.data);
+			} catch (error) {
+				throw error;
+			}
 		};
 		init();
 	}, []);
@@ -41,15 +44,14 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 						description={cardRestaurant.description}
 						specialized={cardRestaurant.specialty}
 						key={cardRestaurant.id}
-						// stateStart={true}
 						evente={() =>
 							!local?.token || !local?.data?.token
 								? navigation(`/restaurante/${cardRestaurant.id}`)
 								: undefined
 						}
-						stateStart={true}
-						valueRating={parseInt(cardRestaurant?.promedio)}
-						disableRating={true}
+						// stateStart={true}
+						// valueRating={parseInt(cardRestaurant?.promedio)}
+						// disableRating={true}
 					/>
 				))}
 			</div>
