@@ -2,6 +2,7 @@ import { Card } from '@/components';
 import { responseGetRestaurant } from '@/models/interface';
 import { getPlatesPopulate } from '@/utilities/api/plate/getPlates';
 import { getRestaurantPopulate } from '@/utilities/api/resturant/getRestaurant';
+import { Skeleton } from '@mui/material';
 
 import React, { useEffect, useState } from 'react';
 

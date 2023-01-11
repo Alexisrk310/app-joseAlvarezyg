@@ -2,6 +2,8 @@ import React, { MouseEventHandler, useState } from 'react';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import './styles/Card.css';
+
+
 export interface CardInterface {
 	img?: string;
 	title?: string;
@@ -49,7 +51,8 @@ const Card: React.FC<CardInterface> = ({
 			data-target={'#staticBackdrop' + idData}
 			className="card m-3 backgroud-img"
 			style={{
-				width: 250,
+				width: '189px',
+        height: '300px'
 			}}>
 			{actions ? (
 				<div className="card-header text-right">
@@ -69,28 +72,31 @@ const Card: React.FC<CardInterface> = ({
 				src={img}
 				className="card-img-top"
 				width={10}
-				height={248}
+				height={130}
 				alt={img}
 				onClick={eventeModal}
 			/>
-			<div className="card-body ">
-				<h5 className="card-title black">{title}</h5>
-				<p className="card-text black">{description}</p>
-				<small className="black">{specialized}</small>
-				<small className="black d-block">{zone}</small>
-				{stateStart ? (
-					<Rating
-						onClick={idRating}
-						name="simple-controlled"
-						value={valueRating}
-						onChange={(event, newValue) => {
-							{
-								onChangee && setValueRating(newValue);
-							}
-						}}
-						disabled={disableRating}
-					/>
-				) : undefined}
+			<div className="card-body">
+				<h5 className="card-title white">{title}</h5>
+        <div className='mt-3' style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+          <p className="card-text card-description white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus, architecto. Placeat, quos amet iste, sunt in vero quod est repellat hic quaerat ad enim consequatur nostrum, debitis assumenda error sed?</p>
+          <small className="white card-specialized">Especialidad: {specialized}</small>
+          <small className="white d-block">{zone}</small>
+          {stateStart ? (
+            <Rating
+              size='small'
+              onClick={idRating}
+              name="simple-controlled"
+              value={valueRating}
+              onChange={(event, newValue) => {
+                {
+                  onChangee && setValueRating(newValue);
+                }
+              }}
+              disabled={disableRating}
+            />
+          ) : undefined}
+        </div>
 			</div>
 		</div>
 	);
