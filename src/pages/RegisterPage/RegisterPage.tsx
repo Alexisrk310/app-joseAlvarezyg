@@ -23,12 +23,14 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 		try {
 			const dataResp = await auth('register', value);
 			const resp = await dataResp.json();
+			console.log(resp);
 
 			if (dataResp.status == 200 || dataResp.status == 201) {
 				localStorage.setItem(
 					'@user',
 					JSON.stringify(resp.data || resp.payload)
 				);
+
 				navigate('/restaurante/crear');
 			} else {
 				MySwal.fire({
@@ -46,6 +48,8 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 		let errors: FormikErrors<ValuesRegister> = {};
 		if (!values.name) {
 			errors.name = 'Escriba su nombre';
+		} else if (!/^[a-zA-Z0-9]{4,20}$/.test(values.name)) {
+			errors.name = 'Minimo 4 y maximo 20 caracteres ';
 		}
 
 		if (!values.email) {

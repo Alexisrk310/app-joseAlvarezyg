@@ -50,9 +50,9 @@ const HomePage: React.FC<HomePageInterface> = () => {
 			<div className="mr-5 ml-5">
 				<div className="row">
 					<p className=" mt-3 col-12 col-md-6">RESTAURANTES DE LA SEMANA</p>
-					<p className="show-more pointer mt-3 col-12 col-md-6 text-right">
+					{/* <p className="show-more pointer mt-3 col-12 col-md-6 text-right">
 						MOSTRAR MAS
-					</p>
+					</p> */}
 				</div>
 				<div className="d-flex contain-card">
 					{restaurant?.map((cardRestaurant: responseGetRestaurant | any) => (
@@ -74,9 +74,9 @@ const HomePage: React.FC<HomePageInterface> = () => {
 
 				<div className="row">
 					<p className=" mt-3 col-12 col-md-6">PLATILLOS DE LA SEMANA</p>
-					<p className="show-more pointer mt-3 col-12 col-md-6 text-right">
+					{/* <p className="show-more pointer mt-3 col-12 col-md-6 text-right">
 						MOSTRAR MAS
-					</p>
+					</p> */}
 				</div>
 				<div className="d-flex contain-card">
 					{plates?.map((plate: any) => (
