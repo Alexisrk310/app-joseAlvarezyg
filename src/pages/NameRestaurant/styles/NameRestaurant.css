@@ -4,10 +4,10 @@
 	background-color: black;
 }
 .banner-img {
-	width: 100%;
+	/* width: 100%; */
 	height: 250px;
 	object-fit: cover;
-	background-repeat: repeat-x;
+	background-repeat: repeat;
 }
 
 .logo-restaurant {
@@ -40,5 +40,3 @@
 	background-color: white;
 	border-radius: 20px;
 }
-
-

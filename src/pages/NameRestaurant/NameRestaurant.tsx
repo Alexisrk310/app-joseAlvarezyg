@@ -246,7 +246,11 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	return (
 		<div className="namerestaurant ">
 			<div className="content-restaurant">
-				<img src={restaurant[0]?.image} alt="logo" className="banner-img" />
+				<div
+					className="banner-img"
+					style={{
+						background: `url(${restaurant[0]?.image})`,
+					}}></div>
 				<div className="d-flex ">
 					<img
 						src={restaurant[0]?.image}
@@ -263,7 +267,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 					Calificanos:{' '}
 					<Rating
 						color={'#FFB100'}
-						className="mb-0 bg-white d-inline "
+						className="mb-0  d-inline "
 						// onClick={idRatingRestaurant}
 						name="simple-controlled"
 						value={valueRatingRestaurant}

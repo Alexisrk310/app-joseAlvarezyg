@@ -50,7 +50,7 @@ const TeamPage: React.FC<TeamPageInterface> = () => {
 									<div className="d-flex container-team-modals">
 										<img src={nataly} alt="img" className="img-info-alexis" />
 										<div>
-											<p>Nataly Carriazo </p>
+											<b>Nataly Carriazo </b>
 											<p>Abogada</p>
 											<p>
 												Asesora empresarial con más de 10 años de experiencia,
@@ -105,7 +105,7 @@ const TeamPage: React.FC<TeamPageInterface> = () => {
 									<div className="d-flex container-team-modals">
 										<img src={jose} alt="img" className="img-info-alexis" />
 										<div>
-											<p>Jose Alvarez </p>
+											<b>Jose Alvarez </b>
 											<p>Un loco amante de la comida</p>
 											<p>
 												Nacido en Cartagena en el barrio piedra de bolívar
