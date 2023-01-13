@@ -49,6 +49,8 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 								? navigation(`/restaurante/${cardRestaurant.id}`)
 								: undefined
 						}
+						classNick="pointer"
+						specializedState={true}
 						// stateStart={true}
 						// valueRating={parseInt(cardRestaurant?.promedio)}
 						// disableRating={true}

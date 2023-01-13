@@ -22,6 +22,7 @@ export interface CardInterface {
 	idData?: string;
 	eventeModal?: MouseEventHandler<HTMLDivElement>;
 	specializedState?: boolean;
+	classNick?: string;
 }
 
 const Card: React.FC<CardInterface> = ({
@@ -42,7 +43,8 @@ const Card: React.FC<CardInterface> = ({
 	onChangee = true,
 	idData,
 	eventeModal,
-	specializedState= false,
+	specializedState = false,
+	classNick,
 }) => {
 	return (
 		<div
@@ -50,7 +52,7 @@ const Card: React.FC<CardInterface> = ({
 			itemType="button"
 			data-toggle="modal"
 			data-target={'#staticBackdrop' + idData}
-			className="card m-3 backgroud-img"
+			className={classNick + ' card m-3 backgroud-img'}
 			style={{
 				width: '189px',
 				height: '300px',
@@ -68,15 +70,16 @@ const Card: React.FC<CardInterface> = ({
 						onClick={handleDeletePlate}></i>
 				</div>
 			) : undefined}
-
-			<img
-				src={img}
-				className="card-img-top"
-				width={10}
-				height={130}
-				alt={img}
-				onClick={eventeModal}
-			/>
+			<div>
+				<img
+					src={img}
+					className="card-img-top"
+					width={10}
+					height={130}
+					alt={img}
+					onClick={eventeModal}
+				/>
+			</div>
 			<div className="card-body">
 				<h5 className="card-title white">{title}</h5>
 				<div

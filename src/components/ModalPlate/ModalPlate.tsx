@@ -18,12 +18,12 @@ const ModalPlate = ({ id }: any) => {
 		const init = async () => {
 			const respPlateId = await getPlatesUnique(id);
 			const dataPlateId = await respPlateId.json();
-			console.log(respPlateId);
+			console.log(dataPlateId);
 
 			console.log(dataPlateId?.data[0]);
 
 			setFormValues({
-				img: dataPlateId?.data[0]?.image,
+				image: dataPlateId?.data[0]?.image,
 				name: dataPlateId?.data[0]?.name,
 				description: dataPlateId?.data[0]?.description,
 			});

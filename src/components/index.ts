@@ -4,6 +4,7 @@ export * from './Card';
 export * from './Footer';
 export * from './Header';
 export * from './InputFilePreviewImage';
+export * from './Loader';
 export * from './MessageErrorType';
 export * from './ModalPlate';
 export * from './NavBar';

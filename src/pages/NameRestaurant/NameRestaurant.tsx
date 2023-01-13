@@ -223,6 +223,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 							id
 						);
 						const dataPlatesId = await respPlatesId.json();
+						console.log(dataPlatesId);
 
 						if (respPlatesId.ok) {
 							navigate(`/restaurante/${restaurant?.id}`);
@@ -283,12 +284,13 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 				<div className="menu-items mr-5 ml-5">
 					{plate?.map((plates: any) => (
 						<Card
-							evente={() => setIdPlate(plates?.id)}
+							eventeModal={() => setIdPlate(plates?.id)}
 							idData={plates?.id}
+							img={plates?.image}
 							title={plates?.name}
 							description={plates?.description}
 							stateStart={true}
-							valueRating={plates.id == idPlate ? valueRating : valueRating}
+							valueRating={plates.id == idPlate ? valueRating : 0}
 							setValueRating={setValueRating}
 							idRating={() => setIdPlate(plates.id)}
 							// actions={actions}
@@ -298,7 +300,8 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 								setActionsPlate({ actions: 'EDIT' });
 							}}
 							// onChangee={false}
-							specializedState={true}
+
+							classNick="pointer"
 							key={plates.id}
 						/>
 					))}
