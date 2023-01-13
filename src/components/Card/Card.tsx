@@ -70,14 +70,14 @@ const Card: React.FC<CardInterface> = ({
 						onClick={handleDeletePlate}></i>
 				</div>
 			) : undefined}
-			<div>
+			<div onClick={eventeModal}>
 				<img
 					src={img}
 					className="card-img-top"
 					width={10}
 					height={130}
 					alt={img}
-					onClick={eventeModal}
+					
 				/>
 			</div>
 			<div className="card-body">

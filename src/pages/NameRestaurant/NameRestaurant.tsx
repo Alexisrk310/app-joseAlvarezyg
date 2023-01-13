@@ -36,6 +36,7 @@ interface actionPlate {
 const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 	const navigate = useNavigate();
 	const [idPlate, setIdPlate] = useState('');
+	const [idPlateModal, setIdPlateModal] = useState('');
 	const [actionsPlate, setActionsPlate] = useState<actionPlate>({
 		actions: 'ADD',
 	});
@@ -284,19 +285,21 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 				<div className="menu-items mr-5 ml-5">
 					{plate?.map((plates: any) => (
 						<Card
-							eventeModal={() => setIdPlate(plates?.id)}
+							evente={() => setIdPlate(plates?.id)}
+							eventeModal={() => setIdPlateModal(plates?.id)}
 							idData={plates?.id}
 							img={plates?.image}
 							title={plates?.name}
 							description={plates?.description}
 							stateStart={true}
-							valueRating={plates.id == idPlate ? valueRating : 0}
+							valueRating={plates?.id == idPlate ? valueRating : 0}
+							disableRating={(valueRating as any) > 0 ? true : false}
 							setValueRating={setValueRating}
-							idRating={() => setIdPlate(plates.id)}
+							idRating={() => setIdPlate(plates?.id)}
 							// actions={actions}
-							handleDeletePlate={() => handleDeletePlate(plates.id)}
+							handleDeletePlate={() => handleDeletePlate(plates?.id)}
 							handleEditPlate={() => {
-								setIdPlate(plates.id);
+								setIdPlate(plates?.id);
 								setActionsPlate({ actions: 'EDIT' });
 							}}
 							// onChangee={false}
@@ -308,7 +311,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 
 					<hr className="mb-0" />
 				</div>
-				<ModalPlate id={idPlate} />
+				<ModalPlate id={idPlateModal} />
 			</div>
 			{/* {local?.token || local?.data?.token ? (
 				<i
