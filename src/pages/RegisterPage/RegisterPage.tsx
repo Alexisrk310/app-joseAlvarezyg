@@ -1,8 +1,8 @@
-import { MessageErrorType } from '@/components';
+import { Loader, LoaderAuth, MessageErrorType } from '@/components';
 import { ValuesRegister } from '@/models/interface/authValues';
 import { auth } from '@/utilities/api/auth/auth';
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/RegisterPage.css';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '@/store/store';
@@ -14,18 +14,22 @@ import { useNavigate } from 'react-router-dom';
 export interface RegisterPageInterface {}
 
 const RegisterPage: React.FC<RegisterPageInterface> = () => {
+	const [stateLoading, setstateLoading] = useState(false);
 	const MySwal = withReactContent(Swal);
 	const navigate = useNavigate();
 	// const authState = useSelector((state: RootState) => state.auth);
 	// console.log(authState);
 
 	const handleSubmit = async (value: ValuesRegister) => {
+		setstateLoading(true);
 		try {
 			const dataResp = await auth('register', value);
+
 			const resp = await dataResp.json();
 			console.log(resp);
 
 			if (dataResp.status == 200 || dataResp.status == 201) {
+				setstateLoading(false);
 				localStorage.setItem(
 					'@user',
 					JSON.stringify(resp.data || resp.payload)
@@ -33,6 +37,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 
 				navigate('/restaurante/crear');
 			} else {
+				setstateLoading(false);
 				MySwal.fire({
 					icon: 'error',
 					title: 'Error',
@@ -45,42 +50,37 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 	};
 
 	const validations = (values: ValuesRegister) => {
-		let errors: FormikErrors<ValuesRegister> = {};
-		if (!values.name) {
-			errors.name = 'Escriba su nombre';
-		} else if (!/^[a-zA-Z0-9]{4,50}$/.test(values.name)) {
-			errors.name = 'Minimo 4, maximo 50 caracteres ';
-		}
-
-		if (!values.email) {
-			errors.email = 'Escribe tu correo';
-		} else if (
-			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		) {
-			errors.email = '@example.com*';
-		}
-		if (!values.password) {
-			errors.password = 'Escriba su contraseña';
-		}
-		if (!values.tel) {
-			errors.tel = 'Escriba su telefono';
-		} else if (!/^\d{10}$/.test(values.tel)) {
-			errors.tel = 'Solo se permiten 10 digitos';
-		}
-
-		if (!values.addressOne) {
-			errors.addressOne = '*';
-		}
-
-		if (!values.addressTwo) {
-			errors.addressTwo = '*';
-		}
-
-		if (!values.addressThree) {
-			errors.addressThree = '*';
-		}
-
-		return errors;
+		// let errors: FormikErrors<ValuesRegister> = {};
+		// if (!values.name) {
+		// 	errors.name = 'Escriba su nombre';
+		// } else if (!/^[a-zA-Z0-9]{4,50}$/.test(values.name)) {
+		// 	errors.name = 'Minimo 4, maximo 50 caracteres ';
+		// }
+		// if (!values.email) {
+		// 	errors.email = 'Escribe tu correo';
+		// } else if (
+		// 	!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+		// ) {
+		// 	errors.email = '@example.com*';
+		// }
+		// if (!values.password) {
+		// 	errors.password = 'Escriba su contraseña';
+		// }
+		// if (!values.tel) {
+		// 	errors.tel = 'Escriba su telefono';
+		// } else if (!/^\d{10}$/.test(values.tel)) {
+		// 	errors.tel = 'Solo se permiten 10 digitos';
+		// }
+		// if (!values.addressOne) {
+		// 	errors.addressOne = '*';
+		// }
+		// if (!values.addressTwo) {
+		// 	errors.addressTwo = '*';
+		// }
+		// if (!values.addressThree) {
+		// 	errors.addressThree = '*';
+		// }
+		// return errors;
 	};
 
 	return (
@@ -215,7 +215,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 								</div>
 
 								<button className="btn btn-info w-100 mt-3" type="submit">
-									Crear cuenta
+									{!stateLoading ? 'Crear cuenta' : <LoaderAuth />}
 								</button>
 								<p className="text-center mt-5">O</p>
 								<AuthGoogle />

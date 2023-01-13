@@ -1,4 +1,4 @@
-import { MessageErrorType } from '@/components';
+import { MessageErrorType, LoaderAuth } from '@/components';
 import { AuthGoogle } from '@/components/AuthGoogle';
 import { ValuesLogin } from '@/models/interface/authValues';
 import { auth } from '@/utilities/api/auth/auth';
@@ -16,10 +16,11 @@ interface State {
 	title?: 'Inicia sesion o crea una cuenta' | 'Iniciar sesión';
 	stateLogin?: boolean;
 	statepushAplication?: false;
-	buttonSubmit?: 'Continuar con e-mail' | 'Iniciar sesión';
+	buttonSubmit?: 'Continuar con e-mail' | 'Iniciar sesión' | '';
 }
 
 const LoginPage: React.FC<LoginPageInterface> = () => {
+	const [stateLoading, setstateLoading] = useState(false);
 	const clientId =
 		'640139910507-tcp9qrg1jbhupsmvr1i9rfmarmnb6n5s.apps.googleusercontent.com';
 	const MySwal = withReactContent(Swal);
@@ -49,17 +50,27 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 			buttonSubmit: 'Iniciar sesión',
 		});
 		if (state.stateLogin) {
+			setState({
+				...state,
+				buttonSubmit: '',
+			});
 			// AQUI VA LA API REST AUTH
 			try {
 				const dataResp = await auth('login', value);
 				const resp = await dataResp.json();
-			
-
+				setState({
+					...state,
+					buttonSubmit: 'Iniciar sesión',
+				});
 				if (resp.ok) {
 					localStorage.setItem('@user', JSON.stringify(resp.data || resp));
 
 					navigate('/restaurante/crear');
 				} else {
+					setState({
+						...state,
+						buttonSubmit: 'Iniciar sesión',
+					});
 					MySwal.fire({
 						icon: 'error',
 						title: 'Error',
@@ -67,29 +78,26 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 					});
 				}
 			} catch (error) {
-				throw(error)
+				throw error;
 			}
 		}
 	};
 
 	const validations = (values: ValuesLogin) => {
-		let errors: FormikErrors<ValuesLogin> = {};
-
-		if (!values.email) {
-			errors.email = 'Escribe tu correo';
-		} else if (
-			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		) {
-			errors.email = '@example.com*';
-		}
-
-		if (state.stateLogin) {
-			if (!values.password) {
-				errors.password = 'Escribe tu contraseña';
-			}
-		}
-
-		return errors;
+		// let errors: FormikErrors<ValuesLogin> = {};
+		// if (!values.email) {
+		// 	errors.email = 'Escribe tu correo';
+		// } else if (
+		// 	!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+		// ) {
+		// 	errors.email = '@example.com*';
+		// }
+		// if (state.stateLogin) {
+		// 	if (!values.password) {
+		// 		errors.password = 'Escribe tu contraseña';
+		// 	}
+		// }
+		// return errors;
 	};
 
 	return (
@@ -136,8 +144,12 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 										/>
 									</>
 								) : undefined}
-								<button className="btn btn-info w-100 mt-3" type="submit">
-									{state && state.buttonSubmit}
+
+								<button
+									className="btn btn-info w-100 mt-3 submitAuth"
+									type="submit">
+									{state.buttonSubmit}
+									{state.buttonSubmit === '' && <LoaderAuth />}
 								</button>
 								<p className="text-center mt-5">O</p>
 								<AuthGoogle />
