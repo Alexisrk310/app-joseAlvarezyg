@@ -3,7 +3,6 @@ import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import './styles/Card.css';
 
-
 export interface CardInterface {
 	img?: string;
 	title?: string;
@@ -22,6 +21,7 @@ export interface CardInterface {
 	onChangee?: boolean;
 	idData?: string;
 	eventeModal?: MouseEventHandler<HTMLDivElement>;
+	specializedState?: boolean;
 }
 
 const Card: React.FC<CardInterface> = ({
@@ -42,6 +42,7 @@ const Card: React.FC<CardInterface> = ({
 	onChangee = true,
 	idData,
 	eventeModal,
+	specializedState= false,
 }) => {
 	return (
 		<div
@@ -52,7 +53,7 @@ const Card: React.FC<CardInterface> = ({
 			className="card m-3 backgroud-img"
 			style={{
 				width: '189px',
-        height: '300px'
+				height: '300px',
 			}}>
 			{actions ? (
 				<div className="card-header text-right">
@@ -78,25 +79,29 @@ const Card: React.FC<CardInterface> = ({
 			/>
 			<div className="card-body">
 				<h5 className="card-title white">{title}</h5>
-        <div className='mt-3' style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-          <p className="card-text card-description white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus, architecto. Placeat, quos amet iste, sunt in vero quod est repellat hic quaerat ad enim consequatur nostrum, debitis assumenda error sed?</p>
-          <small className="white card-specialized">Especialidad: {specialized}</small>
-          <small className="white d-block">{zone}</small>
-          {stateStart ? (
-            <Rating
-              size='small'
-              onClick={idRating}
-              name="simple-controlled"
-              value={valueRating}
-              onChange={(event, newValue) => {
-                {
-                  onChangee && setValueRating(newValue);
-                }
-              }}
-              disabled={disableRating}
-            />
-          ) : undefined}
-        </div>
+				<div
+					className="mt-3"
+					style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+					<p className="card-text card-description white">{description}</p>
+					<small className="white card-specialized">
+						{specializedState ? <>Especialidad:</> : undefined} {specialized}
+					</small>
+					<small className="white d-block">{zone}</small>
+					{stateStart ? (
+						<Rating
+							size="small"
+							onClick={idRating}
+							name="simple-controlled"
+							value={valueRating}
+							onChange={(event, newValue) => {
+								{
+									onChangee && setValueRating(newValue);
+								}
+							}}
+							disabled={disableRating}
+						/>
+					) : undefined}
+				</div>
 			</div>
 		</div>
 	);

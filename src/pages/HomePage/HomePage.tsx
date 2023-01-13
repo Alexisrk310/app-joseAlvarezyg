@@ -66,6 +66,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							valueRating={parseInt(cardRestaurant?.promedio)}
 							disableRating={true}
 							onChangee={false}
+							specializedState={true}
 							key={cardRestaurant?.id}
 						/>
 					))}

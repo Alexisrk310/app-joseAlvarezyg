@@ -78,7 +78,7 @@ const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
 							className="form-contact"
 							onSubmit={handleSubmit}
 							ref={form as any}>
-							<h4 className="text-center">Formulario de contacto</h4>
+							<h4 className="text-center p-3">Formulario de contacto</h4>
 
 							<div className="form-group input-contact">
 								<label>Nombre</label>

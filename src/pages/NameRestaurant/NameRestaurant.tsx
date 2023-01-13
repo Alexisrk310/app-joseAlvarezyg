@@ -298,6 +298,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 								setActionsPlate({ actions: 'EDIT' });
 							}}
 							// onChangee={false}
+							specializedState={true}
 							key={plates.id}
 						/>
 					))}
