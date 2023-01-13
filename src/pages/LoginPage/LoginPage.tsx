@@ -20,7 +20,6 @@ interface State {
 }
 
 const LoginPage: React.FC<LoginPageInterface> = () => {
-	const [stateLoading, setstateLoading] = useState(false);
 	const clientId =
 		'640139910507-tcp9qrg1jbhupsmvr1i9rfmarmnb6n5s.apps.googleusercontent.com';
 	const MySwal = withReactContent(Swal);
@@ -84,20 +83,20 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 	};
 
 	const validations = (values: ValuesLogin) => {
-		// let errors: FormikErrors<ValuesLogin> = {};
-		// if (!values.email) {
-		// 	errors.email = 'Escribe tu correo';
-		// } else if (
-		// 	!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		// ) {
-		// 	errors.email = '@example.com*';
-		// }
-		// if (state.stateLogin) {
-		// 	if (!values.password) {
-		// 		errors.password = 'Escribe tu contraseña';
-		// 	}
-		// }
-		// return errors;
+		let errors: FormikErrors<ValuesLogin> = {};
+		if (!values.email) {
+			errors.email = 'Escribe tu correo';
+		} else if (
+			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+		) {
+			errors.email = '@example.com*';
+		}
+		if (state.stateLogin) {
+			if (!values.password) {
+				errors.password = 'Escribe tu contraseña';
+			}
+		}
+		return errors;
 	};
 
 	return (

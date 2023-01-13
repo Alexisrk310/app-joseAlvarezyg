@@ -1,3 +1,4 @@
+import { LoaderAuth } from '@/components';
 import { useFormValues } from '@/hooks/useFormValues';
 import { getRestaurantiD } from '@/utilities/api/resturant/getRestaurant';
 import { addRestaurant } from '@/utilities/api/resturant/postRestaurant';
@@ -10,7 +11,7 @@ import AddAndCreatePlates from './components/AddAndCreatePlates';
 import './styles/CreateRestaurant.css';
 export interface CreateRestaurantInterface {}
 interface actionRestaurantAndPlate {
-	actions: 'EDIT' | 'ADD';
+	actions: 'EDIT' | 'ADD' | '';
 }
 const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	const [actionsPlate, setActionsPlate] = useState<actionRestaurantAndPlate>({
@@ -76,8 +77,12 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	}, []);
 
 	const handleSubmit = async (e: any) => {
+		e.preventDefault();
+		setActionRestaurant({
+			...actionRestaurant,
+			actions: '',
+		});
 		if (actionRestaurant.actions == 'ADD') {
-			e.preventDefault();
 			const local = JSON.parse(localStorage.getItem('@user') as any);
 
 			const ValueRestaurant = {
@@ -101,6 +106,10 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				const resp = await addResta.json();
 
 				if (resp.ok) {
+					setActionRestaurant({
+						...actionRestaurant,
+						actions: 'ADD',
+					});
 					MySwal.fire({
 						position: 'top-end',
 						icon: 'success',
@@ -110,6 +119,10 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					});
 					navigate('/restaurante');
 				} else {
+					setActionRestaurant({
+						...actionRestaurant,
+						actions: 'ADD',
+					});
 					MySwal.fire({
 						icon: 'error',
 						title: 'Error',
@@ -144,6 +157,10 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				);
 				const dataModifyResta = await respModifyResta.json();
 				if (dataModifyResta.ok) {
+					setActionRestaurant({
+						...actionRestaurant,
+						actions: 'EDIT',
+					});
 					MySwal.fire({
 						position: 'top-end',
 						icon: 'success',
@@ -153,6 +170,10 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					});
 					// navigate('/restaurante');
 				} else {
+					setActionRestaurant({
+						...actionRestaurant,
+						actions: 'EDIT',
+					});
 					MySwal.fire({
 						icon: 'error',
 						title: 'Error',
@@ -370,11 +391,13 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 							<button
 								type="button"
 								className="btn btn-success"
-								data-dismiss="modal"
 								onClick={handleSubmit}>
 								{actionRestaurant.actions == 'EDIT'
-									? 'Editar Restaurante'
-									: 'Añadir Restaurante'}
+									? 'Editar restaurante'
+									: actionRestaurant.actions == 'ADD'
+									? 'Crear restaurante'
+									: ''}
+								{actionRestaurant.actions === '' && <LoaderAuth />}
 							</button>
 							<button
 								type="button"

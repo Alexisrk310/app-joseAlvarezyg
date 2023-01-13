@@ -50,37 +50,37 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 	};
 
 	const validations = (values: ValuesRegister) => {
-		// let errors: FormikErrors<ValuesRegister> = {};
-		// if (!values.name) {
-		// 	errors.name = 'Escriba su nombre';
-		// } else if (!/^[a-zA-Z0-9]{4,50}$/.test(values.name)) {
-		// 	errors.name = 'Minimo 4, maximo 50 caracteres ';
-		// }
-		// if (!values.email) {
-		// 	errors.email = 'Escribe tu correo';
-		// } else if (
-		// 	!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-		// ) {
-		// 	errors.email = '@example.com*';
-		// }
-		// if (!values.password) {
-		// 	errors.password = 'Escriba su contraseña';
-		// }
-		// if (!values.tel) {
-		// 	errors.tel = 'Escriba su telefono';
-		// } else if (!/^\d{10}$/.test(values.tel)) {
-		// 	errors.tel = 'Solo se permiten 10 digitos';
-		// }
-		// if (!values.addressOne) {
-		// 	errors.addressOne = '*';
-		// }
-		// if (!values.addressTwo) {
-		// 	errors.addressTwo = '*';
-		// }
-		// if (!values.addressThree) {
-		// 	errors.addressThree = '*';
-		// }
-		// return errors;
+		let errors: FormikErrors<ValuesRegister> = {};
+		if (!values.name) {
+			errors.name = 'Escriba su nombre';
+		} else if (!/^[a-zA-Z0-9]{4,50}$/.test(values.name)) {
+			errors.name = 'Minimo 4, maximo 50 caracteres ';
+		}
+		if (!values.email) {
+			errors.email = 'Escribe tu correo';
+		} else if (
+			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+		) {
+			errors.email = '@example.com*';
+		}
+		if (!values.password) {
+			errors.password = 'Escriba su contraseña';
+		}
+		if (!values.tel) {
+			errors.tel = 'Escriba su telefono';
+		} else if (!/^\d{10}$/.test(values.tel)) {
+			errors.tel = 'Solo se permiten 10 digitos';
+		}
+		if (!values.addressOne) {
+			errors.addressOne = '*';
+		}
+		if (!values.addressTwo) {
+			errors.addressTwo = '*';
+		}
+		if (!values.addressThree) {
+			errors.addressThree = '*';
+		}
+		return errors;
 	};
 
 	return (

@@ -44,11 +44,7 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 						description={cardRestaurant.description}
 						specialized={cardRestaurant.specialty}
 						key={cardRestaurant.id}
-						evente={() =>
-							!local?.token || !local?.data?.token
-								? navigation(`/restaurante/${cardRestaurant.id}`)
-								: undefined
-						}
+						evente={() => navigation(`/restaurante/${cardRestaurant.id}`)}
 						classNick="pointer"
 						specializedState={true}
 						// stateStart={true}

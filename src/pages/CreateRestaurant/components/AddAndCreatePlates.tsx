@@ -1,3 +1,4 @@
+import { LoaderAuth } from '@/components';
 import { useFormValues } from '@/hooks/useFormValues';
 import { postPlates } from '@/utilities/api/plate/postPlates';
 import { putPlatesId } from '@/utilities/api/plate/putPlates';
@@ -8,6 +9,7 @@ import withReactContent from 'sweetalert2-react-content';
 import '../styles/CreateRestaurant.css';
 
 const AddAndCreatePlates = ({ actionsPlate }: any) => {
+	const [stateLoading, setstateLoading] = useState(false);
 	const [handleChange, formValues, setFormValues] = useFormValues({
 		image: '',
 		name: '',
@@ -21,6 +23,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 	const handleSubmitCreateAndEdit = async (e: any) => {
 		console.log(e);
 		e.preventDefault();
+		setstateLoading(true);
 		if (actionsPlate.actions == 'ADD') {
 			const ValuesPlate = {
 				image: plateImg,
@@ -36,6 +39,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 				);
 				const data = await resp.json();
 				if (resp.ok) {
+					setstateLoading(false);
 					console.log(data);
 
 					MySwal.fire({
@@ -46,6 +50,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 						timer: 1500,
 					});
 				} else {
+					setstateLoading(false);
 					MySwal.fire({
 						icon: 'error',
 						title: 'Error',
@@ -187,7 +192,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 							<button
 								className="btn btn-success"
 								onClick={handleSubmitCreateAndEdit}>
-								Guardar plato
+								{!stateLoading ? 'Crear cuenta' : <LoaderAuth />}
 							</button>
 							<button
 								type="button"

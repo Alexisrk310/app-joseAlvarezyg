@@ -5,6 +5,7 @@ import { getRestaurantPopulate } from '@/utilities/api/resturant/getRestaurant';
 import { Skeleton } from '@mui/material';
 
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './styles/HomePage.css';
 export interface HomePageInterface {}
@@ -12,7 +13,7 @@ export interface HomePageInterface {}
 const HomePage: React.FC<HomePageInterface> = () => {
 	const [restaurant, setRestaurant] = useState([]);
 	const [plates, setPlates] = useState([]);
-
+	const navigation = useNavigate();
 	useEffect(() => {
 		const initPlates = async () => {
 			try {
@@ -20,6 +21,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 				const dataPlatePopulate = await respPlatePopulate.json();
 
 				setPlates(dataPlatePopulate?.data);
+				console.log(plates);
 			} catch (error) {
 				throw error;
 			}
@@ -67,6 +69,8 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							disableRating={true}
 							onChangee={false}
 							specializedState={true}
+							evente={() => navigation(`/restaurante/${cardRestaurant.id}`)}
+							classNick="pointer"
 							key={cardRestaurant?.id}
 						/>
 					))}
@@ -91,6 +95,8 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							valueRating={parseInt(plate?.promedio)}
 							disableRating={true}
 							onChangee={false}
+							evente={() => navigation(`/restaurante/${plate?.restaurantid}`)}
+							classNick="pointer"
 							key={plate?.id}
 						/>
 					))}
