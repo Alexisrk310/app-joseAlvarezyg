@@ -185,3 +185,15 @@
 	text-align: center;
 	cursor: pointer;
 }
+
+/* DATA RESTAURANT */
+
+.data-restaurant {
+	background-color: #ffffff;
+	width: 200px;
+	height: 180px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-radius: 10px;
+}

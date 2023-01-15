@@ -286,6 +286,32 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 						</div>
 					</div>
 				</div>
+				<div className="data-restaurant">
+					<div className="department">
+						<i className="fa-solid fa-city  mx-2"></i>
+						<span>{restaurant?.department}</span>
+					</div>
+					<div className="city">
+						<i className="fa-sharp fa-solid fa-location-dot mx-2"></i>
+						<span>{restaurant?.city}</span>
+					</div>
+					{/* <div className="address">
+						<i className="fa-solid fa-address-card mx-2"></i>
+						<span>{restaurant?.address}</span>
+					</div> */}
+					<div className="tel">
+						<i className="fa-solid fa-phone mx-2"></i>
+						<span>{restaurant?.tel}</span>
+					</div>
+					<div className="facebook-restaurant">
+						<i className="fa-brands fa-facebook mx-2"></i>
+						<span>{restaurant?.facebook}</span>
+					</div>
+					<div className="instagram-restaurant">
+						<i className="fa-brands fa-square-instagram mx-2"></i>
+						<span>{restaurant?.instagram}</span>
+					</div>
+				</div>
 			</div>
 			<div className="container-new-restaurant">
 				<div className="form-group w-75">
