@@ -16,7 +16,7 @@ const Footer: React.FC<FooterInterface> = () => {
 				<p>Sobre Publicidad</p>
 				<p>Soporte</p>
 			</div>
-			<div className="footer-bottom fixed-bottom">
+			<div className="footer-bottom">
 				<div>
 					<p className="mb-0">Jose Alvarez Yg</p>
 				</div>

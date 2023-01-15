@@ -11,8 +11,8 @@
 	justify-content: space-around;
 	align-items: center;
 	flex-wrap: wrap;
-	margin-bottom: 60px;
-	height: 250px;
+	/* margin-bottom: 60px; */
+	/* height: 250px; */
 }
 .footer-div > p {
 	padding: 20px;

@@ -1,6 +1,9 @@
 import { LoaderAuth } from '@/components';
 import { useFormValues } from '@/hooks/useFormValues';
-import { getRestaurantiD } from '@/utilities/api/resturant/getRestaurant';
+import {
+	getRestaurantiD,
+	getRestaurantiDUsuario,
+} from '@/utilities/api/resturant/getRestaurant';
 import { addRestaurant } from '@/utilities/api/resturant/postRestaurant';
 import { putRestaurant } from '@/utilities/api/resturant/putRestaurant';
 import React, { useEffect, useState } from 'react';
@@ -12,6 +15,18 @@ import './styles/CreateRestaurant.css';
 export interface CreateRestaurantInterface {}
 interface actionRestaurantAndPlate {
 	actions: 'EDIT' | 'ADD' | '';
+}
+interface restaurantIdUser {
+	id: string;
+	name: string;
+	description: string;
+	specialty: string;
+	image: string;
+	department: string;
+	city: string;
+	tel: string;
+	instagram: string;
+	facebook: string;
 }
 const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	const [actionsPlate, setActionsPlate] = useState<actionRestaurantAndPlate>({
@@ -26,7 +41,18 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const [actions, setActions] = useState<boolean>(false);
 	const [state, setState] = useState(false);
-	const [restaurantId, setRestaurantId] = useState({});
+	const [restaurant, setRestaurant] = useState<restaurantIdUser>({
+		id: '',
+		name: '',
+		description: '',
+		specialty: '',
+		image: '',
+		department: '',
+		city: '',
+		tel: '',
+		instagram: '',
+		facebook: '',
+	});
 	const [profileImg, setProfileImg] = useState({
 		imgPlate:
 			'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
@@ -65,16 +91,62 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	};
 
 	useEffect(() => {
+		// GET FOR ID RESTAURANT
 		const init = async () => {
-			const respRestaurantId = await getRestaurantiD(
-				local?.id || local?.data?.id
-			);
-			const dataRestauranteId = await respRestaurantId.json();
+			try {
+				const respRestaurantId = await getRestaurantiDUsuario(
+					local?.id || local?.data?.id
+				);
+				const dataRestauranteId = await respRestaurantId.json();
+				console.log(dataRestauranteId?.response[0]);
 
-			setRestaurantId(dataRestauranteId.response[0]);
+				const {
+					id,
+					name,
+					description,
+					specialty,
+					image,
+					department,
+					city,
+					tel,
+					instagram,
+					facebook,
+				} = dataRestauranteId?.response[0];
+				setRestaurant({
+					id,
+					name,
+					description,
+					specialty,
+					image,
+					department,
+					city,
+					tel,
+					instagram,
+					facebook,
+				});
+				// setFormValues({
+				// 	id: restaurant.id,
+				// 	name: restaurant.name,
+				// 	description: restaurant.description,
+				// 	specialty: restaurant.description,
+				// 	image: restaurant.image,
+				// });
+			} catch (error) {
+				throw error;
+			}
 		};
+		setActions(true);
 		init();
-	}, []);
+	}, [restaurant]);
+	// useEffect(() => {
+	// 	setFormValues({
+	// 		id: restaurant?.id,
+	// 		name: restaurant?.name,
+	// 		description: restaurant?.description,
+	// 		specialty: restaurant?.description,
+	// 		image: restaurant?.image,
+	// 	});
+	// }, [restaurant]);
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
@@ -194,7 +266,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					<div className="container-preview-restaurant">
 						<div className="img-holder">
 							<img
-								src={profileImg.imgPlate}
+								src={profileImg.imgPlate && restaurant?.image}
 								alt=""
 								id="img"
 								className="img-of-restaurant"
@@ -234,7 +306,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 						className="form-control"
 						name="name"
 						onChange={handleChange}
-						value={formValues.name}
+						value={formValues.name || restaurant.name}
 					/>
 				</div>
 				<div className="form-group w-75">
@@ -244,7 +316,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 						className="form-control"
 						name="specialty"
 						onChange={handleChange}
-						value={formValues.specialty}
+						value={formValues.specialty || restaurant.specialty}
 					/>
 				</div>
 				<div className="form-group w-75">
@@ -254,18 +326,9 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 						placeholder="Descripcion del restaurante"
 						name="description"
 						onChange={handleChange}
-						value={formValues.description}></textarea>
+						value={formValues.description || restaurant.description}></textarea>
 				</div>
 				<div className="d-flex  w-75">
-					<p
-						onClick={() => setActions(!actions)}
-						className="btn btn-info m-1 w-10">
-						{actions === true ? (
-							<i className="fa-solid fa-pen-to-square editAndCreate"></i>
-						) : (
-							<i className="fa-solid fa-circle-plus editAndCreate"></i>
-						)}
-					</p>
 					{actions === true ? (
 						<button
 							type="submit"
@@ -335,7 +398,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											className="form-control"
 											placeholder="Departmento"
 											onChange={handleChange}
-											value={formValues.department}
+											value={formValues.department || restaurant.department}
 										/>
 										<input
 											type="text"
@@ -343,7 +406,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											className="form-control"
 											placeholder="Ciudad"
 											onChange={handleChange}
-											value={formValues.city}
+											value={formValues.city || restaurant.city}
 										/>
 									</div>
 									{/* <div className="form-group w-75">
@@ -363,7 +426,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											className="form-control"
 											placeholder="Telefono"
 											onChange={handleChange}
-											value={formValues.tel}
+											value={formValues.tel || restaurant.tel}
 										/>
 									</div>
 									<div className="form-group d-flex">
@@ -373,7 +436,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											className="form-control"
 											placeholder="Link Facebook"
 											onChange={handleChange}
-											value={formValues.facebook}
+											value={formValues.facebook || restaurant.facebook}
 										/>
 										<input
 											type="tel"
@@ -381,7 +444,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											className="form-control"
 											placeholder="Link Instagram"
 											onChange={handleChange}
-											value={formValues.instagram}
+											value={formValues.instagram || restaurant.instagram}
 										/>
 									</div>
 								</div>

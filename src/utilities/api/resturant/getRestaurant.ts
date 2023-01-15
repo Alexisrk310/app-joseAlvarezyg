@@ -1,6 +1,16 @@
-// ENCONTRAR RESTAURANTE POR ID
+// ENCONTRAR RESTAURANTE POR ID DE RESTAURANTE
 export const getRestaurantiD = async (id: string) => {
 	const urlGetRestaurant = `https://backen-appjose.vercel.app/restaurant/${id}`;
+	return await fetch(urlGetRestaurant, {
+		method: 'GET',
+		headers: {
+			'Content-type': 'application/json',
+		},
+	});
+};
+// ENCONTRAR RESTAURANTE POR ID DE USUARIO
+export const getRestaurantiDUsuario = async (id: string) => {
+	const urlGetRestaurant = `https://backen-appjose.vercel.app/restaurant/user/${id}`;
 	return await fetch(urlGetRestaurant, {
 		method: 'GET',
 		headers: {
