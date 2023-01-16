@@ -99,58 +99,9 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 			imgPlate: base64,
 		} as any);
 	};
-	// GET FOR ID RESTAURANT
-	const init = async () => {
-		try {
-			const respRestaurantId = await getRestaurantiDUsuario(
-				local?.id || local?.data?.id,
-			);
-			const dataRestauranteId = await respRestaurantId.json();
-			console.log(dataRestauranteId);
-
-			const dataPlates = await getPlatesByRestaurantById(
-				dataRestauranteId.response[0].id,
-			);
-
-			const {
-				id,
-				name,
-				description,
-				specialty,
-				image,
-				department,
-				city,
-				tel,
-				instagram,
-				facebook,
-			} = dataRestauranteId?.response[0];
-			setRestaurant({
-				id,
-				name,
-				description,
-				specialty,
-				image,
-				department,
-				city,
-				tel,
-				instagram,
-				facebook,
-			});
-			// setFormValues({
-			// 	id: restaurant.id,
-			// 	name: restaurant.name,
-			// 	description: restaurant.description,
-			// 	specialty: restaurant.description,
-			// 	image: restaurant.image,
-			// });
-		} catch (error) {
-			throw error;
-		}
-	};
 
 	const getPlatesByRestaurantById = async (id: string) => {
 		try {
-			console.log("Id", id);
 			const respGetPlates = await (await getPlatesId(id)).json();
 			console.log("get plates", respGetPlates);
 			setplatesByID(respGetPlates.data);
@@ -164,7 +115,61 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	}, []);
 
 	const asyncFunctionInit = async () => {
-		await setActions(true);
+		// GET FOR ID RESTAURANT
+		const init = async () => {
+			try {
+				const respRestaurantId = await getRestaurantiDUsuario(
+					local?.id || local?.data?.id,
+				);
+				const dataRestauranteId = await respRestaurantId.json();
+				console.log(dataRestauranteId);
+
+				if (!dataRestauranteId?.response[0]?.id) {
+					setActions(false)
+				} else {
+					const dataPlates = await getPlatesByRestaurantById(
+						dataRestauranteId.response[0].id,
+					);
+          setActions(true)
+				}
+
+				const {
+					id,
+					name,
+					description,
+					specialty,
+					image,
+					department,
+					city,
+					tel,
+					instagram,
+					facebook,
+				} = dataRestauranteId?.response[0];
+				setRestaurant({
+					id,
+					name,
+					description,
+					specialty,
+					image,
+					department,
+					city,
+					tel,
+					instagram,
+					facebook,
+				});
+				// setFormValues({
+				// 	id: restaurant.id,
+				// 	name: restaurant.name,
+				// 	description: restaurant.description,
+				// 	specialty: restaurant.description,
+				// 	image: restaurant.image,
+				// });
+			} catch (error) {
+				throw error;
+			}
+		};
+    console.log("actgion", actions);
+    
 		await init();
 	};
 
@@ -184,6 +189,8 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 			...actionRestaurant,
 			actions: "",
 		});
+		console.log("Action", actionRestaurant, restaurant);
+
 		if (actionRestaurant.actions == "ADD") {
 			const local = JSON.parse(localStorage.getItem("@user") as any);
 
@@ -240,15 +247,15 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 
 			const ValueRestaurantEdit = {
 				image: profileImg.imgPlate,
-				name: formValues.name,
-				specialty: formValues.specialty,
-				description: formValues.description,
-				department: formValues.department,
-				city: formValues.city,
+				name: formValues.name.length > 0 ? formValues.city : restaurant.name,
+				specialty: formValues.specialty.length > 0 ? formValues.city : restaurant.specialty,
+				description: formValues.description.length > 0 ? formValues.city : restaurant.description,
+				department: formValues.department.length > 0 ? formValues.city : restaurant.department,
+				city: formValues.city.length > 0 ? formValues.city : restaurant.city,
 				// address: formValues.address,
-				tel: parseInt(formValues.tel),
-				facebook: formValues.facebook,
-				instagram: formValues.instagram,
+				tel: formValues.tel.length > 0 ? formValues.city : restaurant.tel,
+				facebook: formValues.facebook.length > 0 ? formValues.city : restaurant.facebook,
+				instagram: formValues.instagram.length> 0 ? formValues.city : restaurant.instagram,
 			};
 
 			try {
