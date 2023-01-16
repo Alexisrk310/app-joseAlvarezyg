@@ -247,15 +247,15 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 
 			const ValueRestaurantEdit = {
 				image: profileImg.imgPlate,
-				name: formValues.name.length > 0 ? formValues.city : restaurant.name,
-				specialty: formValues.specialty.length > 0 ? formValues.city : restaurant.specialty,
-				description: formValues.description.length > 0 ? formValues.city : restaurant.description,
-				department: formValues.department.length > 0 ? formValues.city : restaurant.department,
+				name: formValues.name.length > 0 ? formValues.name : restaurant.name,
+				specialty: formValues.specialty.length > 0 ? formValues.specialty : restaurant.specialty,
+				description: formValues.description.length > 0 ? formValues.description : restaurant.description,
+				department: formValues.department.length > 0 ? formValues.department : restaurant.department,
 				city: formValues.city.length > 0 ? formValues.city : restaurant.city,
 				// address: formValues.address,
-				tel: formValues.tel.length > 0 ? formValues.city : restaurant.tel,
-				facebook: formValues.facebook.length > 0 ? formValues.city : restaurant.facebook,
-				instagram: formValues.instagram.length> 0 ? formValues.city : restaurant.instagram,
+				tel: formValues.tel.length > 0 ? formValues.tel : restaurant.tel,
+				facebook: formValues.facebook.length > 0 ? formValues.facebook : restaurant.facebook,
+				instagram: formValues.instagram.length> 0 ? formValues.instagram : restaurant.instagram,
 			};
 
 			try {
