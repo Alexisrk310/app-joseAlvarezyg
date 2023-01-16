@@ -292,216 +292,236 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	return (
 		<div className="createrestaurant">
 			<div className="pt-4">
-        <div className="container-mobile">
-          <div className="w-50 d-flex align-items-center flex-column">
-            <div>
-              <div className="container-preview-restaurant">
-                <div className="picture-container">
-                  <div className="picture">
-                    <img
-                      src={restaurant?.image ? restaurant.image : ""}
-                      className="img-of-restaurant"
-                      id="wizardPicturePreview"
-                      title=""
-                    />
-                    <input type="file" id="wizard-picture" className="" />
-                  </div>
-                  <div className="bg-light">
-                    <h6 className="text-17a2b8 font-weight-bold">
-                      Elija una imagen
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </div>
+				<div className="container-mobile">
+					<div className="w-50 d-flex align-items-center flex-column">
+						<div>
+							<div className="container-preview-restaurant">
+								<div className="picture-container">
+									<div className="picture">
+										<img
+											src={
+												restaurant?.image
+													? restaurant.image
+													: profileImg.imgPlate
+													? profileImg.imgPlate
+													: ""
+											}
+											className="img-of-restaurant"
+											id="wizardPicturePreview"
+											title=""
+										/>
 
-            <div>
-              <div className="data-restaurant">
-                <div className="department">
-                  <i className="fa-solid fa-city  mx-2"></i>
-                  <span className="text-capitalize">
-                    {restaurant?.department}
-                  </span>
-                </div>
-                <div className="city">
-                  <i className="fa-sharp fa-solid fa-location-dot mx-2"></i>
-                  <span className="text-capitalize">{restaurant?.city}</span>
-                </div>
-                <div className="tel">
-                  <i className="fa-solid fa-phone mx-2"></i>
-                  <span className="text-capitalize">{restaurant?.tel}</span>
-                </div>
-                <div className="facebook-restaurant">
-                  <i className="fa-brands fa-facebook mx-2"></i>
-                  <span className="text-capitalize">{restaurant?.facebook}</span>
-                </div>
-                <div className="instagram-restaurant">
-                  <i className="fa-brands fa-square-instagram mx-2"></i>
-                  <span className="text-capitalize">{restaurant?.instagram}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+										<input
+											type="file"
+											onChange={imageHandler}
+											name="image-upload"
+											accept=".png, .jpg, .jpeg"
+											id="wizard-picture"
+											className=""
+										/>
+									</div>
+									<div className="bg-light">
+										<h6 className="text-17a2b8 font-weight-bold">
+											Elija una imagen
+										</h6>
+									</div>
+								</div>
+							</div>
+						</div>
 
-          {/* INIT CONTAINER FORM */}
-          <div className="form-container">
-            <div className="container-new-restaurant">
-              <div className="form-group w-75">
-                <div className="d-flex justify-content-center p-2">
-                  <h3>Mi restaurante</h3>
-                </div>
+						<div>
+							<div className="data-restaurant">
+								<div className="department">
+									<i className="fa-solid fa-city  mx-2"></i>
+									<span className="text-capitalize">
+										{restaurant?.department}
+									</span>
+								</div>
+								<div className="city">
+									<i className="fa-sharp fa-solid fa-location-dot mx-2"></i>
+									<span className="text-capitalize">{restaurant?.city}</span>
+								</div>
+								<div className="tel">
+									<i className="fa-solid fa-phone mx-2"></i>
+									<span className="text-capitalize">{restaurant?.tel}</span>
+								</div>
+								<div className="facebook-restaurant">
+									<i className="fa-brands fa-facebook mx-2"></i>
+									<span className="text-capitalize">
+										{restaurant?.facebook}
+									</span>
+								</div>
+								<div className="instagram-restaurant">
+									<i className="fa-brands fa-square-instagram mx-2"></i>
+									<span className="text-capitalize">
+										{restaurant?.instagram}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                <input
-                  placeholder="Nombre"
-                  type="text"
-                  className="form-control"
-                  // name="name"
-                  onChange={handleChange}
-                  value={local?.data?.payload?.name || local?.name}
-                  readOnly
-                />
-              </div>
-              <div className="form-group w-75">
-                <input
-                  placeholder="Nombre del restaurante"
-                  type="text"
-                  className="form-control"
-                  name="name"
-                  onChange={handleChange}
-                  value={formValues.name || restaurant.name}
-                />
-              </div>
-              <div className="form-group w-75">
-                <input
-                  placeholder="Especialidad"
-                  type="text"
-                  className="form-control"
-                  name="specialty"
-                  onChange={handleChange}
-                  value={formValues.specialty || restaurant.specialty}
-                />
-              </div>
-              <div className="form-group w-75">
-                <textarea
-                  className="form-control resize"
-                  rows={10}
-                  placeholder="Descripcion del restaurante"
-                  name="description"
-                  onChange={handleChange}
-                  value={formValues.description || restaurant.description}
-                ></textarea>
-              </div>
-              <div className="d-flex  w-75">
-                {actions === true ? (
-                  <button
-                    type="submit"
-                    itemType="button"
-                    data-toggle="modal"
-                    data-target="#staticBackdropInfo"
-                    className="btn m-1 btn-primary w-100"
-                    onClick={() => setActionRestaurant({ actions: "EDIT" })}
-                  >
-                    Editar mas informacion
-                  </button>
-                ) : (
-                  <p
-                    itemType="button"
-                    data-toggle="modal"
-                    data-target="#staticBackdropInfo"
-                    className="btn m-1 btn-primary w-100"
-                    onClick={() => setActionRestaurant({ actions: "ADD" })}
-                  >
-                    Mas informacion
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-          <div className="w-100">
-            <div className="w-100 mt-2 d-flex justify-content-center">
-              <div className="row gap">
-                <div className="buttonPlates col-md">
-                  <div className="plate-logo"></div>
-                  <button
-                    className="btn btn-success mt-2"
-                    itemType="button"
-                    data-toggle="modal"
-                    data-target="#staticBackdrop2001"
-                    onClick={() => setActionsPlate({ actions: "ADD" })}
-                  >
-                    Añadir plato
-                  </button>
-                </div>
-                {platesByID.map((plate: PlateIdRestaurant) => (
-                  <div className="buttonPlates col-md">
-                    <div className="plate-logo">
-                      <img src={plate.image} alt="" />
-                    </div>
-                    <button
-                      className="btn btn-primary mt-2"
-                      itemType="button"
-                      data-toggle="modal"
-                      data-target="#staticBackdrop2001"
-                      onClick={() => setActionsPlate({ actions: "ADD" })}
-                    >
-                      Editar plato
-                    </button>
-                  </div>
-                ))}
-                {/* EDIT PLATE */}
-              </div>
-            </div>
-          </div>
+					{/* INIT CONTAINER FORM */}
+					<div className="form-container">
+						<div className="container-new-restaurant">
+							<div className="form-group w-75">
+								<div className="d-flex justify-content-center p-2">
+									<h3>Mi restaurante</h3>
+								</div>
 
-          <div>
-            <AddAndCreatePlates actionsPlate={actionsPlate} />
-            {/* END PLATE */}
-            <div
-              className="modal fade"
-              id="staticBackdropInfo"
-              data-backdrop="static"
-              data-keyboard="false"
-              tabIndex={-1}
-              aria-labelledby="staticBackdropLabel"
-              aria-hidden="true"
-            >
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="staticBackdropLabel">
-                      Información adicional
-                    </h5>
-                    <button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    <div className="d-flex container-team-modals">
-                      <div className="modalAddPlate">
-                        <div className="d-flex form-group">
-                          <input
-                            type="text"
-                            name="department"
-                            className="form-control"
-                            placeholder="Departmento"
-                            onChange={handleChange}
-                            value={formValues.department || restaurant.department}
-                          />
-                          <input
-                            type="text"
-                            name="city"
-                            className="form-control"
-                            placeholder="Ciudad"
-                            onChange={handleChange}
-                            value={formValues.city || restaurant.city}
-                          />
-                        </div>
-                        {/* <div className="form-group w-75">
+								<input
+									placeholder="Nombre"
+									type="text"
+									className="form-control"
+									// name="name"
+									onChange={handleChange}
+									value={local?.data?.payload?.name || local?.name}
+									readOnly
+								/>
+							</div>
+							<div className="form-group w-75">
+								<input
+									placeholder="Nombre del restaurante"
+									type="text"
+									className="form-control"
+									name="name"
+									onChange={handleChange}
+									value={formValues.name || restaurant.name}
+								/>
+							</div>
+							<div className="form-group w-75">
+								<input
+									placeholder="Especialidad"
+									type="text"
+									className="form-control"
+									name="specialty"
+									onChange={handleChange}
+									value={formValues.specialty || restaurant.specialty}
+								/>
+							</div>
+							<div className="form-group w-75">
+								<textarea
+									className="form-control resize"
+									rows={10}
+									placeholder="Descripcion del restaurante"
+									name="description"
+									onChange={handleChange}
+									value={formValues.description || restaurant.description}
+								></textarea>
+							</div>
+							<div className="d-flex  w-75">
+								{actions === true ? (
+									<button
+										type="submit"
+										itemType="button"
+										data-toggle="modal"
+										data-target="#staticBackdropInfo"
+										className="btn m-1 btn-primary w-100"
+										onClick={() => setActionRestaurant({ actions: "EDIT" })}
+									>
+										Editar mas informacion
+									</button>
+								) : (
+									<p
+										itemType="button"
+										data-toggle="modal"
+										data-target="#staticBackdropInfo"
+										className="btn m-1 btn-primary w-100"
+										onClick={() => setActionRestaurant({ actions: "ADD" })}
+									>
+										Mas informacion
+									</p>
+								)}
+							</div>
+						</div>
+					</div>
+					<div className="w-100">
+						<div className="w-100 mt-2 d-flex container-mobile">
+							<div className="row gap">
+								<div className="buttonPlates col-md">
+									<div className="plate-logo"></div>
+									<button
+										className="btn btn-success mt-2"
+										itemType="button"
+										data-toggle="modal"
+										data-target="#staticBackdrop2001"
+										onClick={() => setActionsPlate({ actions: "ADD" })}
+									>
+										Añadir plato
+									</button>
+								</div>
+								{platesByID.map((plate: PlateIdRestaurant) => (
+									<div className="buttonPlates col-md">
+										<div className="plate-logo">
+											<img src={plate.image} alt="" />
+										</div>
+										<button
+											className="btn btn-primary mt-2"
+											itemType="button"
+											data-toggle="modal"
+											data-target="#staticBackdrop2001"
+											onClick={() => setActionsPlate({ actions: "ADD" })}
+										>
+											Editar plato
+										</button>
+									</div>
+								))}
+								{/* EDIT PLATE */}
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<AddAndCreatePlates actionsPlate={actionsPlate} />
+						{/* END PLATE */}
+						<div
+							className="modal fade"
+							id="staticBackdropInfo"
+							data-backdrop="static"
+							data-keyboard="false"
+							tabIndex={-1}
+							aria-labelledby="staticBackdropLabel"
+							aria-hidden="true"
+						>
+							<div className="modal-dialog">
+								<div className="modal-content">
+									<div className="modal-header">
+										<h5 className="modal-title" id="staticBackdropLabel">
+											Información adicional
+										</h5>
+										<button
+											type="button"
+											className="close"
+											data-dismiss="modal"
+											aria-label="Close"
+										>
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div className="modal-body">
+										<div className="d-flex container-team-modals">
+											<div className="modalAddPlate">
+												<div className="d-flex form-group">
+													<input
+														type="text"
+														name="department"
+														className="form-control"
+														placeholder="Departmento"
+														onChange={handleChange}
+														value={
+															formValues.department || restaurant.department
+														}
+													/>
+													<input
+														type="text"
+														name="city"
+														className="form-control"
+														placeholder="Ciudad"
+														onChange={handleChange}
+														value={formValues.city || restaurant.city}
+													/>
+												</div>
+												{/* <div className="form-group w-75">
                       <input
                         type="text"
                         name="address"
@@ -511,63 +531,63 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
                         value={formValues.address}
                       />
                     </div> */}
-                        <div className="form-group w-75">
-                          <input
-                            type="tel"
-                            name="tel"
-                            className="form-control"
-                            placeholder="Telefono"
-                            onChange={handleChange}
-                            value={formValues.tel || restaurant.tel}
-                          />
-                        </div>
-                        <div className="form-group d-flex">
-                          <input
-                            type="text"
-                            name="facebook"
-                            className="form-control"
-                            placeholder="Link Facebook"
-                            onChange={handleChange}
-                            value={formValues.facebook || restaurant.facebook}
-                          />
-                          <input
-                            type="tel"
-                            name="instagram"
-                            className="form-control"
-                            placeholder="Link Instagram"
-                            onChange={handleChange}
-                            value={formValues.instagram || restaurant.instagram}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn btn-success"
-                      onClick={handleSubmit}
-                    >
-                      {actionRestaurant.actions == "EDIT"
-                        ? "Editar restaurante"
-                        : actionRestaurant.actions == "ADD"
-                        ? "Crear restaurante"
-                        : ""}
-                      {actionRestaurant.actions === "" && <LoaderAuth />}
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+												<div className="form-group w-75">
+													<input
+														type="tel"
+														name="tel"
+														className="form-control"
+														placeholder="Telefono"
+														onChange={handleChange}
+														value={formValues.tel || restaurant.tel}
+													/>
+												</div>
+												<div className="form-group d-flex">
+													<input
+														type="text"
+														name="facebook"
+														className="form-control"
+														placeholder="Link Facebook"
+														onChange={handleChange}
+														value={formValues.facebook || restaurant.facebook}
+													/>
+													<input
+														type="tel"
+														name="instagram"
+														className="form-control"
+														placeholder="Link Instagram"
+														onChange={handleChange}
+														value={formValues.instagram || restaurant.instagram}
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div className="modal-footer">
+										<button
+											type="button"
+											className="btn btn-success"
+											onClick={handleSubmit}
+										>
+											{actionRestaurant.actions == "EDIT"
+												? "Editar restaurante"
+												: actionRestaurant.actions == "ADD"
+												? "Crear restaurante"
+												: ""}
+											{actionRestaurant.actions === "" && <LoaderAuth />}
+										</button>
+										<button
+											type="button"
+											className="btn btn-secondary"
+											data-dismiss="modal"
+										>
+											Cerrar
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
