@@ -2,31 +2,48 @@ import { LoaderAuth } from '@/components';
 import { useFormValues } from '@/hooks/useFormValues';
 import { postPlates } from '@/utilities/api/plate/postPlates';
 import { putPlatesId } from '@/utilities/api/plate/putPlates';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getPlatesUnique } from '@/utilities/api/plate/getPlates';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 import '../styles/CreateRestaurant.css';
 
-const AddAndCreatePlates = ({ actionsPlate }: any) => {
+const AddAndCreatePlates = ({ actionsPlate, idPlate }: any) => {
 	const [stateLoading, setstateLoading] = useState(false);
 	const [handleChange, formValues, setFormValues] = useFormValues({
-		image: '',
+		image:
+			'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
 		name: '',
 		description: '',
 	});
-	const [plateImg, setPlateImg] = useState(
-		'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-	);
+
 	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const MySwal = withReactContent(Swal);
+	useEffect(() => {
+		//   GET PLATES FOR ID - EDIT
+		const init = async () => {
+			const respPlateUnique = await getPlatesUnique(idPlate);
+			const dataPlateUnique = await respPlateUnique.json();
+			console.log(dataPlateUnique);
+
+			setFormValues({
+				...formValues,
+				image: dataPlateUnique?.data[0]?.image,
+				namePlate: dataPlateUnique?.data[0]?.name,
+				descriptionPlate: dataPlateUnique?.data[0]?.description,
+			});
+		};
+		if (idPlate !== '') init();
+	}, [idPlate]);
+
 	const handleSubmitCreateAndEdit = async (e: any) => {
 		console.log(e);
 		e.preventDefault();
 		setstateLoading(true);
 		if (actionsPlate.actions == 'ADD') {
 			const ValuesPlate = {
-				image: plateImg,
+				image: formValues.image,
 				name: formValues.namePlate,
 				description: formValues.descriptionPlate,
 			};
@@ -60,48 +77,53 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 			} catch (error) {
 				console.log(error);
 			}
-		}
-		// else if (actionsPlate.actions == 'EDIT') {
-		// 	try {
-		// 		const ValuesPlate = {
-		// 			image: plateImg.platesimg,
-		// 			name: formValues.namePlate,
-		// 			description: formValues.descriptionPlate,
-		// 		};
+		} else if (actionsPlate.actions == 'EDIT') {
+			try {
+				const ValuesPlate = {
+					image: formValues.image,
+					name: formValues.namePlate,
+					description: formValues.descriptionPlate,
+				};
 
-		// 		const respPutPlates = await putPlatesId(
-		// 			local?.token || local?.data?.token,
-		// 			idPlate,
-		// 			ValuesPlate
-		// 		);
-		// 		const dataPutPlates = await respPutPlates.json();
-		// 		if (respPutPlates.ok) {
-		// 			MySwal.fire({
-		// 				position: 'top-end',
-		// 				icon: 'success',
-		// 				title: 'Plato Editado',
-		// 				showConfirmButton: false,
-		// 				timer: 1500,
-		// 			});
-		// 		} else {
-		// 			MySwal.fire({
-		// 				icon: 'error',
-		// 				title: 'Error',
-		// 				text: 'No se pudo editar el plato',
-		// 			});
-		// 		}
-		// 		console.log(respPutPlates);
-		// 		console.log(dataPutPlates);
-		// 	} catch (error) {
-		// 		console.log(error);
-		// 	}
-		// }
+				const respPutPlates = await putPlatesId(
+					local?.token || local?.data?.token,
+					idPlate,
+					ValuesPlate
+				);
+				const dataPutPlates = await respPutPlates.json();
+				if (respPutPlates.ok) {
+					setstateLoading(false);
+					MySwal.fire({
+						position: 'top-end',
+						icon: 'success',
+						title: 'Plato Editado',
+						showConfirmButton: false,
+						timer: 1500,
+					});
+				} else {
+					setstateLoading(false);
+					MySwal.fire({
+						icon: 'error',
+						title: 'Error',
+						text: 'No se pudo editar el plato',
+					});
+				}
+				console.log(respPutPlates);
+				console.log(dataPutPlates);
+			} catch (error) {
+				console.log(error);
+			}
+		}
 	};
+
 	const HandlePlate = (e: any) => {
 		const readerPlate = new FileReader();
 		readerPlate.onload = () => {
 			if (readerPlate.readyState === 2) {
-				setPlateImg(readerPlate.result as string);
+				setFormValues({
+					...formValues,
+					image: readerPlate.result as string,
+				});
 			}
 		};
 		readerPlate.readAsDataURL(e.target.files[0]);
@@ -140,7 +162,7 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 											<div className="container-plate">
 												<div className="img-holder-plate">
 													<img
-														src={plateImg}
+														src={formValues.image}
 														alt=""
 														id="img"
 														className="img-plate"
@@ -192,7 +214,10 @@ const AddAndCreatePlates = ({ actionsPlate }: any) => {
 							<button
 								className="btn btn-success"
 								onClick={handleSubmitCreateAndEdit}>
-								{!stateLoading ? 'Crear cuenta' : <LoaderAuth />}
+								{actionsPlate.actions === 'ADD'
+									? 'Crear plato '
+									: 'Editar plato '}
+								{!stateLoading ? '' : <LoaderAuth />}
 							</button>
 							<button
 								type="button"

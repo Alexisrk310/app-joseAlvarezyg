@@ -1,5 +1,5 @@
 import { useFormValues } from '@/hooks/useFormValues';
-import { getPlatesId, getPlatesUnique } from '@/utilities/api/plate/getPlates';
+import { getPlatesUnique } from '@/utilities/api/plate/getPlates';
 import React, { memo, useEffect, useMemo } from 'react';
 import './styles/ModalPlate.css';
 export interface ModalPlateInterface {

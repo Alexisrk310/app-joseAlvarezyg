@@ -1,37 +1,37 @@
 .createrestaurant {
 	width: 100%;
 	background-image: url('../img/banground.jpg');
-  background-size: contain;
-  background-color: rgba(0,0,0,0.8);
+	background-size: contain;
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 .container-mobile {
-  display: flex;
-  width: 100%;
+	display: flex;
+	width: 100%;
 }
 
-@media only screen and (max-width : 901px) {  
-  .container-mobile{
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    width: 90%;
-    align-items: center;
-  }
+@media only screen and (max-width: 901px) {
+	.container-mobile {
+		display: flex;
+		flex-direction: column;
+		height: auto;
+		width: 90%;
+		align-items: center;
+	}
 }
 
 .createrestaurant > div {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.2);
+	display: flex;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
-@media only screen and (max-width : 901px) {  
-  .createrestaurant > div {    
-    width: 100%;
-    justify-content: center;
-  }
+@media only screen and (max-width: 901px) {
+	.createrestaurant > div {
+		width: 100%;
+		justify-content: center;
+	}
 }
 
 .container-new-restaurant {
@@ -42,24 +42,24 @@
 	align-items: center;
 	flex-direction: column;
 	border-radius: 13px;
-  overflow-y: auto;
-  padding: 10px;
+	overflow-y: auto;
+	padding: 10px;
 }
 
 .form-container {
-  width: 100%;
+	width: 100%;
 }
 
-@media only screen and (max-width : 901px) {  
-  .form-container {
-    width: 100%;
-  }
+@media only screen and (max-width: 901px) {
+	.form-container {
+		width: 100%;
+	}
 }
 
-@media only screen and (max-width : 901px) {  
-  .container-new-restaurant {
-    width: 100%;
-  }
+@media only screen and (max-width: 901px) {
+	.container-new-restaurant {
+		width: 100%;
+	}
 }
 
 .img-responsive {
@@ -134,9 +134,9 @@
 	background-color: #007bff;
 	text-align: center;
 	cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .editAndCreate {
 	font-size: 25px;
@@ -146,12 +146,12 @@
 	width: 200px;
 	height: 200px;
 	margin: 5px 5px;
-  padding: 5px;
+	padding: 5px;
 	background-color: #f4f4f4;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .plate-logo {
@@ -159,16 +159,15 @@
 	height: 100%;
 	background-color: #ffffff;
 	border-radius: 100px;
-  object-fit: cover;
+	object-fit: cover;
 }
 
-@media only screen and (max-width : 901px) {  
-  .plate-logo{
-    width: 50%;
-    height: 50%;
-  }
+@media only screen and (max-width: 901px) {
+	.plate-logo {
+		width: 50%;
+		height: 50%;
+	}
 }
-
 
 /* ADD PLATES */
 
@@ -243,12 +242,12 @@
 	width: 200px;
 	display: flex;
 	flex-direction: column;
-  padding: 5px;
-  gap: 6px;
-  padding-top: 10px;
-  margin-bottom: 10px;
+	padding: 5px;
+	gap: 6px;
+	padding-top: 10px;
+	margin-bottom: 10px;
 }
 
 .text-17a2b8 {
-  color: #17a2b8;
+	color: #17a2b8;
 }

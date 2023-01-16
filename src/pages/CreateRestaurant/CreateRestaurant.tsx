@@ -1,21 +1,21 @@
-import { LoaderAuth } from "@/components";
-import { useFormValues } from "@/hooks/useFormValues";
+import { LoaderAuth } from '@/components';
+import { useFormValues } from '@/hooks/useFormValues';
 import {
 	getRestaurantiD,
 	getRestaurantiDUsuario,
-} from "@/utilities/api/resturant/getRestaurant";
-import { getPlatesId } from "@/utilities/api/plate/getPlates";
-import { addRestaurant } from "@/utilities/api/resturant/postRestaurant";
-import { putRestaurant } from "@/utilities/api/resturant/putRestaurant";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import AddAndCreatePlates from "./components/AddAndCreatePlates";
-import "./styles/CreateRestaurant.css";
+} from '@/utilities/api/resturant/getRestaurant';
+import { getPlatesId } from '@/utilities/api/plate/getPlates';
+import { addRestaurant } from '@/utilities/api/resturant/postRestaurant';
+import { putRestaurant } from '@/utilities/api/resturant/putRestaurant';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import AddAndCreatePlates from './components/AddAndCreatePlates';
+import './styles/CreateRestaurant.css';
 export interface CreateRestaurantInterface {}
 interface actionRestaurantAndPlate {
-	actions: "EDIT" | "ADD" | "";
+	actions: 'EDIT' | 'ADD' | '';
 }
 interface restaurantIdUser {
 	id: string;
@@ -40,45 +40,46 @@ type PlateIdRestaurant = {
 
 const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	const [actionsPlate, setActionsPlate] = useState<actionRestaurantAndPlate>({
-		actions: "ADD",
+		actions: 'ADD',
 	});
 	const [actionRestaurant, setActionRestaurant] =
 		useState<actionRestaurantAndPlate>({
-			actions: "ADD",
+			actions: 'ADD',
 		});
 	const navigate = useNavigate();
 	const MySwal = withReactContent(Swal);
-	const local = JSON.parse(localStorage.getItem("@user") as any);
+	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const [actions, setActions] = useState<boolean>(false);
 	const [platesByID, setplatesByID] = useState([]);
+	const [idPlate, setidPlate] = useState('');
 	const [restaurant, setRestaurant] = useState<restaurantIdUser>({
-		id: "",
-		name: "",
-		description: "",
-		specialty: "",
-		image: "",
-		department: "",
-		city: "",
-		tel: "",
-		instagram: "",
-		facebook: "",
+		id: '',
+		name: '',
+		description: '',
+		specialty: '',
+		image: '',
+		department: '',
+		city: '',
+		tel: '',
+		instagram: '',
+		facebook: '',
 	});
 	const [profileImg, setProfileImg] = useState({
 		imgPlate:
-			"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+			'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
 	});
 
 	const [handleChange, formValues, setFormValues] = useFormValues({
-		image: "",
-		name: "",
-		specialty: "",
-		description: "",
-		department: "",
-		city: "",
-		address: "",
-		tel: "",
-		facebook: "",
-		instagram: "",
+		image: '',
+		name: '',
+		specialty: '',
+		description: '',
+		department: '',
+		city: '',
+		address: '',
+		tel: '',
+		facebook: '',
+		instagram: '',
 	});
 	const convertBase64 = (file: any) => {
 		return new Promise((resolve, reject) => {
@@ -103,7 +104,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 	const getPlatesByRestaurantById = async (id: string) => {
 		try {
 			const respGetPlates = await (await getPlatesId(id)).json();
-			console.log("get plates", respGetPlates);
+			console.log('get plates', respGetPlates);
 			setplatesByID(respGetPlates.data);
 		} catch (error) {
 			throw error;
@@ -119,18 +120,18 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		const init = async () => {
 			try {
 				const respRestaurantId = await getRestaurantiDUsuario(
-					local?.id || local?.data?.id,
+					local?.id || local?.data?.id
 				);
 				const dataRestauranteId = await respRestaurantId.json();
 				console.log(dataRestauranteId);
 
 				if (!dataRestauranteId?.response[0]?.id) {
-					setActions(false)
+					setActions(false);
 				} else {
 					const dataPlates = await getPlatesByRestaurantById(
-						dataRestauranteId.response[0].id,
+						dataRestauranteId.response[0].id
 					);
-          setActions(true)
+					setActions(true);
 				}
 
 				const {
@@ -168,8 +169,8 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				throw error;
 			}
 		};
-    console.log("actgion", actions);
-    
+		console.log('actgion', actions);
+
 		await init();
 	};
 
@@ -187,12 +188,12 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 		e.preventDefault();
 		setActionRestaurant({
 			...actionRestaurant,
-			actions: "",
+			actions: '',
 		});
-		console.log("Action", actionRestaurant, restaurant);
+		console.log('Action', actionRestaurant, restaurant);
 
-		if (actionRestaurant.actions == "ADD") {
-			const local = JSON.parse(localStorage.getItem("@user") as any);
+		if (actionRestaurant.actions == 'ADD') {
+			const local = JSON.parse(localStorage.getItem('@user') as any);
 
 			const ValueRestaurant = {
 				image: profileImg.imgPlate,
@@ -210,31 +211,31 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 			try {
 				const addResta = await addRestaurant(
 					ValueRestaurant,
-					local?.token || local?.data?.token,
+					local?.token || local?.data?.token
 				);
 				const resp = await addResta.json();
 
 				if (resp.ok) {
 					setActionRestaurant({
 						...actionRestaurant,
-						actions: "ADD",
+						actions: 'ADD',
 					});
 					MySwal.fire({
-						position: "top-end",
-						icon: "success",
-						title: "Restaurante creado",
+						position: 'top-end',
+						icon: 'success',
+						title: 'Restaurante creado',
 						showConfirmButton: false,
 						timer: 1500,
 					});
-					navigate("/restaurante");
+					navigate('/restaurante');
 				} else {
 					setActionRestaurant({
 						...actionRestaurant,
-						actions: "ADD",
+						actions: 'ADD',
 					});
 					MySwal.fire({
-						icon: "error",
-						title: "Error",
+						icon: 'error',
+						title: 'Error',
 						text: resp.msg,
 					});
 					// navigate('/restaurante');
@@ -242,37 +243,52 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 			} catch (error) {
 				throw error;
 			}
-		} else if (actionRestaurant.actions == "EDIT") {
+		} else if (actionRestaurant.actions == 'EDIT') {
 			// EDITAR RESTAURANTE
 
 			const ValueRestaurantEdit = {
 				image: profileImg.imgPlate,
 				name: formValues.name.length > 0 ? formValues.name : restaurant.name,
-				specialty: formValues.specialty.length > 0 ? formValues.specialty : restaurant.specialty,
-				description: formValues.description.length > 0 ? formValues.description : restaurant.description,
-				department: formValues.department.length > 0 ? formValues.department : restaurant.department,
+				specialty:
+					formValues.specialty.length > 0
+						? formValues.specialty
+						: restaurant.specialty,
+				description:
+					formValues.description.length > 0
+						? formValues.description
+						: restaurant.description,
+				department:
+					formValues.department.length > 0
+						? formValues.department
+						: restaurant.department,
 				city: formValues.city.length > 0 ? formValues.city : restaurant.city,
 				// address: formValues.address,
 				tel: formValues.tel.length > 0 ? formValues.tel : restaurant.tel,
-				facebook: formValues.facebook.length > 0 ? formValues.facebook : restaurant.facebook,
-				instagram: formValues.instagram.length> 0 ? formValues.instagram : restaurant.instagram,
+				facebook:
+					formValues.facebook.length > 0
+						? formValues.facebook
+						: restaurant.facebook,
+				instagram:
+					formValues.instagram.length > 0
+						? formValues.instagram
+						: restaurant.instagram,
 			};
 
 			try {
 				const respModifyResta = await putRestaurant(
 					ValueRestaurantEdit,
 					local?.token || local?.data?.token,
-					local?.id || local?.data?.id,
+					local?.id || local?.data?.id
 				);
 				const dataModifyResta = await respModifyResta.json();
 				if (dataModifyResta.ok) {
 					setActionRestaurant({
 						...actionRestaurant,
-						actions: "EDIT",
+						actions: 'EDIT',
 					});
 					MySwal.fire({
-						position: "top-end",
-						icon: "success",
+						position: 'top-end',
+						icon: 'success',
 						title: dataModifyResta.msg,
 						showConfirmButton: false,
 						timer: 1500,
@@ -281,11 +297,11 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 				} else {
 					setActionRestaurant({
 						...actionRestaurant,
-						actions: "EDIT",
+						actions: 'EDIT',
 					});
 					MySwal.fire({
-						icon: "error",
-						title: "Error",
+						icon: 'error',
+						title: 'Error',
 						text: dataModifyResta.msg,
 					});
 					// navigate('/restaurante');
@@ -311,7 +327,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 													? restaurant.image
 													: profileImg.imgPlate
 													? profileImg.imgPlate
-													: ""
+													: ''
 											}
 											className="img-of-restaurant"
 											id="wizardPicturePreview"
@@ -393,7 +409,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 									className="form-control"
 									name="name"
 									onChange={handleChange}
-									value={formValues.name || restaurant.name}
+									value={formValues?.name || restaurant?.name}
 								/>
 							</div>
 							<div className="form-group w-75">
@@ -403,7 +419,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 									className="form-control"
 									name="specialty"
 									onChange={handleChange}
-									value={formValues.specialty || restaurant.specialty}
+									value={formValues?.specialty || restaurant?.specialty}
 								/>
 							</div>
 							<div className="form-group w-75">
@@ -413,8 +429,9 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 									placeholder="Descripcion del restaurante"
 									name="description"
 									onChange={handleChange}
-									value={formValues.description || restaurant.description}
-								></textarea>
+									value={
+										formValues?.description || restaurant?.description
+									}></textarea>
 							</div>
 							<div className="d-flex  w-75">
 								{actions === true ? (
@@ -424,8 +441,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 										data-toggle="modal"
 										data-target="#staticBackdropInfo"
 										className="btn m-1 btn-primary w-100"
-										onClick={() => setActionRestaurant({ actions: "EDIT" })}
-									>
+										onClick={() => setActionRestaurant({ actions: 'EDIT' })}>
 										Editar mas informacion
 									</button>
 								) : (
@@ -434,8 +450,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 										data-toggle="modal"
 										data-target="#staticBackdropInfo"
 										className="btn m-1 btn-primary w-100"
-										onClick={() => setActionRestaurant({ actions: "ADD" })}
-									>
+										onClick={() => setActionRestaurant({ actions: 'ADD' })}>
 										Mas informacion
 									</p>
 								)}
@@ -452,13 +467,15 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 										itemType="button"
 										data-toggle="modal"
 										data-target="#staticBackdrop2001"
-										onClick={() => setActionsPlate({ actions: "ADD" })}
-									>
+										onClick={() => {
+											setidPlate('');
+											setActionsPlate({ actions: 'ADD' });
+										}}>
 										Añadir plato
 									</button>
 								</div>
 								{platesByID.map((plate: PlateIdRestaurant) => (
-									<div className="buttonPlates col-md">
+									<div className="buttonPlates col-md" key={plate.id}>
 										<div className="plate-logo">
 											<img src={plate.image} alt="" />
 										</div>
@@ -467,8 +484,11 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											itemType="button"
 											data-toggle="modal"
 											data-target="#staticBackdrop2001"
-											onClick={() => setActionsPlate({ actions: "ADD" })}
-										>
+											onClick={() => {
+												setidPlate(plate?.id);
+												setActionsPlate({ actions: 'EDIT' });
+												
+											}}>
 											Editar plato
 										</button>
 									</div>
@@ -479,7 +499,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 					</div>
 
 					<div>
-						<AddAndCreatePlates actionsPlate={actionsPlate} />
+						<AddAndCreatePlates actionsPlate={actionsPlate} idPlate={idPlate} />
 						{/* END PLATE */}
 						<div
 							className="modal fade"
@@ -488,8 +508,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 							data-keyboard="false"
 							tabIndex={-1}
 							aria-labelledby="staticBackdropLabel"
-							aria-hidden="true"
-						>
+							aria-hidden="true">
 							<div className="modal-dialog">
 								<div className="modal-content">
 									<div className="modal-header">
@@ -500,8 +519,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											type="button"
 											className="close"
 											data-dismiss="modal"
-											aria-label="Close"
-										>
+											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
@@ -573,20 +591,18 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 										<button
 											type="button"
 											className="btn btn-success"
-											onClick={handleSubmit}
-										>
-											{actionRestaurant.actions == "EDIT"
-												? "Editar restaurante"
-												: actionRestaurant.actions == "ADD"
-												? "Crear restaurante"
-												: ""}
-											{actionRestaurant.actions === "" && <LoaderAuth />}
+											onClick={handleSubmit}>
+											{actionRestaurant.actions == 'EDIT'
+												? 'Editar restaurante'
+												: actionRestaurant.actions == 'ADD'
+												? 'Crear restaurante'
+												: ''}
+											{actionRestaurant.actions === '' && <LoaderAuth />}
 										</button>
 										<button
 											type="button"
 											className="btn btn-secondary"
-											data-dismiss="modal"
-										>
+											data-dismiss="modal">
 											Cerrar
 										</button>
 									</div>
