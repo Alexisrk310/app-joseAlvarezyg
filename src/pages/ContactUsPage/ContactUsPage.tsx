@@ -28,7 +28,7 @@ const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
 						icon: 'success',
 						title: 'Se ha enviado correctamente',
 						showConfirmButton: false,
-						timer: 1500,
+						timer: 1400,
 					});
 				},
 				() => {
