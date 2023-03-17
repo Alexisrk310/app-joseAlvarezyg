@@ -1,3 +1,19 @@
+.card-new {
+  width: 623px;
+}
+
+.imageCustom {
+  background-color: #FCFBEA;
+}
+
+.imageCustom:hover {
+  background-color: #C3FDFB;
+  background-image: url("");
+  opacity: 0.9;
+  transition: 0.3s;
+}
+
+
 .card-body {
   border-radius: 13px!important;
 }

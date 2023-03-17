@@ -282,7 +282,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
 			</div>
 			<div className="container-menu-items mr-2 ml-2 ">
 				<h3 className="text-center white">PLATILLOS</h3>
-				<div className="menu-items mr-5 ml-5">
+				<div className="flex mt-10 gap-2 overflow-x-auto">
 					{plate?.map((plates: any) => (
 						<Card
 							evente={() => setIdPlate(plates?.id)}

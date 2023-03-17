@@ -1,4 +1,4 @@
-import { Card } from '@/components';
+import { Card, Carrousel } from '@/components';
 import { responseGetRestaurant } from '@/models/interface';
 import { getPlatesPopulate } from '@/utilities/api/plate/getPlates';
 import { getRestaurantPopulate } from '@/utilities/api/resturant/getRestaurant';
@@ -11,45 +11,50 @@ import './styles/HomePage.css';
 export interface HomePageInterface {}
 
 const HomePage: React.FC<HomePageInterface> = () => {
-	const [restaurant, setRestaurant] = useState([]);
-	const [plates, setPlates] = useState([]);
+	const [restaurant, setRestaurant] = useState<any>([]);
+	const [plates, setPlates] = useState<any>([]);
 	const navigation = useNavigate();
 	useEffect(() => {
-		const initPlates = async () => {
-			try {
-				const respPlatePopulate = await getPlatesPopulate();
-				const dataPlatePopulate = await respPlatePopulate.json();
+		setRestaurant(JSON.parse(localStorage.getItem("restaurantsPopulates")).data)
+		setPlates(JSON.parse(localStorage.getItem("platesPopulate")).data)		
+		// const initPlates = async () => {
+		// 	try {
+		// 		const respPlatePopulate = await getPlatesPopulate();
+		// 		const dataPlatePopulate = await respPlatePopulate.json();
 
-				setPlates(dataPlatePopulate?.data);
-				console.log(plates);
-			} catch (error) {
-				throw error;
-			}
-		};
-
-		const initRestaurant = async () => {
-			try {
-				const data = await getRestaurantPopulate();
-				const resp = await data.json();
-
-				setRestaurant(resp?.data);
-			} catch (error) {
-				throw error;
-			}
-		};
-		// const initGetRatingPlates = async () => {
-		// 	const respRatingPlates = await getRatingPlates();
-		// 	const dataRatingPlates = await respRatingPlates.json();
-		// 	console.log(respRatingPlates);
-		// 	console.log(dataRatingPlates);
+		// 		setPlates(dataPlatePopulate?.data);
+		// 		console.log(plates);
+		// 	} catch (error) {
+		// 		throw error;
+		// 	}
 		// };
-		// initGetRatingPlates();
-		initPlates();
-		initRestaurant();
+
+		// const initRestaurant = async () => {
+		// 	try {
+		// 		const data = await getRestaurantPopulate();
+		// 		const resp = await data.json();
+
+		// 		setRestaurant(resp?.data);
+		// 	} catch (error) {
+		// 		throw error;
+		// 	}
+		// };
+		// // const initGetRatingPlates = async () => {
+		// // 	const respRatingPlates = await getRatingPlates();
+		// // 	const dataRatingPlates = await respRatingPlates.json();
+		// // 	console.log(respRatingPlates);
+		// // 	console.log(dataRatingPlates);
+		// // };
+		// // initGetRatingPlates();
+		// initPlates();
+		// initRestaurant();
 	}, []);
 
 	return (
 		<div className="homepage">
+			<div>
+				<Carrousel />
+			</div>
 			<div className="mr-5 ml-5">
 				<div className="row">
 					<p className=" mt-3 col-12 col-md-6">RESTAURANTES DE LA SEMANA</p>
@@ -57,7 +62,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						MOSTRAR MAS
 					</p> */}
 				</div>
-				<div className="d-flex contain-card">
+				<div className="flex gap-2 overflow-x-auto overflow-y-hidden p-0 w-full lg:p-10 mt-3">
 					{restaurant?.map((cardRestaurant: responseGetRestaurant | any) => (
 						<Card
 							img={cardRestaurant?.image}
@@ -79,12 +84,12 @@ const HomePage: React.FC<HomePageInterface> = () => {
 				{/* PLATILLOS */}
 
 				<div className="row">
-					<p className=" mt-3 col-12 col-md-6">PLATILLOS DE LA SEMANA</p>
+					<p className=" mt-5 col-12 col-md-6">PLATILLOS DE LA SEMANA</p>
 					{/* <p className="show-more pointer mt-3 col-12 col-md-6 text-right">
 						MOSTRAR MAS
 					</p> */}
 				</div>
-				<div className="d-flex contain-card">
+				<div className="flex gap-2 overflow-x-auto overflow-y-hidden p-0 w-full lg:p-10 mt-3 pb-2">
 					{plates?.map((plate: any) => (
 						<Card
 							img={plate?.image}

@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;500;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
 	/* overflow-x: hidden; */
 	box-sizing: border-box;

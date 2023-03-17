@@ -221,7 +221,7 @@ const AddAndCreatePlates = ({ actionsPlate, idPlate }: any) => {
 							</button>
 							<button
 								type="button"
-								className="btn btn-secondary"
+								className="btn btn-secondary text-gray-700"
 								data-dismiss="modal">
 								Cerrar
 							</button>

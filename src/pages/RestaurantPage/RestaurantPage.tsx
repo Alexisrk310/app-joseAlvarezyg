@@ -18,17 +18,18 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const navigation = useNavigate();
 	useEffect(() => {
-		const init = async () => {
-			try {
-				const data = await getRestaurant();
-				const resp = await data.json();
+		setRestaurant(JSON.parse(localStorage.getItem("restaurants")).data)
+		// const init = async () => {
+		// 	try {
+		// 		const data = await getRestaurant();
+		// 		const resp = await data.json();
 
-				setRestaurant(resp.data);
-			} catch (error) {
-				throw error;
-			}
-		};
-		init();
+		// 		setRestaurant(resp.data);
+		// 	} catch (error) {
+		// 		throw error;
+		// 	}
+		// };
+		// init();
 	}, []);
 
 	return (
@@ -36,7 +37,7 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 			<div className="img-restaurant">
 				<p>RESTAURANTES</p>
 			</div>
-			<div className="mr-5 ml-5 mt-5 restaurant-card">
+			<div className="flex mt-10 gap-2 overflow-x-auto">
 				{restaurant?.map((cardRestaurant: responseGetRestaurant | any) => (
 					<Card
 						img={cardRestaurant?.image}

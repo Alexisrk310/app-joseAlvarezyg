@@ -99,22 +99,24 @@ const NavBar: React.FC<NavBarInterface> = () => {
 					CONTACTANOS
 				</NavLink>
 				{/* <i className="fa-solid fa-magnifying-glass pointer white"></i> */}
-				{!JSON.parse(localStorage.getItem('@user') as any) ? (
-					<>
-						<NavLink to={'login'} className="pointer btn btn-info">
-							Inicia Sesión
-						</NavLink>
-						<NavLink to={'register'} className="pointer btn btn-info">
-							Registrate
-						</NavLink>
-					</>
-				) : !local?.data?.token ? (
-					<button className="pointer btn btn-info" onClick={handleSignOff}>
-						Cerrar sesión
-					</button>
-				) : (
-					<Logout event={handleSignOff} />
-				)}
+				<div style={{ gap: '5px', display: 'flex' }}>
+					{!JSON.parse(localStorage.getItem('@user') as any) ? (
+						<>
+							<NavLink to={'login'} className="pointer btn btn-info">
+								Inicia Sesión
+							</NavLink>
+							<NavLink to={'register'} className="pointer btn btn-info">
+								Registrate
+							</NavLink>
+						</>
+					) : !local?.data?.token ? (
+						<button className="pointer btn btn-info" onClick={handleSignOff}>
+							Cerrar sesión
+						</button>
+					) : (
+						<Logout event={handleSignOff} />
+					)}
+				</div>
 			</div>
 			<i
 				className="fa-solid fa-bars barJose pointer"

@@ -1,8 +1,12 @@
 .createrestaurant {
 	width: 100%;
-	background-image: url('../img/banground.jpg');
-	background-size: contain;
+	object-fit: contain;
 	background-color: rgba(0, 0, 0, 0.8);
+	background-repeat: no-repeat;
+}
+
+.createrestaurant > div:before {
+	opacity: 0.6;
 }
 
 .container-mobile {
@@ -24,6 +28,7 @@
 	display: flex;
 	width: 100%;
 	height: 100%;
+	background-image: url('../img/banground.jpg');
 	background-color: rgba(0, 0, 0, 0.2);
 }
 

@@ -63,7 +63,7 @@ const TeamPage: React.FC<TeamPageInterface> = () => {
 								<div className="modal-footer">
 									<button
 										type="button"
-										className="btn btn-secondary"
+										className="btn btn-secondary text-gray-700"
 										data-dismiss="modal">
 										Cerrar
 									</button>
@@ -125,7 +125,7 @@ const TeamPage: React.FC<TeamPageInterface> = () => {
 								<div className="modal-footer">
 									<button
 										type="button"
-										className="btn btn-secondary"
+										className="btn btn-secondary text-gray-700"
 										data-dismiss="modal">
 										Cerrar
 									</button>
@@ -179,7 +179,7 @@ const TeamPage: React.FC<TeamPageInterface> = () => {
 								<div className="modal-footer">
 									<button
 										type="button"
-										className="btn btn-secondary"
+										className="btn btn-secondary text-gray-700"
 										data-dismiss="modal">
 										Cerrar
 									</button>

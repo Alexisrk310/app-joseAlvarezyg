@@ -440,7 +440,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 										itemType="button"
 										data-toggle="modal"
 										data-target="#staticBackdropInfo"
-										className="btn m-1 btn-primary w-100"
+										className="btn m-1 btn-primary w-100 text-[#007bff]"
 										onClick={() => setActionRestaurant({ actions: 'EDIT' })}>
 										Editar mas informacion
 									</button>
@@ -449,7 +449,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 										itemType="button"
 										data-toggle="modal"
 										data-target="#staticBackdropInfo"
-										className="btn m-1 btn-primary w-100"
+										className="btn m-1 btn-primary w-100 text-[#007bff]"
 										onClick={() => setActionRestaurant({ actions: 'ADD' })}>
 										Mas informacion
 									</p>
@@ -463,7 +463,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 								<div className="buttonPlates col-md">
 									<div className="plate-logo"></div>
 									<button
-										className="btn btn-success mt-2"
+										className="btn btn-success mt-2 text-white"
 										itemType="button"
 										data-toggle="modal"
 										data-target="#staticBackdrop2001"
@@ -480,7 +480,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 											<img src={plate.image} alt="" />
 										</div>
 										<button
-											className="btn btn-primary mt-2"
+											className="btn btn-primary mt-2 text-white"
 											itemType="button"
 											data-toggle="modal"
 											data-target="#staticBackdrop2001"
@@ -601,7 +601,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
 										</button>
 										<button
 											type="button"
-											className="btn btn-secondary"
+											className="btn btn-secondary text-gray-700"
 											data-dismiss="modal">
 											Cerrar
 										</button>

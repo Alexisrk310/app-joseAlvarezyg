@@ -10,3 +10,5 @@ export * from './MessageErrorType';
 export * from './ModalPlate';
 export * from './NavBar';
 export * from './index';
+export * from './Carrousel';
+

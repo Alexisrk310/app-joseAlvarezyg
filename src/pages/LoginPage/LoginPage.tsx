@@ -145,7 +145,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 								) : undefined}
 
 								<button
-									className="btn btn-info w-100 mt-3 submitAuth"
+									className="btn btn-info w-100 mt-3 submitAuth text-[#17a2b8]"
 									type="submit">
 									{state.buttonSubmit}
 									{state.buttonSubmit === '' && <LoaderAuth />}
