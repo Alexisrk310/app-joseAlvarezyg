@@ -18,7 +18,7 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 	const local = JSON.parse(localStorage.getItem('@user') as any);
 	const navigation = useNavigate();
 	useEffect(() => {
-		setRestaurant(JSON.parse(localStorage.getItem("restaurants")).data)
+		setRestaurant(JSON.parse(localStorage.getItem("restaurants") || "[]").data)
 		// const init = async () => {
 		// 	try {
 		// 		const data = await getRestaurant();
@@ -37,7 +37,7 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 			<div className="img-restaurant">
 				<p>RESTAURANTES</p>
 			</div>
-			<div className="flex mt-10 gap-2 overflow-x-auto">
+			<div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 				{restaurant?.map((cardRestaurant: responseGetRestaurant | any) => (
 					<Card
 						img={cardRestaurant?.image}
@@ -45,8 +45,9 @@ const RestaurantPage: React.FC<RestaurantPageInterface> = () => {
 						description={cardRestaurant.description}
 						specialized={cardRestaurant.specialty}
 						key={cardRestaurant.id}
-						evente={() => navigation(`/restaurante/${cardRestaurant.id}`)}
-						classNick="pointer"
+						evente={() => {
+							navigation(`/restaurante/${cardRestaurant.id}`)
+						}}
 						specializedState={true}
 						// stateStart={true}
 						// valueRating={parseInt(cardRestaurant?.promedio)}

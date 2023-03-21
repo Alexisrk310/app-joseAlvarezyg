@@ -1,6 +1,6 @@
 import React from 'react'
 import { Carousel } from 'flowbite-react'
-import firstImage from './img/Rectangle97.png';
+import firstImage from './img/portada.png';
 import twoImage from './img/DSCF6610.jpg';
 import threeImage from './img/DSCF6639.jpg';
 import fourImage from './img/DSCF6749.jpg';

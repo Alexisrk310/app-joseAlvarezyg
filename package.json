@@ -9,12 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@coreui/coreui": "^4.2.6",
+    "@coreui/react": "^4.6.0",
     "@emailjs/browser": "^3.10.0",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.11.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.13",
     "@reduxjs/toolkit": "^1.9.1",
     "@types/jwt-decode": "^3.1.0",
+    "daisyui": "^2.51.4",
     "flowbite": "^1.6.4",
     "flowbite-react": "^0.4.2",
     "formik": "^2.2.9",
@@ -25,8 +29,10 @@
     "react-google-login": "^5.2.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
+    "react-transition-group": "^4.4.5",
     "sweetalert2": "^11.6.16",
-    "sweetalert2-react-content": "^5.0.7"
+    "sweetalert2-react-content": "^5.0.7",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/node": "^18.11.13",
