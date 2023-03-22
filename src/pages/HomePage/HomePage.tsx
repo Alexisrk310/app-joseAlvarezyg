@@ -15,8 +15,8 @@ const HomePage: React.FC<HomePageInterface> = () => {
 	const [plates, setPlates] = useState<any>([]);
 	const navigation = useNavigate();
 	useEffect(() => {
-		setRestaurant(JSON.parse(localStorage.getItem("restaurantsPopulates")).data)
-		setPlates(JSON.parse(localStorage.getItem("platesPopulate")).data)		
+		setRestaurant(JSON.parse(localStorage.getItem("restaurantsPopulates")|| "[]").data)
+		setPlates(JSON.parse(localStorage.getItem("platesPopulate") || "[]").data)		
 		// const initPlates = async () => {
 		// 	try {
 		// 		const respPlatePopulate = await getPlatesPopulate();
@@ -55,14 +55,14 @@ const HomePage: React.FC<HomePageInterface> = () => {
 			<div>
 				<Carrousel />
 			</div>
-			<div className="mr-5 ml-5">
+			<div className="mr-5 ml-5 mt-5 p-7">
 				<div className="row">
-					<p className=" mt-3 col-12 col-md-6">RESTAURANTES DE LA SEMANA</p>
+					<h5 className="text-[#33D1CB] text-2xl font-[Inter] text-center">RESTAURANTES DE LA SEMANA</h5>
 					{/* <p className="show-more pointer mt-3 col-12 col-md-6 text-right">
 						MOSTRAR MAS
 					</p> */}
 				</div>
-				<div className="flex gap-2 overflow-x-auto overflow-y-hidden p-0 w-full lg:p-10 mt-3">
+				<div className="mt-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 					{restaurant?.map((cardRestaurant: responseGetRestaurant | any) => (
 						<Card
 							img={cardRestaurant?.image}
@@ -75,7 +75,6 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							onChangee={false}
 							specializedState={true}
 							evente={() => navigation(`/restaurante/${cardRestaurant.id}`)}
-							classNick="pointer"
 							key={cardRestaurant?.id}
 						/>
 					))}
@@ -83,13 +82,14 @@ const HomePage: React.FC<HomePageInterface> = () => {
 
 				{/* PLATILLOS */}
 
-				<div className="row">
-					<p className=" mt-5 col-12 col-md-6">PLATILLOS DE LA SEMANA</p>
+				<div className="row mt-10">
+				<h5 className="text-[#33D1CB] text-2xl font-[Inter] text-center">PLATILLOS DE LA SEMANA</h5>
+					{/* <p className=" mt-5 col-12 col-md-6">PLATILLOS DE LA SEMANA</p> */}
 					{/* <p className="show-more pointer mt-3 col-12 col-md-6 text-right">
 						MOSTRAR MAS
 					</p> */}
 				</div>
-				<div className="flex gap-2 overflow-x-auto overflow-y-hidden p-0 w-full lg:p-10 mt-3 pb-2">
+				<div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 					{plates?.map((plate: any) => (
 						<Card
 							img={plate?.image}
@@ -101,7 +101,6 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							disableRating={true}
 							onChangee={false}
 							evente={() => navigation(`/restaurante/${plate?.restaurantid}`)}
-							classNick="pointer"
 							key={plate?.id}
 						/>
 					))}

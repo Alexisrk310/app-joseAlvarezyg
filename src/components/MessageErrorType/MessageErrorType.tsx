@@ -8,7 +8,7 @@ export const MessageErrorType: React.FC<MessageErrorTypeInterface> = ({
 	msg,
 	clase,
 }) => {
-	return <small className={'form-text text-danger ' + clase}>{msg}</small>;
+	return <small className= "text-red-600">{msg}</small>;
 };
 
 export default MessageErrorType;
