@@ -15,6 +15,8 @@ import AddAndCreatePlates from "./components/AddAndCreatePlates";
 import "./styles/CreateRestaurant.css";
 import { ErrorMessage, useFormik } from "formik";
 import * as Yup from "yup";
+import Img from "react-cool-img";
+
 export interface CreateRestaurantInterface {}
 interface actionRestaurantAndPlate {
   actions: "EDIT" | "ADD" | "";
@@ -95,25 +97,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
     facebook: "",
     instagram: "",
   });
-  const convertBase64 = (file: any) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-  const imageHandler = async (e: any) => {
-    const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    setProfileImg({
-      imgPlate: base64,
-    } as any);
-  };
 
   const getPlatesByRestaurantById = async (id: string) => {
     try {
@@ -172,6 +155,22 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
           instagram,
           facebook,
         });
+
+        formik.values.name = name;
+        formik.values.id = id;
+        formik.values.description = description;
+        formik.values.specialty = specialty;
+        // formik.values.image = image
+        formik.values.department = department;
+        formik.values.city = city;
+        formik.values.tel = tel;
+        formik.values.instagram = instagram;
+        formik.values.facebook = facebook;
+        setImage(image);
+        setActionRestaurant({
+          actions: "EDIT",
+        });
+        // setImage(image)
         // setFormValues({
         // 	id: restaurant.id,
         // 	name: restaurant.name,
@@ -204,7 +203,6 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
       ...actionRestaurant,
       actions: "",
     });
-    console.log("Action", actionRestaurant, restaurant);
 
     if (actionRestaurant.actions == "ADD") {
       const local = JSON.parse(localStorage.getItem("@user") as any);
@@ -325,19 +323,19 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
       }
     }
   };
-  
+
   const [image, setImage] = useState("");
 
-  const handleImageChange = (e : any) => {
+  const handleImageChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
       let reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result[0]);
+      reader.onload = (e  :any) => {
+        console.log(e.target.result);
+        setImage(e.target.result);
       };
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-
 
   const formik = useFormik({
     initialValues: {
@@ -355,17 +353,102 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
     validationSchema: validationSchema,
     validateOnChange: true,
     validateOnMount: false,
-    onSubmit: (values) => {
-      values.image = image
+    onSubmit: async (values) => {
+      console.log("Tel", values);
+
+      values.image = image;
+      if (actionRestaurant.actions == "ADD") {
+        const local = JSON.parse(localStorage.getItem("@user") as any);
+
+        const ValueRestaurant = {
+          image: image,
+          name: values.name,
+          specialty: values.specialty,
+          description: values.description,
+          department: values.department,
+          city: values.city,
+          // address: formValues.address,
+          tel: parseInt(values.tel),
+          facebook: values.facebook,
+          instagram: values.instagram,
+        };
+
+        try {
+          const addResta = await addRestaurant(
+            ValueRestaurant,
+            local?.token || local?.data?.token
+          );
+          const resp = await addResta.json();
+
+          if (resp.ok) {
+            MySwal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Restaurante creado correctamente!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            navigate("/restaurante/crear");
+          } else {
+            setActionRestaurant({
+              ...actionRestaurant,
+              actions: "ADD",
+            });
+            MySwal.fire({
+              icon: "error",
+              title: "Error",
+              text: resp.msg,
+            });
+            // navigate('/restaurante');
+          }
+        } catch (error) {
+          throw error;
+        }
+      } else if (actionRestaurant.actions == "EDIT") {
+        // EDITAR RESTAURANTE
+
+        try {
+          const respModifyResta = await putRestaurant(
+            values,
+            local?.token || local?.data?.token,
+            local?.id || local?.data?.id
+          );
+          const dataModifyResta = await respModifyResta.json();
+          if (dataModifyResta.ok) {
+            MySwal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Se actualizo correctamente el restaurante",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            navigate("/restaurante/crear");
+          } else {
+            setActionRestaurant({
+              ...actionRestaurant,
+              actions: "EDIT",
+            });
+            MySwal.fire({
+              icon: "error",
+              title: "Error",
+              text: dataModifyResta.msg,
+            });
+            // navigate('/restaurante');
+          }
+        } catch (error) {
+          throw error;
+        }
+      }
+
       console.log(values, image);
     },
   });
 
   return (
-    <div className="w-screen h-auto bg-white flex p-10">
-      <form
-        className="w-full max-w-lg"
-      >
+    <div className="w-screen h-auto bg-white flex flex-col  lg:flex-row  p-10">
+      <form className="w-full max-w-lg">
         <div className="flex flex-wrap -mx-3 mb-6 justify-center">
           <div className="flex flex-col items-center mb-2">
             {image && (
@@ -378,7 +461,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
               id="image"
               name="image"
               type="file"
-              value={formik.values.image}
+              // value={formik.values.image}
               accept="image/*"
               onChange={handleImageChange}
               className="border border-gray-400 p-2 rounded-lg"
@@ -391,16 +474,15 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
         <div className="flex flex-wrap -mx-3 mb-6 gap-y-2">
           <div className="w-full px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Nombre del restaurante { formik.touched.name }
+              Nombre del restaurante {formik.touched.name}
             </label>
             <input
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-last-name"
               type="text"
               name="name"
               onChange={formik.handleChange}
               value={formik.values.name}
-              placeholder="Doe"
+              placeholder="Ej: Jose alvarez food"
             />
             {formik.touched.name && formik.errors.name ? (
               <div className="text-red-500">{formik.errors.name}</div>
@@ -448,7 +530,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
               name="facebook"
               onChange={formik.handleChange}
               value={formik.values.facebook}
-              placeholder="Doe"
+              placeholder="https://www.facebook.com/tupagina"
             />
             {formik.touched.facebook && formik.errors.facebook ? (
               <div className="text-red-500">{formik.errors.facebook}</div>
@@ -464,7 +546,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
               name="instagram"
               onChange={formik.handleChange}
               value={formik.values.instagram}
-              placeholder="Doe"
+              placeholder="https://www.instagram.com/tupagina"
             />
             {formik.touched.instagram && formik.errors.instagram ? (
               <div className="text-red-500">{formik.errors.instagram}</div>
@@ -482,7 +564,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
               name="city"
               onChange={formik.handleChange}
               value={formik.values.city}
-              placeholder="Cartagena"
+              placeholder="Ej: Cartagena"
             />
             {formik.touched.city && formik.errors.city ? (
               <div className="text-red-500">{formik.errors.city}</div>
@@ -499,7 +581,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
                 name="department"
                 onChange={formik.handleChange}
                 value={formik.values.department}
-                placeholder="Albuquerque"
+                placeholder="Ej: Bolivar"
               />
               {formik.touched.department && formik.errors.department ? (
                 <div className="text-red-500">{formik.errors.department}</div>
@@ -533,12 +615,20 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
           </div>
         </div>
         <div
-          onClick={() => {formik.handleSubmit()}}
+          onClick={() => {
+            formik.handleSubmit();
+          }}
           className="btn w-full bg-[#33D1CB] text-white  hover:bg-[#23B2AC]"
         >
-          Crear Restaurante
+          {actionRestaurant.actions === "ADD"
+            ? "Crear Restaurante"
+            : "Editar Restaurante"}
         </div>
       </form>
+
+      <div className="flex justify-center w-full p-10">
+          <AddAndCreatePlates platesByID={platesByID} actionsPlate={actionsPlate} idPlate={idPlate}/>
+      </div>
     </div>
     // <div classNameName="createrestaurant">
     // 	<div classNameName="pt-4">

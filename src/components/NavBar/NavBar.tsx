@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 import "./styles/NavBar.css";
 import Swal from "sweetalert2";
 import Logout from "../AuthGoogle/Logout";
-import Signature from "../Header/img/firma.png";
+import Signature from "../Header/img/firma.webp";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import RestaurantOutlinedIcon from "@mui/icons-material/RestaurantOutlined";
 import FoodBankOutlinedIcon from "@mui/icons-material/FoodBankOutlined";
@@ -15,6 +15,7 @@ import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlin
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import Img from "react-cool-img";
 
 export interface NavBarInterface {}
 
@@ -46,7 +47,7 @@ const NavBar: React.FC<NavBarInterface> = () => {
   };
 
   return (
-    <div className="navbar">
+    <div className="navbar flex justify-between">
       <div className="navbar-start w-[30%]">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -155,8 +156,8 @@ const NavBar: React.FC<NavBarInterface> = () => {
             </li>
           </ul>
         </div>
-        <NavLink to={"/"} className="btn btn-ghost normal-case text-xl">
-          <img src={Signature} alt="" />
+        <NavLink to={"/"} className="btn hidden md:block btn-ghost normal-case text-xl">
+          <Img src={Signature} alt="" />
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -259,10 +260,10 @@ const NavBar: React.FC<NavBarInterface> = () => {
 
             <NavLink
               to={"register"}
-              className="btn bg-[#33D1CB] text-white  hover:bg-[#23B2AC]"
+              className="btn bg-[#33D1CB] text-white w-auto  hover:bg-[#23B2AC]"
             >
               <AppRegistrationOutlinedIcon />
-                Únete a nuestra cocina
+                Registrate
             </NavLink>
           </>
         ) : !local?.data?.token ? (
@@ -270,7 +271,7 @@ const NavBar: React.FC<NavBarInterface> = () => {
             <LogoutOutlinedIcon />
           </div>
         ) : (
-          <Logout event={handleSignOff} />
+          <Logout event={handleSignOff}/>
         )}
       </div>
     </div>

@@ -7,6 +7,7 @@ import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { postRatingRestaurant } from "@/utilities/api/startRating/postRating";
+import Img from "react-cool-img";
 
 
 export interface ModalPlateInterface {
@@ -62,15 +63,15 @@ const ModalPlate = ({ id, data, restaurant }: any) => {
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal-6" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box bg-white flex justify-center flex-col items-center">
-          <img className="w-60" src={data.image || NoImage} alt="" />
-          <div>
-            <h3 className="font-bold text-lg text-black">{data.name}</h3>
-            <p className="py-4">{data.description}</p>
+        <div className="modal-box bg-white flex justify-center flex-col items-center overflow-hidden">
+          <Img lazy={true} className="w-60" src={data.image || NoImage} alt="" />
+          <div className="p-5">
+            <h3 className="font-bold text-lg text-center text-black">{data.name}</h3>
+            <p className="py-4 px-3 w-[100%] text-black text-center h-auto overflow-hidden">{data.description}</p>
           </div>
 
           <div>
-            <p className="py-4 flex justify-center items-center gap-2">
+            <p className="py-4 flex text-black justify-center items-center gap-2">
               Califica este Plato:
               <Rating
                 size="medium"

@@ -1,4 +1,4 @@
-import { Card, Carrousel } from '@/components';
+import { Card, Carrousel, ModalPlate } from '@/components';
 import { responseGetRestaurant } from '@/models/interface';
 import { getPlatesPopulate } from '@/utilities/api/plate/getPlates';
 import { getRestaurantPopulate } from '@/utilities/api/resturant/getRestaurant';
@@ -13,6 +13,8 @@ export interface HomePageInterface {}
 const HomePage: React.FC<HomePageInterface> = () => {
 	const [restaurant, setRestaurant] = useState<any>([]);
 	const [plates, setPlates] = useState<any>([]);
+	const [plateModal, setplateModal] = useState({})
+
 	const navigation = useNavigate();
 	useEffect(() => {
 		setRestaurant(JSON.parse(localStorage.getItem("restaurantsPopulates")|| "[]").data)
@@ -49,6 +51,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 		// initPlates();
 		// initRestaurant();
 	}, []);
+	
 
 	return (
 		<div className="homepage">
@@ -73,6 +76,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							valueRating={parseInt(cardRestaurant?.promedio)}
 							disableRating={true}
 							onChangee={false}
+							isPlate={false}
 							specializedState={true}
 							evente={() => navigation(`/restaurante/${cardRestaurant.id}`)}
 							key={cardRestaurant?.id}
@@ -94,17 +98,21 @@ const HomePage: React.FC<HomePageInterface> = () => {
 						<Card
 							img={plate?.image}
 							title={plate?.name}
+							eventeModal={() => setplateModal(plate)}
 							description={plate?.description}
 							specialized={plate?.specialized}
 							stateStart={true}
 							valueRating={parseInt(plate?.promedio)}
 							disableRating={true}
 							onChangee={false}
+							isPlate={true}
 							evente={() => navigation(`/restaurante/${plate?.restaurantid}`)}
 							key={plate?.id}
 						/>
 					))}
 				</div>
+				<ModalPlate restaurant={restaurant} data={plateModal} />
+
 				{/* <div className="mt-3 row">
 					<p className="col-12 col-md-6 ">TOP 10 DE COLOMBIA</p>
 					<p className="pointer col-12 col-md-6 text-right">MOSTRAR MAS</p>

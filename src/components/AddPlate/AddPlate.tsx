@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './styles/AddPlate.css';
 export interface AddPlateInterface {}
+import Img from "react-cool-img";
+
 
 const AddPlate: React.FC<AddPlateInterface> = () => {
 	const [plateImg, setPlateImg] = useState({
@@ -23,7 +25,7 @@ const AddPlate: React.FC<AddPlateInterface> = () => {
 		<div className="page-plate">
 			<div className="container-plate">
 				<div className="img-holder-plate">
-					<img src={plateImg.platesimg} alt="" id="img" className="img-plate" />
+					<Img lazy={true} src={plateImg.platesimg} alt="" id="img" className="img-plate" />
 				</div>
 				<input
 					type="file"

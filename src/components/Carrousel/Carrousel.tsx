@@ -1,9 +1,11 @@
 import React from 'react'
 import { Carousel } from 'flowbite-react'
-import firstImage from './img/portada.png';
-import twoImage from './img/DSCF6610.jpg';
-import threeImage from './img/DSCF6639.jpg';
-import fourImage from './img/DSCF6749.jpg';
+import firstImage from './img/portada.webp';
+import twoImage from './img/dscf6610.webp';
+import threeImage from './img/dscf6639.webp';
+import fourImage from './img/dscf6749.webp';
+import Img from "react-cool-img";
+
 import './styles/main.css'
 
 const Carrousel = () => {
@@ -12,24 +14,32 @@ const Carrousel = () => {
     <div className='carrousel-custom'>
       <div className="h-80 sm:h-80 xl:h-full 2xl:h-full">
         <Carousel slideInterval={5000}>
-          <img
+          <Img
+            cache={true}
             className='carrousel-img'
             src={firstImage}
+            lazy={true}
             alt="..."
           />
-          <img
+          <Img
+            cache={true}
             className='carrousel-img center-block'
             src={twoImage}
+            lazy={true}
             alt="..."
           />
-          <img
+          <Img
+            cache={true}
             className='carrousel-img'
             src={threeImage}
+            lazy={true}
             alt="..."
           />
-          <img
+          <Img
+            cache={true}
             className='carrousel-img'
             src={fourImage}
+            lazy={true}
             alt="..."
           />
         </Carousel>

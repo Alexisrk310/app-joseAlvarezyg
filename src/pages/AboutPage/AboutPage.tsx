@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/AboutPage.css';
 export interface AboutPageInterface {}
+import Img from "react-cool-img";
 
 const AboutPage: React.FC<AboutPageInterface> = () => {
 	return (
@@ -25,7 +26,7 @@ const AboutPage: React.FC<AboutPageInterface> = () => {
 					data-ride="carousel">
 					<div className="carousel-inner">
 						<div className="carousel-item active">
-							<img
+							<Img
 								src="https://a.cdn-hotels.com/gdcs/production0/d904/1a2db549-b49d-4845-aa19-c9d72f4266c2.jpg"
 								className="d-block w-100 carousel-img"
 								height={400}
@@ -33,7 +34,7 @@ const AboutPage: React.FC<AboutPageInterface> = () => {
 							/>
 						</div>
 						<div className="carousel-item">
-							<img
+							<Img
 								src="https://ingenieriademenu.com/wp-content/uploads/2022/02/letrero-restaurante.jpg"
 								className="d-block w-100 carousel-img"
 								height={400}
@@ -41,7 +42,7 @@ const AboutPage: React.FC<AboutPageInterface> = () => {
 							/>
 						</div>
 						<div className="carousel-item">
-							<img
+							<Img
 								src="https://a.cdn-hotels.com/gdcs/production0/d904/1a2db549-b49d-4845-aa19-c9d72f4266c2.jpg"
 								className="d-block w-100 carousel-img"
 								height={400}

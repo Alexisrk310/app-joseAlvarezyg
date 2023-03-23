@@ -7,6 +7,7 @@ import { StarRating } from "../";
 import NoImage from "./img/sinimagen.jpg";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import Img from "react-cool-img";
 
 export interface CardInterface {
   img?: string;
@@ -26,6 +27,7 @@ export interface CardInterface {
   onChangee?: boolean;
   idData?: string;
   eventeModal?: any;
+  isPlate: boolean;
   specializedState?: boolean;
   classNameNameNameNick?: string;
 }
@@ -48,6 +50,7 @@ const Card: React.FC<CardInterface> = ({
   onChangee = true,
   idData,
   eventeModal,
+  isPlate,
   specializedState = false,
   classNameNameNameNick,
 }) => {
@@ -66,7 +69,8 @@ const Card: React.FC<CardInterface> = ({
       className="bg-gray-800 hover:bg-gray-900 transition ease-in rounded-md overflow-hidden shadow-lg max-w-md"
     >
       <div className="relative">
-        <img
+        <Img
+          lazy={true}
           className="w-full h-56 object-cover object-center"
           src={img ? img : NoImage}
           alt="Restaurante"
@@ -102,12 +106,13 @@ const Card: React.FC<CardInterface> = ({
           ) : undefined}
         </div>
         <div className="flex justify-between">
-          {specialized ? (
+          <p className="text-white">plate {isPlate} </p>
+          {!isPlate ? (
             <button
               onClick={evente}
               className="bg-yellow-500 text-gray-800 rounded-full px-4 py-2 hover:bg-yellow-600 focus:outline-none focus:shadow-outline"
             >
-              {specialized ? "Ver restaurante" : "Ver Platillo"}
+              Ver restaurante
             </button>
           ) : (
             <label onClick={eventeModal} className="bg-yellow-500 cursor-pointer text-gray-800 rounded-full px-4 py-2 hover:bg-yellow-600 focus:outline-none focus:shadow-outline" htmlFor="my-modal-6">Ver Platillo</label>

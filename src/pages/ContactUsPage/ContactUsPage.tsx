@@ -64,7 +64,7 @@ const ContactUsPage: React.FC<ContactUsPageInterface> = () => {
 					<h1 className="contact">CONTACTENOS</h1>
 					<div className="contact-form">
 						<form
-							className="form-contact"
+							className="flex flex-col gap-3"
 							onSubmit={handleSubmit}
 							ref={form as any}>
 							<h4 className="text-2xl font-bold text-black">Formulario de contacto</h4>

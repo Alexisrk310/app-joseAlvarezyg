@@ -311,6 +311,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
                 title={plates?.name}
                 description={plates?.description}
                 stateStart={true}
+                isPlate={true}
                 valueRating={plates?.id == idPlate ? valueRating : 0}
                 disableRating={(valueRating as any) > 0 ? true : false}
                 setValueRating={setValueRating}
