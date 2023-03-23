@@ -99,13 +99,13 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			{({ handleBlur, handleChange, handleSubmit, values, errors }) => (
 				<div className="loginpage">
 					<form className="container-form-register" onSubmit={handleSubmit}>
-						<p className="text-center log-in">Crear cuenta</p>
+						<p className="text-center log-in text-2xl font-bold text-black">Crear cuenta</p>
 
 						<div className="container-input">
-							<div className="container-p-input">
-								<p className="text-email">Nombre</p>
+							<div className="container-p-input flex flex-col space-y-2">
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Nombre</p>
 								<input
-									className="form-control auth"
+									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="text"
 									name="name"
 									onBlur={handleBlur}
@@ -117,9 +117,9 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									component={() => <MessageErrorType msg={errors.name} />}
 								/>
 
-								<p className="text-email">Correo electronico</p>
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Correo electronico</p>
 								<input
-									className="form-control mt-2"
+									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="text"
 									name="email"
 									onBlur={handleBlur}
@@ -130,9 +130,9 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									name="email"
 									component={() => <MessageErrorType msg={errors.email} />}
 								/>
-								<p className="text-email">Contraseña</p>
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Contraseña</p>
 								<input
-									className="form-control mt-2"
+									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="password"
 									name="password"
 									onBlur={handleBlur}
@@ -143,9 +143,9 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									name="password"
 									component={() => <MessageErrorType msg={errors.password} />}
 								/>
-								<p className="text-email">Telefono</p>
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Telefono</p>
 								<input
-									className="form-control mt-2"
+									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="tel"
 									name="tel"
 									onBlur={handleBlur}
@@ -157,10 +157,10 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									component={() => <MessageErrorType msg={errors.tel} />}
 								/>
 
-								<p className="text-email">Direccion</p>
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Direccion</p>
 								<div className="d-flex">
 									<input
-										className="form-control mt-2"
+										className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 										type="text"
 										name="addressOne"
 										onBlur={handleBlur}
@@ -178,7 +178,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									/>
 
 									<input
-										className="form-control mt-2 address-short"
+										className="form-control mt-2 address-short auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 										type="text"
 										name="addressTwo"
 										onBlur={handleBlur}
@@ -194,9 +194,9 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 											/>
 										)}
 									/>
-									<p className="text-email guion">-</p>
+									<p className="text-email guion text-black">-</p>
 									<input
-										className="form-control mt-2 address-short"
+										className="form-control mt-2 address-short auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 										type="text"
 										name="addressThree"
 										onBlur={handleBlur}
@@ -214,7 +214,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									/>
 								</div>
 
-								<button className="btn btn-info w-100 mt-3" type="submit">
+								<button className="bg-[#33D1CB] text-white py-2 px-4 rounded-md hover:bg-[#23B2AC]" type="submit">
 									{!stateLoading ? 'Crear cuenta' : <LoaderAuth />}
 								</button>
 								<p className="text-center mt-5">O</p>
