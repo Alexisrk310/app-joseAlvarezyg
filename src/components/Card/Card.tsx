@@ -50,7 +50,7 @@ const Card: React.FC<CardInterface> = ({
   onChangee = true,
   idData,
   eventeModal,
-  isPlate,
+  isPlate = false,
   specializedState = false,
   classNameNameNameNick,
 }) => {
@@ -106,7 +106,6 @@ const Card: React.FC<CardInterface> = ({
           ) : undefined}
         </div>
         <div className="flex justify-between">
-          <p className="text-white">plate {isPlate} </p>
           {!isPlate ? (
             <button
               onClick={evente}

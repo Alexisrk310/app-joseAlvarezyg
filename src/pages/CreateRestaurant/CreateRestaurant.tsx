@@ -16,6 +16,7 @@ import "./styles/CreateRestaurant.css";
 import { ErrorMessage, useFormik } from "formik";
 import * as Yup from "yup";
 import Img from "react-cool-img";
+import { Spinner, Toast } from "flowbite-react";
 
 export interface CreateRestaurantInterface {}
 interface actionRestaurantAndPlate {
@@ -329,7 +330,7 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
   const handleImageChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
       let reader = new FileReader();
-      reader.onload = (e  :any) => {
+      reader.onload = (e: any) => {
         console.log(e.target.result);
         setImage(e.target.result);
       };
@@ -614,20 +615,44 @@ const CreateRestaurant: React.FC<CreateRestaurantInterface> = () => {
             ) : null}
           </div>
         </div>
-        <div
-          onClick={() => {
-            formik.handleSubmit();
-          }}
-          className="btn w-full bg-[#33D1CB] text-white  hover:bg-[#23B2AC]"
-        >
-          {actionRestaurant.actions === "ADD"
-            ? "Crear Restaurante"
-            : "Editar Restaurante"}
-        </div>
+        {formik.isSubmitting ? (
+          <Toast className="w-full max-w-none">
+            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-500 dark:bg-blue-800 dark:text-blue-200">
+              <Spinner className="h-5 w-5" />
+            </div>
+            <div className="ml-3 text-sm font-normal">
+              Estamos Creando Tu Restaurante...
+            </div>
+            <Toast.Toggle />
+          </Toast>
+        ) : actionRestaurant.actions === "ADD" ? (
+          <div
+            onClick={() => {
+              formik.handleSubmit();
+            }}
+            className="btn w-full bg-[#33D1CB] text-white  hover:bg-[#23B2AC]"
+          >
+            Crear Restaurante
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              formik.handleSubmit();
+            }}
+            className="btn w-full bg-yellow-400 text-white  hover:bg-yellow-600"
+          >
+            Editar Restaurante
+          </div>
+        )}
       </form>
 
       <div className="flex justify-center w-full p-10">
-          <AddAndCreatePlates platesByID={platesByID} actionsPlate={actionsPlate} idPlate={idPlate}/>
+        <AddAndCreatePlates
+          setplatesByID={setplatesByID}
+          actionsPlate={actionsPlate}
+          idPlate={idPlate}
+          platesByID={platesByID}
+        />
       </div>
     </div>
     // <div classNameName="createrestaurant">
