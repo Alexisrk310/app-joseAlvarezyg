@@ -1,18 +1,38 @@
 import React from 'react';
 import './styles/FoodTourPage.css';
+import { Carousel } from 'flowbite-react'
+import firstImage from './img/Tour 2.png';
+import twoImage from './img/portada tour.png';
+import Img from "react-cool-img";
 export interface FoodTourPageInterface {}
 
-const FoodTourPage: React.FC<FoodTourPageInterface> = () => {
-	return (
-		<div className="foodtourpage">
-			<div className="tour-img-1"></div>
-			<div className="tour-text">
-				<p>Tour Gastronomico</p>
-				<p>Soon cooming</p>
-			</div>
-			<div className="tour-img-2"></div>
-		</div>
-	);
-};
+const Carrousel = () => {
+  return (
+    <>
+    <div className='carrousel-custom'>
+      <div className="h-80 sm:h-80 xl:h-full 2xl:h-full">
+        <Carousel slideInterval={5000}>
+          <Img
+            cache={true}
+            className='carrousel-img'
+            src={firstImage}
+            lazy={true}
+            alt="..."
+          />
+          <Img
+            cache={true}
+            className='carrousel-img center-block'
+            src={twoImage}
+            lazy={true}
+            alt="..."
+          />
+        </Carousel>
+      </div>
 
-export default FoodTourPage;
+    </div>
+    </>
+  )
+}
+
+
+export default Carrousel

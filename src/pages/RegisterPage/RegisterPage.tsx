@@ -221,7 +221,7 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 								</button>
 								<p className="text-center mt-5">O</p>
 								<AuthGoogle />
-								<p className="text-center">
+								<p className="text-center text-black">
 									{' '}Al iniciar sesion o crear una cuenta esta aceptando nuestros {' '}
 									<a href={Terminos} download={Terminos} className="cursor-pointer text-info polity">terminos y condiciones y</a>
 									<b className="text-info"> politica de privacidad</b>
