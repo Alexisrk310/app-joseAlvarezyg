@@ -72,6 +72,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
         restaurant[0]?.id
       );
       const dataRatingRestaurant = await respRatingRestaurant.json();
+      location.reload()
     } catch (error) {
       throw error;
     }
@@ -263,12 +264,15 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
             {restaurant[0]?.name}
           </h1>
           <div className="flex text-yellow-400">
+            { restaurant[0]?.rate }
             <Rating
               size="medium"
               name="simple-controlled"
               icon={<StarIcon />}
-              value={valueRatingRestaurant}
+              value={Number(restaurant[0]?.rate || 0)} 
               onChange={(event, newValue) => {
+                console.log("New Value", newValue);
+                
                 setValueRatingRestaurant(newValue);
                 handleRatingRestaurant();
               }}
@@ -312,7 +316,7 @@ const NameRestaurant: React.FC<NameRestaurantInterface> = () => {
                 description={plates?.description}
                 stateStart={true}
                 isPlate={true}
-                valueRating={plates?.id == idPlate ? valueRating : 0}
+                valueRating={Number(plates?.rate || 0)}
                 disableRating={(valueRating as any) > 0 ? true : false}
                 setValueRating={setValueRating}
                 idRating={() => setIdPlate(plates?.id)}

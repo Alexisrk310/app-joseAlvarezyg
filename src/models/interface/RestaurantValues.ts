@@ -17,5 +17,5 @@ export interface responseGetRestaurant {
 	description: string;
 	specialty: string;
 	userId: string;
-	promedio?: string | number;
+	rate?: string | number;
 }

@@ -11,7 +11,7 @@ export const getPlatesId = async (id: string) => {
 
 // PLATES FOR ID
 export const getPlatesUnique = async (id: string) => {
-	const urlGetRestaurant = `https://backen-appjose.vercel.app/plate/plate/${id}`;
+	const urlGetRestaurant = `https://backen-appjose.vercel.app/plate/${id}`;
 	return await fetch(urlGetRestaurant, {
 		method: 'GET',
 		headers: {

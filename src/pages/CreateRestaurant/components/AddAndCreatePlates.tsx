@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().required("Campo requerido"),
 });
 
-const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID, setplatesByID }: any) => {
+const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID, setplatesByID, restaurantId }: any) => {
   const [stateLoading, setstateLoading] = useState(false);
   const [updatePlates, setupdatePlates] = useState(false)
   const [handleChange, formValues, setFormValues] = useFormValues({

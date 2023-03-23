@@ -73,7 +73,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							description={cardRestaurant?.description}
 							specialized={cardRestaurant?.specialty}
 							stateStart={true}
-							valueRating={parseInt(cardRestaurant?.promedio)}
+							valueRating={Number(cardRestaurant?.rate)}
 							disableRating={true}
 							onChangee={false}
 							isPlate={false}
@@ -102,7 +102,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 							description={plate?.description}
 							specialized={plate?.specialized}
 							stateStart={true}
-							valueRating={parseInt(plate?.promedio)}
+							valueRating={Number(plate?.rate)}
 							disableRating={true}
 							onChangee={false}
 							isPlate={true}
