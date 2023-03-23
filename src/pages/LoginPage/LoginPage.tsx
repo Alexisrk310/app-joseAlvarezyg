@@ -105,15 +105,15 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 			onSubmit={handleSubmit}
 			validate={validations}>
 			{({ handleBlur, handleChange, handleSubmit, values, errors }) => (
-				<div className="loginpage">
-					<form className="container-form" onSubmit={handleSubmit}>
-						<p className="text-center log-in">{state.title}</p>
+				<div className="loginpage ">
+					<form className="container-form flex flex-col gap-3" onSubmit={handleSubmit}>
+						<p className="text-center log-in text-2xl font-bold text-black">{state.title}</p>
 
-						<div className="container-input">
-							<div className="container-p-input">
+						<div className="container-input ">
+							<div className="container-p-input uppercase tracking-wide text-gray-700 text-xs font-bold mb-2  flex flex-col gap-3">
 								<p className="text-email">E-mail</p>
 								<input
-									className="form-control auth"
+									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="text"
 									name="email"
 									onBlur={handleBlur}
@@ -128,7 +128,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 									<>
 										<p className="text-email">Contraseña</p>
 										<input
-											className="form-control mt-2"
+											className="form-control mt-2 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 											type="password"
 											name="password"
 											onBlur={handleBlur}
@@ -145,7 +145,7 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 								) : undefined}
 
 								<button
-									className="btn btn-info w-100 mt-3 submitAuth text-[#17a2b8]"
+									className=" bg-[#33D1CB] text-white py-2 px-4 rounded-md hover:bg-[#23B2AC] "
 									type="submit">
 									{state.buttonSubmit}
 									{state.buttonSubmit === '' && <LoaderAuth />}
