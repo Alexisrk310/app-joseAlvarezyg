@@ -9,6 +9,8 @@ import Swal from 'sweetalert2';
 import './styles/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import { gapi } from 'gapi-script';
+import Terminos from '../../components/Footer/document/Términos y condiciones de uso Pagina Jose.pdf'
+
 
 export interface LoginPageInterface {}
 
@@ -153,8 +155,8 @@ const LoginPage: React.FC<LoginPageInterface> = () => {
 								<p className="text-center mt-5">O</p>
 								<AuthGoogle />
 								<p className="text-center">
-									Al iniciar sesion o crear una cuenta esta aceptando nuestros
-									<b className="text-info"> terminos y condiciones</b> y
+									{' '}Al iniciar sesion o crear una cuenta esta aceptando nuestros {' '}
+									<a href={Terminos} download={Terminos} className="cursor-pointer text-info polity">terminos y condiciones y</a>
 									<b className="text-info"> politica de privacidad</b>
 								</p>
 							</div>

@@ -1,8 +1,6 @@
 import React from "react";
 import "./styles/Footer.css";
-import facebook from "./img/facebook2.png";
-import instagram from "./img/instagram2.png";
-import youtube from "./img/youtube2.png";
+import Terminos from './document/Términos y condiciones de uso Pagina Jose.pdf'
 export interface FooterInterface {}
 
 const Footer: React.FC<FooterInterface> = () => {
@@ -26,7 +24,7 @@ const Footer: React.FC<FooterInterface> = () => {
             <a href="/contactanos" className="text-gray-400 hover:text-gray-300 mx-2">
               <i className="uil uil-envelope-alt"></i> Contacto
             </a>
-            <a href="#" className="text-gray-400 hover:text-gray-300 mx-2">
+            <a href={Terminos} download={Terminos} className="text-gray-400 hover:text-gray-300 mx-2">
               <i className="uil uil-file-alt"></i> Términos de uso
             </a>
             <a href="#" className="text-gray-400 hover:text-gray-300 mx-2">

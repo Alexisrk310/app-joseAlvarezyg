@@ -3,7 +3,7 @@ import { useFormValues } from "@/hooks/useFormValues";
 import { postPlates } from "@/utilities/api/plate/postPlates";
 import { putPlatesId } from "@/utilities/api/plate/putPlates";
 import React, { useEffect, useState } from "react";
-import { getPlatesUnique } from "@/utilities/api/plate/getPlates";
+import { getPlatesId, getPlatesUnique } from "@/utilities/api/plate/getPlates";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import * as Yup from "yup";
@@ -11,14 +11,16 @@ import NoImage from "../../../components/Card/img/sinimagen.jpg";
 
 import "../styles/CreateRestaurant.css";
 import { useFormik } from "formik";
+import { Spinner, Toast } from "flowbite-react";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Campo requerido"),
+  name: Yup.string().required("Campo requerido").min(6),
   description: Yup.string().required("Campo requerido"),
 });
 
-const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID }: any) => {
+const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID, setplatesByID }: any) => {
   const [stateLoading, setstateLoading] = useState(false);
+  const [updatePlates, setupdatePlates] = useState(false)
   const [handleChange, formValues, setFormValues] = useFormValues({
     image:
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
@@ -29,22 +31,21 @@ const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID }: any) => {
 
   const local = JSON.parse(localStorage.getItem("@user") as any);
   const MySwal = withReactContent(Swal);
-  //   useEffect(() => {
-  //     //   GET PLATES FOR ID - EDIT
-  //     const init = async () => {
-  //       const respPlateUnique = await getPlatesUnique(idPlate);
-  //       const dataPlateUnique = await respPlateUnique.json();
-  //       console.log("platos", dataPlateUnique);
-
-  //       setFormValues({
-  //         ...formValues,
-  //         image: dataPlateUnique?.data[0]?.image,
-  //         namePlate: dataPlateUnique?.data[0]?.name,
-  //         descriptionPlate: dataPlateUnique?.data[0]?.description,
-  //       });
+  // useEffect(() => {
+  //   //   GET PLATES FOR ID - EDIT
+  //   const init = async () => {
+  //     const getPlatesByRestaurantById = async (id: string) => {
+  //       try {
+  //         const respGetPlates = await (await getPlatesId(id)).json();
+  //         console.log("get plates", respGetPlates);
+  //         setplatesByID(respGetPlates.data);
+  //       } catch (error) {
+  //         throw error;
+  //       }
   //     };
-  //     if (idPlate !== "") init();
-  //   }, [idPlate]);
+  //   };
+  //   if (updatePlates) init();
+  // }, [updatePlates]);
 
   const handleSubmitCreateAndEdit = async (e: any) => {
     console.log(e);
@@ -125,27 +126,21 @@ const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID }: any) => {
     }
   };
 
-  const HandlePlate = (e: any) => {
-    const readerPlate = new FileReader();
-    readerPlate.onload = () => {
-      if (readerPlate.readyState === 2) {
-        setFormValues({
-          ...formValues,
-          image: readerPlate.result as string,
-        });
-      }
-    };
-    readerPlate.readAsDataURL(e.target.files[0]);
-  };
-
   const handleImageChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
-      let reader = new FileReader();
-      reader.onload = (e : any) => {
-        console.log(e.target.result);
-        setimage(e.target.result);
-      };
-      reader.readAsDataURL(e.target.files[0]);
+      const fileSize = e.target.files.item(0).size;
+      const fileMb = fileSize / 1024 ** 2;
+      if (fileMb >= 2) {
+        return alert("Please select a file less than 2MB.");
+      } else {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          console.log("target", e.target);
+          console.log(e.target.result);
+          setimage(e.target.result);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
     }
   };
 
@@ -161,7 +156,6 @@ const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID }: any) => {
     validateOnMount: false,
     onSubmit: async (values) => {
       console.log("values", values);
-      setstateLoading(true);
       if (actionsPlate.actions == "ADD") {
         const ValuesPlate = {
           image: image,
@@ -188,9 +182,10 @@ const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID }: any) => {
               timer: 1500,
             });
 
-            location.reload();
+            setupdatePlates(true)
+            location.reload()
           } else {
-            setstateLoading(false);
+            setupdatePlates(false)
             MySwal.fire({
               icon: "error",
               title: "Error",
@@ -205,16 +200,18 @@ const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID }: any) => {
   });
 
   return (
-    <div className="grid grid-cols-1 m-0 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="grid grid-cols-1 m-0 md:grid-cols-2 gap-6 w-full">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-full">
         <form className="mt-6">
-          <h2 className="text-xl font-semibold mb-4 text-center">Crear platillo</h2>
+          <h2 className="text-xl font-semibold mb-4 text-center">
+            Crear platillo
+          </h2>
           <div className="flex flex-col items-center mb-2">
             {image && (
               <img src={image} alt="restaurant image" className="w-32 h-32" />
             )}
             <label htmlFor="image" className="mt-4 mb-2">
-              Choose an image
+              [MAX FILE SIZE = 1.8MB]
             </label>
             <input
               id="image"
@@ -266,23 +263,35 @@ const AddAndCreatePlates = ({ actionsPlate, idPlate, platesByID }: any) => {
               <div className="text-red-500">{formik.errors.description}</div>
             ) : null}
           </div>
-          <div
-            onClick={() => {
-              formik.handleSubmit();
-            }}
-            className="btn w-full bg-[#33D1CB] text-white  hover:bg-[#23B2AC]"
-          >
-            {actionsPlate.actions === "ADD"
-              ? "Crear Platillo"
-              : "Editar Platillo"}
-          </div>
+          {formik.isSubmitting ? (
+            <Toast className="w-full max-w-none">
+              <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-500 dark:bg-blue-800 dark:text-blue-200">
+                <Spinner className="h-5 w-5" />
+              </div>
+              <div className="ml-3 text-sm font-normal">
+                Estamos Creando Tu plato...
+              </div>
+              <Toast.Toggle />
+            </Toast>
+          ) : (
+            <div
+              onClick={() => {
+                formik.handleSubmit();
+              }}
+              className="btn w-full bg-[#33D1CB] text-white  hover:bg-[#23B2AC]"
+            >
+              {actionsPlate.actions === "ADD"
+                ? "Crear Platillo"
+                : "Editar Platillo"}
+            </div>
+          )}
         </form>
       </div>
-      <div className="bg-gray-100 w-full rounded-lg shadow-md p-6">
+      <div className="bg-gray-100 w-full rounded-lg shadow-md p-6 ">
         <h2 className="text-xl font-semibold mb-4">
           Listado de platillos creados
         </h2>
-        <ul className="space-y-4">
+        <ul className="space-y-4 overflow-y-auto h-[90%]">
           {platesByID.map((plate: any) => (
             <li className="cursor-pointer">
               <div className="flex items-center">

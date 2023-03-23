@@ -27,3 +27,10 @@
     font-size: 20px;
     align-self: flex-end;
 }
+
+.polity {
+    color: hsl(var(--in) / var(--tw-text-opacity))!important;
+	font-size: 12px;
+	font-weight: bolder;
+	text-transform: uppercase!important;
+}

@@ -94,7 +94,7 @@ const HomePage: React.FC<HomePageInterface> = () => {
 					</p> */}
 				</div>
 				<div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-					{plates?.map((plate: any) => (
+					{plates?.slice(0, 4).map((plate: any) => (
 						<Card
 							img={plate?.image}
 							title={plate?.name}
