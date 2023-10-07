@@ -10,8 +10,7 @@ import { AuthGoogle } from '@/components/AuthGoogle';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useNavigate } from 'react-router-dom';
-import Terminos from '../../components/Footer/document/Términos y condiciones de uso Pagina Jose.pdf'
-
+import Terminos from '../../components/Footer/document/Términos y condiciones de uso Pagina Jose.pdf';
 
 export interface RegisterPageInterface {}
 
@@ -101,11 +100,15 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 			{({ handleBlur, handleChange, handleSubmit, values, errors }) => (
 				<div className="loginpage">
 					<form className="container-form-register" onSubmit={handleSubmit}>
-						<p className="text-center log-in text-2xl font-bold text-black">Crear cuenta</p>
+						<p className="text-center log-in text-2xl font-bold text-black">
+							Crear cuenta
+						</p>
 
 						<div className="container-input">
 							<div className="container-p-input flex flex-col space-y-2">
-								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Nombre</p>
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+									Nombre
+								</p>
 								<input
 									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="text"
@@ -119,7 +122,9 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									component={() => <MessageErrorType msg={errors.name} />}
 								/>
 
-								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Correo electronico</p>
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+									Correo electronico
+								</p>
 								<input
 									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="text"
@@ -132,7 +137,9 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									name="email"
 									component={() => <MessageErrorType msg={errors.email} />}
 								/>
-								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Contraseña</p>
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+									Contraseña
+								</p>
 								<input
 									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="password"
@@ -145,7 +152,9 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									name="password"
 									component={() => <MessageErrorType msg={errors.password} />}
 								/>
-								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Telefono</p>
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+									Telefono
+								</p>
 								<input
 									className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									type="tel"
@@ -159,10 +168,12 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 									component={() => <MessageErrorType msg={errors.tel} />}
 								/>
 
-								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Direccion</p>
-								<div className="d-flex">
+								<p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+									Direccion
+								</p>
+								<div className="flex">
 									<input
-										className="form-control auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										className="form-control address appearance-none mr-1 bg-gray-200 text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 										type="text"
 										name="addressOne"
 										onBlur={handleBlur}
@@ -178,52 +189,61 @@ const RegisterPage: React.FC<RegisterPageInterface> = () => {
 											/>
 										)}
 									/>
+									<div className="flex">
+										<input
+											className="form-control address-short auth appearance-none  bg-gray-200 text-gray-700 border border-gray-200 rounded  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+											type="text"
+											name="addressTwo"
+											onBlur={handleBlur}
+											onChange={handleChange}
+											value={values.addressTwo}
+										/>
+										<ErrorMessage
+											name="addressTwo"
+											component={() => (
+												<MessageErrorType
+													msg={errors.addressTwo}
+													clase="validate-address"
+												/>
+											)}
+										/>
 
-									<input
-										className="form-control mt-2 address-short auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-										type="text"
-										name="addressTwo"
-										onBlur={handleBlur}
-										onChange={handleChange}
-										value={values.addressTwo}
-									/>
-									<ErrorMessage
-										name="addressTwo"
-										component={() => (
-											<MessageErrorType
-												msg={errors.addressTwo}
-												clase="validate-address"
-											/>
-										)}
-									/>
-									<p className="text-email guion text-black">-</p>
-									<input
-										className="form-control mt-2 address-short auth appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-										type="text"
-										name="addressThree"
-										onBlur={handleBlur}
-										onChange={handleChange}
-										value={values.addressThree}
-									/>
-									<ErrorMessage
-										name="addressThree"
-										component={() => (
-											<MessageErrorType
-												msg={errors.addressThree}
-												clase="validate-address"
-											/>
-										)}
-									/>
+										<input
+											className="form-control  address-short auth appearance-none  bg-gray-200 text-gray-700 border border-gray-200 rounded  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+											type="text"
+											name="addressThree"
+											onBlur={handleBlur}
+											onChange={handleChange}
+											value={values.addressThree}
+										/>
+										<ErrorMessage
+											name="addressThree"
+											component={() => (
+												<MessageErrorType
+													msg={errors.addressThree}
+													clase="validate-address"
+												/>
+											)}
+										/>
+									</div>
 								</div>
 
-								<button className="bg-[#33D1CB] text-white py-2 px-4 rounded-md hover:bg-[#23B2AC]" type="submit">
+								<button
+									className="bg-[#33D1CB] text-white py-2 px-4 rounded-md hover:bg-[#23B2AC]"
+									type="submit">
 									{!stateLoading ? 'Crear cuenta' : <LoaderAuth />}
 								</button>
 								<p className="text-center mt-5">O</p>
 								<AuthGoogle />
 								<p className="text-center text-black">
-									{' '}Al iniciar sesion o crear una cuenta esta aceptando nuestros {' '}
-									<a href={Terminos} download={Terminos} className="cursor-pointer text-info polity">terminos y condiciones y</a>
+									{' '}
+									Al iniciar sesion o crear una cuenta esta aceptando nuestros{' '}
+									<a
+										href={Terminos}
+										download={Terminos}
+										className="cursor-pointer text-info polity">
+										terminos y condiciones y
+									</a>
 									<b className="text-info"> politica de privacidad</b>
 								</p>
 							</div>

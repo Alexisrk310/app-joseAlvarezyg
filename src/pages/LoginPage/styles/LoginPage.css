@@ -55,10 +55,9 @@
 	justify-content: center;
 }
 
-
 .polity {
-    color: hsl(var(--in) / var(--tw-text-opacity))!important;
+	color: hsl(var(--in) / var(--tw-text-opacity)) !important;
 	font-size: 12px;
 	font-weight: bolder;
-	text-transform: uppercase!important;
+	text-transform: uppercase !important;
 }

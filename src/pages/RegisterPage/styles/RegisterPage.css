@@ -1,36 +1,43 @@
-.registerpage{
-
+.registerpage {
 }
 
-.container-form-register{
-    padding: 30px;
-    background-color: white;
-    border-radius: 60px;
-    width: 550px;
-    /* height: 500px; */
-    display: flex;
-    flex-direction: column;
-   
-    justify-content: center;
+.container-form-register {
+	padding: 40px;
+	background-color: white;
+	border-radius: 60px;
+	display: flex;
+	flex-direction: column;
+
+	justify-content: center;
 }
-.guion{
-    align-self: center;
-    font-size: 30px;
+.guion {
+	align-self: center;
+	font-size: 30px;
 }
-.address-short{
-    width: 90px !important;
+.address-short {
+	width: 90px !important;
 }
-.address-short:nth-child(2){
-    margin-left: 10px;
+.address-short:nth-child(2) {
+	margin-left: 10px;
 }
-.validate-address{
-    font-size: 20px;
-    align-self: flex-end;
+.validate-address {
+	font-size: 20px;
+	align-self: flex-end;
 }
 
 .polity {
-    color: hsl(var(--in) / var(--tw-text-opacity))!important;
+	color: hsl(var(--in) / var(--tw-text-opacity)) !important;
 	font-size: 12px;
 	font-weight: bolder;
-	text-transform: uppercase!important;
+	text-transform: uppercase !important;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 440px) {
+	.address-short {
+		display: none !important;
+	}
+	.address {
+		width: 100% !important;
+	}
 }
